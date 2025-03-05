@@ -47,7 +47,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Run picom (uncomment to enable)
-exec --no-startup-id picom
+# exec --no-startup-id picom
 
 # Application bindings
 bindsym $mod+Return exec --no-startup-id alacritty
