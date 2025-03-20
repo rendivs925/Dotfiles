@@ -221,3 +221,4 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export PATH="/home/rendi/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/home/rendi/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 source /usr/share/nvm/init-nvm.sh
+export PATH=$PATH:/usr/local/go/bin
