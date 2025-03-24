@@ -77,7 +77,7 @@ bindsym ctrl+$mod+h split h
 bindsym ctrl+$mod+v split v
 
 # Tiling and floating options
-bindsym $mod+Shift+space floating toggle, resize set 1200 800, move position center
+bindsym $mod+Shift+space floating toggle, resize set 1640 850, move position center
 bindsym $mod+space focus mode_toggle
 
 # Fullscreen mode
