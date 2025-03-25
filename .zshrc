@@ -90,6 +90,12 @@ alias t="tmux"
 alias n="nvim"
 alias r="ranger"
 alias sn="sudoedit"
+alias nn="n ~/.config/nvim"
+alias na="n ~/.config/alacritty"
+alias ni="n ~/.config/i3"
+alias nz="n ~/.zshrc"
+alias nt="n ~/.tmux.conf"
+alias nb="n ~/.bashrc"
 
 # 📂 Directory Navigation
 alias cd="z"
