@@ -7,7 +7,7 @@ floating_modifier $mod
 
 # Font configuration
 # font pango:"JetBrains Mono" 8
-font pango:"Hack Nerd Font" 8
+font pango:"Hack Nerd Font" 10
 
 # Client color configurations
 client.focused          #005B73 #005B73 #FFFFFF
