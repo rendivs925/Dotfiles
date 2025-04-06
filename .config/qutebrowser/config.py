@@ -375,6 +375,10 @@ config.bind(
     "config-cycle statusbar.show always never;; config-cycle tabs.show always never",
 )
 
+config.bind(
+    "<Escape>", "mode-leave ;; jseval -q document.activeElement.blur()", mode="insert"
+)
+
 # Bindings for insert mode
 config.bind(
     "<Escape>", "mode-leave ;; jseval -q document.activeElement.blur()", mode="insert"
