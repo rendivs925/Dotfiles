@@ -59,7 +59,7 @@ keymap.set("i", "<C-D>", "<C-o>dw", { noremap = true, silent = true, desc = "Del
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
 -- Select all
-keymap.set("n", "<C-t>", "gg<S-v>G", { desc = "Select all" })
+keymap.set("n", "<C-b>", "gg<S-v>G", { desc = "Select all" })
 
 -- Keymaps that avoid affecting registers
 keymap.set("n", "x", '"_x', { noremap = true, silent = true, desc = "Delete without affecting register" })
