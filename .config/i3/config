@@ -21,6 +21,21 @@ for_window [class="^.*"] border pixel 0
 bindsym $mod+Shift+b exec --no-startup-id i3-msg '[class="^.*"] border pixel 3'
 bindsym $mod+Shift+x exec --no-startup-id i3-msg '[class="^.*"] border pixel 0'
 
+# Move mouse with keyboard 
+bindsym $mod+Ctrl+Shift+h exec --no-startup-id xdotool mousemove_relative -- -10 0
+bindsym $mod+Ctrl+Shift+l exec --no-startup-id xdotool mousemove_relative -- 10 0
+bindsym $mod+Ctrl+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -10
+bindsym $mod+Ctrl+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 10
+
+# left click 
+bindsym $mod+Ctrl+Return exec --no-startup-id xdotool click 1
+
+# Start mouse drag (press and hold left click)
+bindsym $mod+Shift+s exec --no-startup-id xdotool mousedown 1
+
+# Stop mouse drag (release left click)
+bindsym $mod+Shift+e exec --no-startup-id xdotool mouseup 1
+
 # Enable XDG autostart
 exec --no-startup-id dex --autostart --environment i3
 
@@ -56,8 +71,8 @@ bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id qutebrowser
 bindsym $mod+e exec --no-startup-id alacritty -e ranger
 bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+w exec --no-startup-id feh ~/.config/i3/charts/hiragana-chart@2x-8-800x1035.png
-bindsym $mod+Shift+w exec --no-startup-id feh ~/.config/i3/charts/katakana-chart-preview-lg-1200x1553-1776256199.png
+bindsym $mod+n exec --no-startup-id feh ~/.config/i3/charts/hiragana-chart@2x-8-800x1035.png
+bindsym $mod+m exec --no-startup-id feh ~/.config/i3/charts/katakana-chart-preview-lg-1200x1553-1776256199.png
 bindsym $mod+g exec --no-startup-id feh ~/.config/i3/charts/germany.jpg
 
 # Window focus navigation
@@ -72,9 +87,9 @@ bindsym $mod+Shift+l move right
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 
-# Split windows
-bindsym ctrl+$mod+h split h
-bindsym ctrl+$mod+v split v
+# Split orientation
+bindsym $mod+s split h
+bindsym $mod+w split v
 
 # Tiling and floating options
 bindsym $mod+Shift+space floating toggle, resize set 1640 850, move position center
@@ -140,7 +155,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # i3 reload and restart
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
 
 exec --no-startup-id qvm-start-gui --all --watch
 
