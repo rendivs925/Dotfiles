@@ -34,7 +34,7 @@ bindsym Mod4+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -150
 bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 150
 
 # left click 
-bindsym $mod+Ctrl+Return exec --no-startup-id xdotool click 1
+bindsym Mod4+Return exec --no-startup-id xdotool click 1
 
 # Start mouse drag (press and hold left click)
 bindsym $mod+Shift+s exec --no-startup-id xdotool mousedown 1
