@@ -41,6 +41,13 @@ if [[ -f ~/.config/zsh/plugins/fzf/shell/completion.zsh ]]; then
   source ~/.config/zsh/plugins/fzf/shell/completion.zsh
 fi
 
+# zsh completion
+autoload -Uz compinit
+compinit
+
+# fzf-tab
+source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+
 # FZF widgets keybindings
 autoload -Uz fzf-file-widget fzf-history-widget
 zle     -N  fzf-file-widget
