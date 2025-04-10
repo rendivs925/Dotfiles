@@ -6,10 +6,7 @@
 
 config_version: 2
 settings:
-  content.javascript.clipboard:
-    https://chatgpt.com: access-paste
-    https://github.com: access-paste
-  content.local_content_can_access_file_urls:
-    global: true
-  content.local_content_can_access_remote_urls:
-    global: true
+  statusbar.show:
+    global: never
+  tabs.show:
+    global: always

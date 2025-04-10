@@ -45,9 +45,6 @@ fi
 autoload -Uz compinit
 compinit
 
-# fzf-tab
-source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
-
 # FZF widgets keybindings
 autoload -Uz fzf-file-widget fzf-history-widget
 zle     -N  fzf-file-widget
