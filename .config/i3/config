@@ -21,20 +21,20 @@ for_window [class="^.*"] border pixel 0
 bindsym $mod+Shift+b exec --no-startup-id i3-msg '[class="^.*"] border pixel 3'
 bindsym $mod+Shift+x exec --no-startup-id i3-msg '[class="^.*"] border pixel 0'
 
-# Move mouse slowly (10px) with Win + hjkl
-bindsym Mod4+h exec --no-startup-id xdotool mousemove_relative -- -10 0
-bindsym Mod4+l exec --no-startup-id xdotool mousemove_relative -- 10 0
-bindsym Mod4+k exec --no-startup-id xdotool mousemove_relative -- 0 -10
-bindsym Mod4+j exec --no-startup-id xdotool mousemove_relative -- 0 10
+# Move mouse slowly (25px) with Win + hjkl
+bindsym Mod4+h exec --no-startup-id xdotool mousemove_relative -- -25 0
+bindsym Mod4+l exec --no-startup-id xdotool mousemove_relative -- 25 0
+bindsym Mod4+k exec --no-startup-id xdotool mousemove_relative -- 0 -25
+bindsym Mod4+j exec --no-startup-id xdotool mousemove_relative -- 0 25
 
-# Move mouse faster (150px) with Win + Shift + hjkl
-bindsym Mod4+Shift+h exec --no-startup-id xdotool mousemove_relative -- -150 0
-bindsym Mod4+Shift+l exec --no-startup-id xdotool mousemove_relative -- 150 0
-bindsym Mod4+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -150
-bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 150
+# Move 1/3 of screen width or height
+bindsym Mod4+Shift+h exec --no-startup-id xdotool mousemove_relative -- -660 0
+bindsym Mod4+Shift+l exec --no-startup-id xdotool mousemove_relative -- 660 0
+bindsym Mod4+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -336
+bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 336
 
 # left click 
-bindsym $mod+Ctrl+Return exec --no-startup-id xdotool click 1
+bindsym Mod4+Return exec --no-startup-id xdotool click 1
 
 # Start mouse drag (press and hold left click)
 bindsym $mod+Shift+s exec --no-startup-id xdotool mousedown 1
