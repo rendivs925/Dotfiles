@@ -34,13 +34,10 @@ bindsym Mod4+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -100
 bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
 # left click 
-bindsym Mod4+Return exec --no-startup-id xdotool click 1
+bindsym Mod4+Return exec --no-startup-id ~/.config/i3/scripts/click_and_stop.sh
 
-# Start mouse drag (press and hold left click)
-bindsym $mod+Shift+s exec --no-startup-id xdotool mousedown 1
-
-# Stop mouse drag (release left click)
-bindsym $mod+Shift+e exec --no-startup-id xdotool mouseup 1
+# Start holding the left-click
+bindsym $mod+Shift+s exec --no-startup-id ~/.config/i3/scripts/hold_left_click.sh
 
 # Enable XDG autostart
 exec --no-startup-id dex --autostart --environment i3
