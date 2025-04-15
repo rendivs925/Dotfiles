@@ -1,6 +1,9 @@
 #!/bin/zsh
 
-# Start holding the left mouse button (mousedown = press and hold)
+# Ensure no leftover stop signal
+rm -f /tmp/stop_drawing
+
+# Start holding the left mouse button
 xdotool mousedown 1
 
 # Infinite loop to keep holding
