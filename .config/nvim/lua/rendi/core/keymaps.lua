@@ -13,38 +13,59 @@ keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 
 keymap.set(
   "n",
+  "<leader>dhhc",
+  [[:%s/<!--.*-->//gc<CR>]],
+  { noremap = true, silent = true, desc = "Remove all HTML comments (<!-- -->) with confirmation" }
+)
+
+keymap.set(
+  "n",
+  "<leader>dccc",
+  [[:%s/\/\*.*\*\///gc<CR>]],
+  { noremap = true, silent = true, desc = "Remove all CSS comments (/* */) with confirmation" }
+)
+
+keymap.set(
+  "n",
   "<leader>ddc",
-  [[:%s/--.*//g<CR>]],
-  { noremap = true, silent = true, desc = "Removes all comments that start with -- in the file." }
+  [[:%s/--.*//gc<CR>]],
+  { noremap = true, silent = true, desc = "Remove all '--' comments (confirm each)" }
 )
 
 keymap.set(
   "n",
   "<leader>dac",
-  [[:%s/;.*//g<CR>]],
-  { noremap = true, silent = true, desc = "Removes all assembly comments in the file." }
+  [[:%s/;.*//gc<CR>]],
+  { noremap = true, silent = true, desc = "Remove all ';' assembly comments (confirm each)" }
 )
 
 keymap.set(
   "n",
   "<leader>drc",
-  [[:%s/\/\/.*//g<CR>]],
-  { noremap = true, silent = true, desc = "Removes all regular comments in the file." }
+  [[:%s/\/\/.*//gc<CR>]],
+  { noremap = true, silent = true, desc = "Remove all '//' comments (confirm each)" }
 )
 
 keymap.set(
   "n",
   "<leader>dhc",
-  [[:%s/#.*//g<CR>]],
-  { noremap = true, silent = true, desc = "Removes all comments that start with # in the file." }
+  [[:%s/#.*//gc<CR>]],
+  { noremap = true, silent = true, desc = "Remove all '#' comments (confirm each)" }
 )
+
 keymap.set(
   "n",
   "<leader>dcl",
-  [[:%s/\n\{3,}/\r\r/e<CR>]],
-  { noremap = true, silent = true, desc = "Collapses multiple consecutive empty lines into a single line." }
+  [[:%s/\n\{3,}/\r\r/gc<CR>]],
+  { noremap = true, silent = true, desc = "Collapse 3+ blank lines into 2 (confirm each)" }
 )
-keymap.set("n", "<leader>sc", [[:/\/\/.*<CR>]], { noremap = true, silent = true, desc = "Search all comments." })
+
+keymap.set(
+  "n",
+  "<leader>sc",
+  [[:/\v(#|--|\/\/|;|<!--.*-->|\/\*.*\*\/).*<CR>]],
+  { noremap = true, silent = true, desc = "Search all comments (#, --, //, ;, HTML, CSS)" }
+)
 
 -- Cursor movements in insert mode
 keymap.set("i", "<C-h>", "<Left>", { noremap = true, silent = true, desc = "Move cursor left" })
@@ -57,6 +78,12 @@ keymap.set("i", "<C-D>", "<C-o>dw", { noremap = true, silent = true, desc = "Del
 
 -- Clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+
+-- <leader>g: search word under cursor and jump to next match (like `*`)
+keymap.set("n", "<leader>g", "*", { desc = "Search word under cursor and jump" })
+
+-- <leader>zg: search word under cursor without jumping (like `g*`)
+keymap.set("n", "<leader>zg", "g*", { desc = "Search word under cursor without jumping" })
 
 -- Select all
 keymap.set("n", "<C-b>", "gg<S-v>G", { desc = "Select all" })

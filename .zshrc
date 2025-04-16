@@ -32,11 +32,6 @@ export PHP_INI_SCAN_DIR="/home/rendi/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 source /usr/share/nvm/init-nvm.sh
 export PATH=$PATH:/usr/local/go/bin
 
-# zsh fzf plugin (manual install)
-if [[ -f ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh ]]; then
-  source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
-fi
-
 if [[ -f ~/.config/zsh/plugins/fzf/shell/completion.zsh ]]; then
   source ~/.config/zsh/plugins/fzf/shell/completion.zsh
 fi
@@ -162,3 +157,8 @@ bindkey -M vicmd 'y' copy
 zle -N paste
 zle -N copy
 source <(fzf --zsh)
+
+if [[ -n $TMUX ]]; then
+  [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+fi
+
