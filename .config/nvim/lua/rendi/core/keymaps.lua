@@ -79,11 +79,17 @@ keymap.set("i", "<C-D>", "<C-o>dw", { noremap = true, silent = true, desc = "Del
 -- Clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
--- <leader>g: search word under cursor and jump to next match (like `*`)
-keymap.set("n", "<leader>g", "*", { desc = "Search word under cursor and jump" })
+-- <leader>g: search for exact word under cursor and jump to next match (like `*`)
+keymap.set("n", "<leader>g", "*", { desc = "Search exact word and jump to next match" })
 
--- <leader>zg: search word under cursor without jumping (like `g*`)
-keymap.set("n", "<leader>zg", "g*", { desc = "Search word under cursor without jumping" })
+-- <leader>G: search for exact word under cursor and jump to previous match (like `#`)
+keymap.set("n", "<leader>G", "#", { desc = "Search exact word and jump to previous match" })
+
+-- <leader>zg: search for partial word under cursor and jump to next match (like `g*`)
+keymap.set("n", "<leader>zg", "g*", { desc = "Search partial word and jump to next match" })
+
+-- <leader>zG: search for partial word under cursor and jump to previous match (like `g#`)
+keymap.set("n", "<leader>zG", "g#", { desc = "Search partial word and jump to previous match" })
 
 -- Select all
 keymap.set("n", "<C-b>", "gg<S-v>G", { desc = "Select all" })
