@@ -69,10 +69,16 @@ bindkey "^N" down-line-or-beginning-search
 
 # plugins and enhancements
 source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
-source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
-eval "$(zoxide init zsh)"
 source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# fzf-tab 
+if [[ -f ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh ]]; then
+  source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+fi
+
+# Initialize zoxide 
+eval "$(zoxide init zsh)"
 
 # theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -165,9 +171,3 @@ bindkey -M vicmd 'p' paste
 bindkey -M vicmd 'y' copy
 zle -N paste
 zle -N copy
-source <(fzf --zsh)
-
-if [[ -n $TMUX ]]; then
-  [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-fi
-
