@@ -6,7 +6,18 @@
 
 config_version: 2
 settings:
-  statusbar.show:
-    global: never
-  tabs.show:
-    global: always
+  bindings.commands:
+    global:
+      insert:
+        <Escape>: mode-leave ;; jseval -q document.activeElement.blur()
+      normal:
+        <Ctrl+Up>: scroll page 0 -1
+        M: hint links spawn mpv {hint-url}
+        Z: hint links spawn st -e youtube-dl {hint-url}
+        t: set-cmd-text -s :open -t
+        xb: config-cycle statusbar.show always never
+        xt: config-cycle tabs.show always never
+        xx: config-cycle statusbar.show always never;; config-cycle tabs.show always
+          never
+  content.javascript.enabled:
+    global: true

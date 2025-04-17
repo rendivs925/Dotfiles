@@ -248,6 +248,8 @@ config.set(
 # Type: Bool
 c.content.local_content_can_access_remote_urls = True
 
+config.bind("<Ctrl-e>", "edit-text")
+
 # Allow locally loaded documents to access other local URLs.
 # Type: Bool
 config.set(
