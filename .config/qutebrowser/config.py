@@ -17,6 +17,8 @@ config.load_autoconfig(False)
 # aliases, while the values are the commands they map to.
 # Type: Dict
 c.aliases = {"q": "quit", "w": "session-save", "wq": "quit --save"}
+c.editor.command = ["alacritty", "-e", "nvim", "{file}"]
+c.editor.encoding = "utf-8"
 
 # Which cookies to accept. With QtWebEngine, this setting also controls
 # other features with tracking capabilities similar to those of cookies;
