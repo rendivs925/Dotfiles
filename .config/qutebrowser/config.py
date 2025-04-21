@@ -295,7 +295,7 @@ c.tabs.show = "always"
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = "https://duckduckgo.com/"
+c.url.default_page = "https://google.com/"
 
 # Search engines which can be used via the address bar.  Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
@@ -317,7 +317,7 @@ c.url.default_page = "https://duckduckgo.com/"
 # qutebrowser`.
 # Type: Dict
 c.url.searchengines = {
-    "DEFAULT": "https://duckduckgo.com/?q={}",
+    "DEFAULT": "https://google.com/?q={}",
     "am": "https://www.amazon.com/s?k={}",
     "aw": "https://wiki.archlinux.org/?search={}",
     "goog": "https://www.google.com/search?q={}",
