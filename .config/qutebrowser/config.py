@@ -150,7 +150,7 @@ config.set(
 config.set(
     "content.headers.user_agent",
     "Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0",
-    "https://docs.google.com/*",
+    "https://docs.duckduckgo.com/*",
 )
 
 # User agent to send.  The following placeholders are defined:  *
@@ -170,7 +170,7 @@ config.set(
 config.set(
     "content.headers.user_agent",
     "Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0",
-    "https://drive.google.com/*",
+    "https://drive.duckduckgo.com/*",
 )
 
 # Load images automatically in web pages.
@@ -295,7 +295,7 @@ c.tabs.show = "always"
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = "https://google.com/"
+c.url.default_page = "https://duckduckgo.com/"
 
 # Search engines which can be used via the address bar.  Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
@@ -317,7 +317,7 @@ c.url.default_page = "https://google.com/"
 # qutebrowser`.
 # Type: Dict
 c.url.searchengines = {
-    "DEFAULT": "https://google.com/?q={}",
+    "DEFAULT": "https://duckduckgo.com/?q={}",
     "am": "https://www.amazon.com/s?k={}",
     "aw": "https://wiki.archlinux.org/?search={}",
     "goog": "https://www.google.com/search?q={}",
@@ -330,7 +330,7 @@ c.url.searchengines = {
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = "https://google.com/"
+c.url.start_pages = "https://duckduckgo.com/"
 
 # Default font families to use. Whenever "default_family" is used in a
 # font setting, it's replaced with the fonts listed here. If set to an

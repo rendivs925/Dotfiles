@@ -17,6 +17,9 @@ client.urgent           #FF2D00 #FF2D00 #FF2D00
 # Window border settings
 for_window [class="^.*"] border pixel 0
 
+# Flameshot
+bindsym $mod+Shift+c exec --no-startup-id flameshot gui
+
 # Border toggle keybindings
 bindsym $mod+Shift+b exec --no-startup-id i3-msg '[class="^.*"] border pixel 3'
 bindsym $mod+Shift+x exec --no-startup-id i3-msg '[class="^.*"] border pixel 0'
