@@ -330,7 +330,7 @@ c.url.searchengines = {
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = "https://duckduckgo.com/"
+c.url.start_pages = "https://google.com/"
 
 # Default font families to use. Whenever "default_family" is used in a
 # font setting, it's replaced with the fonts listed here. If set to an
