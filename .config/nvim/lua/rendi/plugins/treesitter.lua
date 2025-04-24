@@ -28,6 +28,7 @@ return {
 
     -- configure treesitter
     treesitter.setup({
+      sync_install = false,
       -- enable syntax highlighting
       highlight = {
         enable = true,
