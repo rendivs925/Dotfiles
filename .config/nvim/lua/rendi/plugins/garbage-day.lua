@@ -3,6 +3,6 @@ return {
   dependencies = "neovim/nvim-lspconfig",
   event = "VeryLazy",
   opts = {
-    aggressive_mode = false,
+    aggressive_mode = true,
   },
 }

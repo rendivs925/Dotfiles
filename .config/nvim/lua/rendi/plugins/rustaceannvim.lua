@@ -6,7 +6,7 @@ return {
   config = function()
     vim.g.rustaceanvim = {
       server = {
-        autostart = false,
+        autostart = true,
         on_attach = function(client, bufnr)
           local opts = { noremap = true, silent = true, buffer = bufnr }
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
