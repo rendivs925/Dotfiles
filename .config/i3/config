@@ -73,6 +73,7 @@ exec --no-startup-id nm-applet
 # Application bindings
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+c exec flameshot gui
+bindsym $mod+Shift+z exec zathura
 bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id qutebrowser
 bindsym $mod+e exec --no-startup-id alacritty -e ranger

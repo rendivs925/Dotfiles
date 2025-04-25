@@ -2,7 +2,7 @@ n http://localhost:3000/auth/login
 ch https://chatgpt.com/
 lk https://www.linkedin.com/feed/
 mg https://github.com/rendivs925
-gt https://duckduckgo.com/?q=google+translate&ia=web
+gt https://translate.google.co.id/?hl=id&sl=en&tl=id&op=translate
 sc https://ui.shadcn.com/
 wf http://192.168.1.1/
 w3 https://solana.com/developers/courses/intro-to-solana/intro-to-reading-data
@@ -18,3 +18,4 @@ ge https://gemini.google.com/app
 math https://www.notion.so/Math-Roadmap-For-Machine-Learning-1dcb961a966880d1af4bdcded54c1c2a
 rustui https://www.rust-ui.com/
 rustdoc https://book.leptos.dev/view/01_basic_component.html
+cal https://www.google.com/search?q=calculator
