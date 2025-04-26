@@ -56,9 +56,8 @@ return {
       root_dir = lsp.util.root_pattern("package.json", "tsconfig.json", ".git") or vim.fn.getcwd(),
     })
 
-    -- HTML LSP for HTML inside Rust
+    -- HTML LSP
     setup_lsp("html", {
-      filetypes = { "html", "rust" }, -- Ensure it works with Rust files that include HTML
       root_dir = lsp.util.root_pattern(".git") or vim.fn.getcwd(),
     })
 
