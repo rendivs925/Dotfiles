@@ -1,8 +1,8 @@
 return {
   "mrcjkb/rustaceanvim",
-  version = "^5", -- Recommended version
-  lazy = false, -- Ensure it loads on startup
-  ft = { "rust" }, -- Load only for Rust files
+  version = "^5",
+  lazy = false,
+  ft = { "rust" },
   config = function()
     vim.g.rustaceanvim = {
       server = {
@@ -15,6 +15,11 @@ return {
         end,
         settings = {
           ["rust-analyzer"] = {
+            linkedProjects = {
+              "frontend/Cargo.toml",
+              "backend/Cargo.toml",
+              "shared/Cargo.toml",
+            },
             cargo = { allFeatures = true },
             checkOnSave = { command = "check" },
             diagnostics = { enable = true },
