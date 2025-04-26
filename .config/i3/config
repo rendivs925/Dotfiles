@@ -17,6 +17,9 @@ client.urgent           #FF2D00 #FF2D00 #FF2D00
 # Window border settings
 for_window [class="^.*"] border pixel 0
 
+# Open Notes
+bindsym $mod+Shift+d exec --no-startup-id alacritty -e sh -c 'cd ~/notes && nvim'
+
 # Border toggle keybindings
 bindsym $mod+Shift+b exec --no-startup-id i3-msg '[class="^.*"] border pixel 3'
 bindsym $mod+Shift+x exec --no-startup-id i3-msg '[class="^.*"] border pixel 0'
