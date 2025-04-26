@@ -51,7 +51,7 @@ return {
     vim.keymap.set("n", "<leader>dh", hide_diagnostics)
     vim.keymap.set("n", "<leader>ds", show_diagnostics)
 
-    setup_lsp("tsserver", { -- TypeScript LSP for embedded HTML (e.g., in Leptos components)
+    setup_lsp("ts_ls", { -- TypeScript LSP for embedded HTML (e.g., in Leptos components)
       filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
       root_dir = lsp.util.root_pattern("package.json", "tsconfig.json", ".git") or vim.fn.getcwd(),
     })
