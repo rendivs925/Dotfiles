@@ -12,7 +12,7 @@ return {
       if vim.fn.filereadable(cargo_toml) == 1 then
         table.insert(projects, cargo_toml)
       else
-        local handle = io.popen('find "' .. cwd .. '" -name "Cargo.toml"')
+        local handle = io.popen('find "' .. cwd .. '" -name "Cargo.toml" -maxdepth 2')
         if handle then
           for path in handle:lines() do
             table.insert(projects, path)
@@ -21,7 +21,7 @@ return {
         end
       end
 
-      return projects
+      return #projects > 0 and projects or nil
     end
 
     vim.g.rustaceanvim = {
@@ -37,30 +37,7 @@ return {
         end,
         settings = {
           ["rust-analyzer"] = {
-            -- cargo = {
-            --   allFeatures = true,
-            --   autoreload = true,
-            -- },
-            -- diagnostics = {
-            --   enable = true,
-            -- },
-            -- procMacro = {
-            --   enable = true,
-            -- },
-            -- completion = {
-            --   autoimport = {
-            --     enable = false,
-            --   },
-            -- },
-            -- workspace = {
-            --   symbol = {
-            --     search = {
-            --       limit = 500,
-            --     },
-            --   },
-            -- },
             linkedProjects = find_linked_projects(),
-            -- standalone = false,
           },
         },
       },
