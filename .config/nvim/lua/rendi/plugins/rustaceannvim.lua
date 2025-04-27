@@ -37,30 +37,30 @@ return {
         end,
         settings = {
           ["rust-analyzer"] = {
-            cargo = {
-              allFeatures = true,
-              autoreload = true,
-            },
-            diagnostics = {
-              enable = true,
-            },
-            procMacro = {
-              enable = true,
-            },
-            completion = {
-              autoimport = {
-                enable = false,
-              },
-            },
-            workspace = {
-              symbol = {
-                search = {
-                  limit = 500,
-                },
-              },
-            },
+            -- cargo = {
+            --   allFeatures = true,
+            --   autoreload = true,
+            -- },
+            -- diagnostics = {
+            --   enable = true,
+            -- },
+            -- procMacro = {
+            --   enable = true,
+            -- },
+            -- completion = {
+            --   autoimport = {
+            --     enable = false,
+            --   },
+            -- },
+            -- workspace = {
+            --   symbol = {
+            --     search = {
+            --       limit = 500,
+            --     },
+            --   },
+            -- },
             linkedProjects = find_linked_projects(),
-            standalone = false,
+            -- standalone = false,
           },
         },
       },
