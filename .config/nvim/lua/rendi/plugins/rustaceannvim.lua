@@ -1,6 +1,6 @@
 return {
   "mrcjkb/rustaceanvim",
-  version = "^5",
+  version = "^6",
   lazy = false,
   ft = { "rust" },
   config = function()
@@ -12,7 +12,7 @@ return {
       if vim.fn.filereadable(cargo_toml) == 1 then
         table.insert(projects, cargo_toml)
       else
-        local handle = io.popen('find "' .. cwd .. '" -name "Cargo.toml" -maxdepth 2')
+        local handle = io.popen('find "' .. cwd .. '" -name "Cargo.toml"')
         if handle then
           for path in handle:lines() do
             table.insert(projects, path)
@@ -21,7 +21,7 @@ return {
         end
       end
 
-      return #projects > 0 and projects or nil
+      return #projects > 0 and projects or { cwd .. "/Cargo.toml" }
     end
 
     vim.g.rustaceanvim = {
