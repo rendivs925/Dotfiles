@@ -7,6 +7,9 @@ keymap.set("n", "<leader>as", ":LspStart<CR>", { noremap = true, silent = true }
 
 keymap.set("i", "<C-c>", "<Esc>", { noremap = true, silent = true, desc = "Switch to normal mode" })
 
+keymap.set("n", "<leader>sl", ":lua require('garbage-day.utils').stop_lsp()<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>sr", ":lua require('garbage-day.utils').start_lsp()<CR>", { noremap = true, silent = true })
+
 -- LSP keybindings
 local opts = { noremap = true, silent = true, desc = "Go to definition" }
 keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
