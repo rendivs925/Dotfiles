@@ -2,5 +2,7 @@ return {
   "zeioth/garbage-day.nvim",
   dependencies = "neovim/nvim-lspconfig",
   event = "VeryLazy",
-  opts = {},
+  opts = {
+    aggressive_mode = true,
+  },
 }
