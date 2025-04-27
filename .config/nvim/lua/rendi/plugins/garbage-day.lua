@@ -4,7 +4,6 @@ return {
   event = "VeryLazy",
   opts = {
     aggressive_mode = true,
-    grace_period = 15,
   },
   debug = {
     retries = 3,
