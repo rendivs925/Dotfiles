@@ -1,14 +1,24 @@
 vim.g.mapleader = " "
 
-local keymap = vim.keymap -- for conciseness
+local keymap = vim.keymap
 
-keymap.set("n", "<leader>xs", ":LspStop<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>as", ":LspStart<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>xs", ":LspStop<CR>", { noremap = true, silent = true, desc = "Stop standard LSP" })
+keymap.set("n", "<leader>as", ":LspStart<CR>", { noremap = true, silent = true, desc = "Start standard LSP" })
+
+keymap.set(
+  "n",
+  "<leader>sl",
+  ":lua require('garbage-day.utils').stop_lsp()<CR>",
+  { noremap = true, silent = true, desc = "Stop LSP (garbage-day)" }
+)
+keymap.set(
+  "n",
+  "<leader>sr",
+  ":lua require('garbage-day.utils').start_lsp()<CR>",
+  { noremap = true, silent = true, desc = "Start LSP (garbage-day)" }
+)
 
 keymap.set("i", "<C-c>", "<Esc>", { noremap = true, silent = true, desc = "Switch to normal mode" })
-
-keymap.set("n", "<leader>sl", ":lua require('garbage-day.utils').stop_lsp()<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>sr", ":lua require('garbage-day.utils').start_lsp()<CR>", { noremap = true, silent = true })
 
 -- LSP keybindings
 local opts = { noremap = true, silent = true, desc = "Go to definition" }
