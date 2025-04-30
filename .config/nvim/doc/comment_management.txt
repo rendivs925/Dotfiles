@@ -1,7 +1,6 @@
 *comment_management*
 
 Comment Management Keymaps
-==========================
 
 <leader>ddc   Remove all '--' comments (confirm each)
 <leader>dhc   Remove all '#' comments (confirm each)
