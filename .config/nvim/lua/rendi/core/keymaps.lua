@@ -105,7 +105,7 @@ keymap.set("n", "<leader>zg", "g*", { desc = "Search partial word and jump to ne
 keymap.set("n", "<leader>zG", "g#", { desc = "Search partial word and jump to previous match" })
 
 -- Select all
-keymap.set("n", "<C-x>", "gg<S-v>G", { desc = "Select all" })
+keymap.set("n", "<C-s>", "gg<S-v>G", { desc = "Select all" })
 
 -- Keymaps that avoid affecting registers
 keymap.set("n", "x", '"_x', { noremap = true, silent = true, desc = "Delete without affecting register" })
