@@ -48,6 +48,8 @@ return {
       })
     end
 
+    show_diagnostics()
+
     vim.keymap.set("n", "<leader>dh", hide_diagnostics)
     vim.keymap.set("n", "<leader>ds", show_diagnostics)
 
