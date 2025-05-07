@@ -3,7 +3,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Load zsh-defer first
+# Load zsh-defer 
 source ~/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh
 
 # environment variables
@@ -65,30 +65,14 @@ autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
 
-# plugins and enhancements
-# source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
-# source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-
-# Lazy load fzf-tab (optional)
+# Lazy load fzf-tab 
 zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Lazy load autosuggestions and syntax highlighting
 zsh-defer source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 zsh-defer source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-
-# # fzf-tab 
-# if [[ -f ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh ]]; then
-#   source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
-# fi
-
-
-# Initialize zoxide 
-# eval "$(zoxide init zsh)"
-
-# zoxide (can be deferred safely)
+# zoxide 
 zsh-defer eval "$(zoxide init zsh)"
 
 # theme
