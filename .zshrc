@@ -3,6 +3,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Load zsh-defer first
+source ~/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh
+
 # environment variables
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
@@ -17,9 +20,6 @@ export PYTHONPATH="/home/rendi/Downloads/pwndbg-2024.08.29/.venv/lib/python3.13/
 export FZF_CTRL_T_COMMAND=""
 export FZF_CTRL_T_OPTS=""
 export FZF_CTRL_R_OPTS=""
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 export ANDROID_HOME=/opt/android-sdk
 export NDK_HOME=/opt/android-ndk
 export PATH="/home/rendi/perl5/bin${PATH:+:${PATH}}"
@@ -29,16 +29,14 @@ export PERL_MB_OPT="--install_base \"/home/rendi/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=/home/rendi/perl5"
 export PATH="/home/rendi/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/home/rendi/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-source /usr/share/nvm/init-nvm.sh
+zsh-defer '[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"'
+zsh-defer '[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"'
+zsh-defer source /usr/share/nvm/init-nvm.sh
 export PATH=$PATH:/usr/local/go/bin
 
-if [[ -f ~/.config/zsh/plugins/fzf/shell/completion.zsh ]]; then
-  source ~/.config/zsh/plugins/fzf/shell/completion.zsh
-fi
-
-# zsh completion
-autoload -Uz compinit
-compinit
+# FZF completion and key bindings
+zsh-defer source ~/.config/zsh/plugins/fzf/shell/completion.zsh
+zsh-defer source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
 
 # FZF widgets keybindings
 autoload -Uz fzf-file-widget fzf-history-widget
@@ -72,8 +70,6 @@ bindkey "^N" down-line-or-beginning-search
 # source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Load zsh-defer first
-source ~/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh
 
 # Lazy load fzf-tab (optional)
 zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
@@ -83,13 +79,17 @@ zsh-defer source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 zsh-defer source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
-# fzf-tab 
-if [[ -f ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh ]]; then
-  source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
-fi
+# # fzf-tab 
+# if [[ -f ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh ]]; then
+#   source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+# fi
+
 
 # Initialize zoxide 
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"
+
+# zoxide (can be deferred safely)
+zsh-defer eval "$(zoxide init zsh)"
 
 # theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
