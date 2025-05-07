@@ -39,12 +39,13 @@ return {
         },
       },
       git = {
-    ignore = false,
-  },
+        ignore = false,
+      },
       filters = {
         dotfiles = false,
         custom = {
-          "node_modules/.*", "node_modules",
+          "node_modules/.*",
+          "node_modules",
           -- ".next",
         },
       },

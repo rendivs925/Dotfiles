@@ -1,6 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
+  lazy = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -27,4 +28,5 @@ return {
     keymap("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
     keymap("n", "<leader>ft", "<cmd>Telescope telescope-tabs list_tabs<cr>", { desc = "Find tabs" })
   end,
+  cmd = { "Telescope" },
 }

@@ -1,7 +1,7 @@
 return {
   "mrcjkb/rustaceanvim",
   version = "^6",
-  lazy = false,
+  lazy = true,
   ft = { "rust" },
   config = function()
     local function find_linked_projects()
