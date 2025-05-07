@@ -68,9 +68,20 @@ bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
 
 # plugins and enhancements
-source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
-source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
+# source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Load zsh-defer first
+source ~/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh
+
+# Lazy load fzf-tab (optional)
+zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+
+# Lazy load autosuggestions and syntax highlighting
+zsh-defer source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+zsh-defer source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
 # fzf-tab 
 if [[ -f ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh ]]; then
