@@ -5,8 +5,4 @@ return {
   opts = {
     aggressive_mode = true,
   },
-  debug = {
-    retries = 3,
-    timeout = 1000,
-  },
 }

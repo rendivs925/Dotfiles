@@ -9,6 +9,6 @@ settings:
   content.javascript.clipboard:
     https://gemini.google.com: access-paste
   statusbar.show:
-    global: always
-  tabs.show:
     global: never
+  tabs.show:
+    global: always

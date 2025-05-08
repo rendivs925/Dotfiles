@@ -29,7 +29,6 @@ return {
         "asm_lsp",
         "jdtls",
         "tailwindcss",
-        "rust_analyzer",
         "lua_ls",
         "graphql",
         "emmet_ls",
