@@ -5,7 +5,6 @@ return {
   },
   {
     "christoomey/vim-tmux-navigator",
-    cmd = "TmuxNavigate",
   },
   {
     "L3MON4D3/LuaSnip",
