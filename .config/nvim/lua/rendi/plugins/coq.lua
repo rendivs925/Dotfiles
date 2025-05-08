@@ -1,15 +1,14 @@
 return {
-  "neovim/nvim-lspconfig", -- REQUIRED: Native Neovim LSP integration
-  lazy = false, -- REQUIRED: Start plugin at startup
+  "neovim/nvim-lspconfig",
+  lazy = false,
   dependencies = {
-    -- COQ for autocomplete
     { "ms-jpq/coq_nvim", branch = "coq" },
     { "ms-jpq/coq.artifacts", branch = "artifacts" },
     { "ms-jpq/coq.thirdparty", branch = "3p" },
   },
   init = function()
     vim.g.coq_settings = {
-      auto_start = true, -- Auto-start COQ
+      auto_start = true,
       keymap = {
         recommended = false,
         jump_to_mark = "<c-]>",
@@ -28,7 +27,7 @@ return {
     -- Utility function to simplify setup
     local function setup_lsp(server, opts)
       opts = opts or {}
-      lsp[server].setup(coq.lsp_ensure_capabilities(opts)) -- Ensure COQ capabilities are added
+      lsp[server].setup(coq.lsp_ensure_capabilities(opts))
     end
 
     -- Keymap for diagnostics
