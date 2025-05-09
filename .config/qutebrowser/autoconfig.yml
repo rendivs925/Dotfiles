@@ -8,7 +8,3 @@ config_version: 2
 settings:
   content.javascript.clipboard:
     https://gemini.google.com: access-paste
-  statusbar.show:
-    global: never
-  tabs.show:
-    global: always

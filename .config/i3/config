@@ -63,6 +63,11 @@ bindsym ctrl+4 exec --no-startup-id feh --bg-scale ./.config/i3/images/switzerla
 bindsym ctrl+5 exec --no-startup-id feh --bg-scale ./.config/i3/images/moraine-lake-banff-national-park-valley-of-the-ten-peaks-6000x3376-4828.jpg
 bindsym ctrl+6 exec --no-startup-id feh --bg-scale ./.config/i3/images/moraine-lake-canada-reflection-landscape-snow-covered-5120x3200-3933.jpg
 
+# Enable scroll lock
+exec --no-startup-id xmodmap -e "add mod3 = Scroll_Lock"
+
+# Run unclutter at startup
+exec --no-startup-id unclutter -idle 1 -root
 
 # Shutdown the system with $mod+Escape
 bindsym $mod+Shift+Escape exec --no-startup-id shutdown now
