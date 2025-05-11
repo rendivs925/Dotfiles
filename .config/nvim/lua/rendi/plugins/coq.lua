@@ -7,7 +7,6 @@ return {
     { "ms-jpq/coq.thirdparty", branch = "3p" },
   },
   init = function()
-    -- Coq settings are grouped together for clarity
     vim.g.coq_settings = {
       auto_start = true,
       keymap = {
@@ -25,19 +24,11 @@ return {
     local lsp = require("lspconfig")
     local coq = require("coq")
 
-    -- 1. Utility Functions
-    --   - Centralize common setup logic.
-    --   - Use `...` for variable arguments to handle options more cleanly.
-
-    ---@param server string
-    ---@param opts table
     local function setup_lsp(server, opts)
       opts = opts or {}
       lsp[server].setup(coq.lsp_ensure_capabilities(opts))
     end
 
-    -- 2. Diagnostic Configuration
-    --   - Encapsulate diagnostic settings.
     local function configure_diagnostics(enabled)
       vim.diagnostic.config({
         virtual_text = enabled,
@@ -46,8 +37,6 @@ return {
       })
     end
 
-    -- 3. Keybindings
-    --   - Group keybindings logically.
     local function set_keybindings()
       vim.keymap.set("n", "<leader>dh", function()
         configure_diagnostics(false)
@@ -56,7 +45,6 @@ return {
         configure_diagnostics(true)
       end, { desc = "Show Diagnostics" })
 
-      -- Completion keybindings (Insert mode)
       vim.api.nvim_set_keymap(
         "i",
         "<Esc>",
@@ -95,35 +83,33 @@ return {
       )
     end
 
-    -- 4. LSP Server Setup
-    --   - Group LSP server configurations.
     local function setup_lsp_servers()
-      setup_lsp("ts_ls", { -- TypeScript
+      setup_lsp("ts_ls", {
         filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
         root_dir = lsp.util.root_pattern("package.json", "tsconfig.json", ".git") or vim.fn.getcwd(),
       })
 
-      setup_lsp("html", { -- HTML
+      setup_lsp("html", {
         filetypes = { "html" },
         root_dir = lsp.util.root_pattern(".git") or vim.fn.getcwd(),
       })
 
-      setup_lsp("cssls", { -- CSS
+      setup_lsp("cssls", {
         filetypes = { "css", "scss" },
       })
 
-      setup_lsp("asm_lsp", { -- Assembly
+      setup_lsp("asm_lsp", {
         filetypes = { "asm", "nasm" },
       })
 
-      setup_lsp("tailwindcss", { -- Tailwind CSS
+      setup_lsp("tailwindcss", {
         filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescriptreact" },
         root_dir = function(fname)
           return lsp.util.root_pattern("tailwind.config.js", ".git")(fname) or vim.fn.getcwd()
         end,
       })
 
-      setup_lsp("lua_ls", { -- Lua
+      setup_lsp("lua_ls", {
         filetypes = { "lua" },
         settings = {
           Lua = {
@@ -137,19 +123,19 @@ return {
         },
       })
 
-      setup_lsp("graphql", { -- GraphQL
+      setup_lsp("graphql", {
         filetypes = { "graphql", "gql" },
       })
 
-      setup_lsp("emmet_ls", { -- Emmet
+      setup_lsp("emmet_ls", {
         filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact" },
       })
 
-      setup_lsp("prismals", { -- Prisma
+      setup_lsp("prismals", {
         filetypes = { "prisma" },
       })
 
-      setup_lsp("pyright", { -- Python
+      setup_lsp("pyright", {
         filetypes = { "python" },
         settings = {
           python = {
@@ -161,9 +147,7 @@ return {
       })
     end
 
-    -- 5. Main Configuration Flow
-    --   - Keep the main config function concise.
-    configure_diagnostics(true) -- Enable diagnostics by default
+    configure_diagnostics(true)
     set_keybindings()
     setup_lsp_servers()
   end,
