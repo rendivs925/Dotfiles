@@ -5,4 +5,16 @@ return {
   dependencies = {
     "MunifTanjim/nui.nvim",
   },
+  config = function()
+    require("lazydocker").setup({
+      window = {
+        settings = {
+          width = 1,
+          height = 1,
+          border = "rounded",
+          relative = "editor",
+        },
+      },
+    })
+  end,
 }
