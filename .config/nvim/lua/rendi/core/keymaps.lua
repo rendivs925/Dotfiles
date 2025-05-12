@@ -142,7 +142,12 @@ keymap.set(
 keymap.set("v", "<Leader>D", '"_D', { noremap = true, silent = true, desc = "Delete to end of line in visual mode" })
 
 -- Managing LazyDocker and Lazy.nvim
-keymap.set("n", "<leader>ld", "<cmd>LazyDocker<CR>", { noremap = true, silent = true, desc = "Toggle LazyDocker" })
+keymap.set(
+  "n",
+  "<leader>ld",
+  "<Cmd>lua LazyDocker.toggle()<CR>",
+  { noremap = true, silent = true, desc = "Toggle LazyDocker" }
+)
 keymap.set("n", "<leader>ll", ":Lazy<CR>", { desc = "Open Lazy.nvim" })
 
 -- Increment and decrement numbers
