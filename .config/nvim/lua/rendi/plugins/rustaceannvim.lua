@@ -13,7 +13,7 @@ return {
             checkOnSave = false,
             completion = {
               autoimport = {
-                enable = true,
+                enable = false,
               },
             },
             inlayHints = {
