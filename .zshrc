@@ -7,6 +7,7 @@ fi
 source ~/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh
 
 # environment variables
+export LEPTOS_TAILWIND_VERSION='v4.0.0'
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH="$JAVA_HOME/bin:$PATH"

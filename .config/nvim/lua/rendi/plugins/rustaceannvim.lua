@@ -5,31 +5,31 @@ return {
   config = function()
     vim.g.rustaceanvim = {
       server = {
-        -- settings = {
-        --   ["rust-analyzer"] = {
-        --     procMacro = {
-        --       enable = false,
-        --     },
-        --     checkOnSave = false,
-        --     completion = {
-        --       autoimport = {
-        --         enable = true,
-        --       },
-        --     },
-        --     inlayHints = {
-        --       enable = false,
-        --       -- parameterHints = { enable = false },
-        --       -- typeHints = { enable = false },
-        --       -- chainHints = { enable = false },
-        --       -- ... other hint types
-        --     },
-        --     semanticHighlighting = {
-        --       enable = false,
-        --     },
-        --
-        --     notifications = {},
-        --   },
-        -- },
+        settings = {
+          ["rust-analyzer"] = {
+            procMacro = {
+              enable = true,
+            },
+            checkOnSave = false,
+            completion = {
+              autoimport = {
+                enable = true,
+              },
+            },
+            inlayHints = {
+              enable = false,
+              -- parameterHints = { enable = false },
+              -- typeHints = { enable = false },
+              -- chainHints = { enable = false },
+              -- ... other hint types
+            },
+            semanticHighlighting = {
+              enable = false,
+            },
+
+            notifications = {},
+          },
+        },
         on_attach = function(_, bufnr)
           local map = function(keys, func)
             vim.keymap.set("n", keys, func, { noremap = true, silent = true, buffer = bufnr })

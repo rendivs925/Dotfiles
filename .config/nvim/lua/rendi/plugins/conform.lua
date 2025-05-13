@@ -29,11 +29,17 @@ return {
         lua = { "stylua" },
         python = { "black" },
       },
-      format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 2000,
-      },
+      format_on_save = function(bufnr)
+        local ft = vim.bo[bufnr].filetype
+        if ft == "rust" then
+          return
+        end
+        return {
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 2000,
+        }
+      end,
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>mp", function()
