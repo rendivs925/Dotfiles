@@ -37,6 +37,7 @@ return {
         "java",
         "typescript",
         "tsx",
+        "rust_with_rstml",
         "asm",
         "yaml",
         "html",
