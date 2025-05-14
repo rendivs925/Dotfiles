@@ -26,22 +26,22 @@ mods = "Alt"
 
 [[keyboard.bindings]]
 key = "H"
-mods = "Control|Alt"
+mods = "Shift"
 chars = "\u001b[D"  
 
 [[keyboard.bindings]]
 key = "J"
-mods = "Control|Alt"
+mods = "Shift"
 chars = "\u001b[B" 
 
 [[keyboard.bindings]]
 key = "K"
-mods = "Control|Alt"
+mods = "Shift"
 chars = "\u001b[A"
 
 [[keyboard.bindings]]
 key = "L"
-mods = "Control|Alt"
+mods = "Shift"
 chars = "\u001b[C"
 
 [general]
