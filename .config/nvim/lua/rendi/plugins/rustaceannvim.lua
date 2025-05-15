@@ -7,7 +7,7 @@ return {
       server = {
         settings = {
           ["rust-analyzer"] = {
-            procMacro = { enable = false },
+            procMacro = { enable = true },
             completion = { autoimport = { enable = false } },
             inlayHints = { enable = false },
             semanticHighlighting = { enable = false },
