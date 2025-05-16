@@ -8,14 +8,34 @@ return {
         settings = {
           ["rust-analyzer"] = {
             procMacro = { enable = true },
-            completion = { autoimport = { enable = false } },
-            inlayHints = { enable = false },
-            semanticHighlighting = { enable = false },
-            checkOnSave = {
-              command = "check",
+
+            completion = {
+              autoimport = { enable = false },
+              postfix = { enable = false },
             },
+
             diagnostics = {
               enable = true,
+              experimental = { enable = false },
+            },
+
+            inlayHints = { enable = false },
+            semanticHighlighting = { enable = false },
+            lens = { enable = false },
+            hover = { actions = { enable = false } },
+
+            cargo = {
+              allFeatures = false,
+              loadOutDirsFromCheck = false,
+              runBuildScripts = false,
+            },
+
+            checkOnSave = {
+              enable = false,
+            },
+
+            files = {
+              watcher = "client",
             },
           },
         },
