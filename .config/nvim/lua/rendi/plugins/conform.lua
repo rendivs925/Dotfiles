@@ -30,11 +30,7 @@ return {
         lua = { "stylua" },
         -- python = { "black" },
       },
-      format_on_save = function(bufnr)
-        local ft = vim.bo[bufnr].filetype
-        if ft == "rust" then
-          return
-        end
+      format_on_save = function()
         return {
           lsp_fallback = true,
           async = false,
