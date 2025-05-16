@@ -19,7 +19,9 @@ return {
             },
           },
         },
-        on_attach = function(_, bufnr)
+        on_attach = function(client, bufnr)
+          client.server_capabilities.semanticTokensProvider = nil
+
           local map = function(keys, func)
             vim.keymap.set("n", keys, func, { noremap = true, silent = true, buffer = bufnr })
           end
