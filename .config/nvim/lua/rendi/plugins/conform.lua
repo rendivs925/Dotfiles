@@ -6,29 +6,30 @@ return {
 
     conform.setup({
       formatters_by_ft = {
-        -- c = { "clang-format" },
-        -- asm = { "asmfmt" },
-        -- xml = { "xmlformatter" },
-        -- cpp = { "clang-format" },
-        -- java = { "google-java-format" },
         javascript = { "prettier" },
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
         typescriptreact = { "prettier" },
-        -- svelte = { "prettier" },
-        -- rust = { "rustfmt" },
-        rust = { "leptosfmt" },
-        -- css = { "prettier" },
-        -- php = { "pint" },
+        rust = { "rustfmt_with_leptos" },
         html = { "prettier" },
         json = { "prettier" },
         yaml = { "prettier" },
-        -- blade = { "blade-formatter" },
         markdown = { "prettier" },
-        -- graphql = { "prettier" },
-        -- liquid = { "prettier" },
         lua = { "stylua" },
-        -- python = { "black" },
+      },
+      formatters = {
+        rustfmt_with_leptos = {
+          command = "sh",
+          args = {
+            "-c",
+            "rustfmt --emit stdout | leptosfmt --stdin --rustfmt",
+          },
+          stdin = true,
+          stdout = true,
+          condition = function()
+            return vim.fn.executable("rustfmt") == 1 and vim.fn.executable("leptosfmt") == 1
+          end,
+        },
       },
       format_on_save = function()
         return {
