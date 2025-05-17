@@ -10,26 +10,12 @@ return {
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
         typescriptreact = { "prettier" },
-        rust = { "rustfmt_with_leptos" },
+        rust = { "rustfmt", "leptosfmt" },
         html = { "prettier" },
         json = { "prettier" },
         yaml = { "prettier" },
         markdown = { "prettier" },
         lua = { "stylua" },
-      },
-      formatters = {
-        rustfmt_with_leptos = {
-          command = "sh",
-          args = {
-            "-c",
-            "rustfmt --emit stdout | leptosfmt --stdin --rustfmt",
-          },
-          stdin = true,
-          stdout = true,
-          condition = function()
-            return vim.fn.executable("rustfmt") == 1 and vim.fn.executable("leptosfmt") == 1
-          end,
-        },
       },
       format_on_save = function()
         return {
