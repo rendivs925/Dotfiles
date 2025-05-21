@@ -247,6 +247,7 @@ config.set(
 # Allow locally loaded documents to access remote URLs.
 # Type: Bool
 c.content.local_content_can_access_remote_urls = True
+c.scrolling.smooth = True
 
 config.bind("<Ctrl-e>", "edit-text")
 
