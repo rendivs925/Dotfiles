@@ -388,3 +388,9 @@ config.bind(
 config.bind(
     "<Escape>", "mode-leave ;; jseval -q document.activeElement.blur()", mode="insert"
 )
+
+# Select all
+config.bind(
+    "<Ctrl+a>", "mode-enter caret ;; selection-toggle ;; move-to-end-of-document", mode="normal"
+)
+

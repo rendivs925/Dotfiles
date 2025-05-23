@@ -6,5 +6,17 @@
 
 config_version: 2
 settings:
-  scrolling.smooth:
-    global: true
+  bindings.commands:
+    global:
+      insert:
+        <Escape>: mode-leave ;; jseval -q document.activeElement.blur()
+      normal:
+        <Ctrl+a>: mode-enter caret ;; selection-toggle ;; move-to-end-of-document
+        <Ctrl+e>: edit-text
+        M: hint links spawn mpv {hint-url}
+        Z: hint links spawn st -e youtube-dl {hint-url}
+        t: set-cmd-text -s :open -t
+        xb: config-cycle statusbar.show always never
+        xt: config-cycle tabs.show always never
+        xx: config-cycle statusbar.show always never;; config-cycle tabs.show always
+          never
