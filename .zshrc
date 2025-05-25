@@ -6,6 +6,8 @@ fi
 # Load zsh-defer 
 source ~/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh
 
+source "$HOME/export-esp.sh"
+
 # environment variables
 export LEPTOS_TAILWIND_VERSION='v4.0.0'
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
@@ -16,7 +18,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export MAKEFLAGS="-j$(nproc)"
 export PATH="$HOME/.cargo/bin:/opt/nvim-linux64/bin:/home/rendi/.local/bin:$PATH"
-export PATH="$HOME/.espressif/tools/xtensa-esp32-elf/bin:$PATH"
+export PATH="$HOME/.espressif/tools/xtensa-esp-elf/bin:$PATH"
 export PYTHONPATH="/home/rendi/Downloads/pwndbg-2024.08.29/.venv/lib/python3.13/site-packages"
 export FZF_CTRL_T_COMMAND=""
 export FZF_CTRL_T_OPTS=""
@@ -30,7 +32,7 @@ export PERL_MB_OPT="--install_base \"/home/rendi/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=/home/rendi/perl5"
 export PATH="/home/rendi/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/home/rendi/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-zsh-defer '[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"'
+
 zsh-defer '[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"'
 zsh-defer source /usr/share/nvm/init-nvm.sh
 export PATH=$PATH:/usr/local/go/bin
@@ -199,3 +201,4 @@ bindkey -M vicmd 'p' paste
 bindkey -M vicmd 'y' copy
 zle -N paste
 zle -N copy
+export PATH="$HOME/.espressif/xtensa-esp32-elf/bin:$PATH" # or /home/rendi/.bashrc

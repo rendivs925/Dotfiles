@@ -25,6 +25,7 @@ return {
       ensure_installed = {
         "ts_ls",
         "html",
+        "rust_analyzer",
         -- "cssls",
         -- "asm_lsp",
         -- "jdtls",
