@@ -25,3 +25,4 @@ lo http://localhost.:3000/
 emdoc1 https://docs.rust-embedded.org/book/collections/index.html
 emdoc2 https://esp32.implrust.com/buzzer/index.html
 wo https://wokwi.com/
+api https://chatgpt.com/c/683563de-fd68-8010-95cd-1ef52531f71e

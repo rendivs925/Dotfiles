@@ -6,9 +6,8 @@ fi
 # Load zsh-defer 
 source ~/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh
 
-source "$HOME/export-esp.sh"
-
 # environment variables
+export BROWSER=/usr/bin/qutebrowser
 export LEPTOS_TAILWIND_VERSION='v4.0.0'
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
@@ -125,6 +124,7 @@ alias cq="cd ~/.config/qutebrowser/"
 alias nq="n ~/.config/qutebrowser/config.py"
 alias sot="tmux source ~/.tmux.conf"
 alias soz="source ~/.zshrc"
+alias sob="source ~/.bashrc"
 alias ga="git add"
 alias gra="git remote add"
 alias grv="git remote -v"
