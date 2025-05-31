@@ -151,6 +151,8 @@ keymap.set(
 )
 keymap.set("n", "<leader>ll", ":Lazy<CR>", { desc = "Open Lazy.nvim" })
 
+keymap.set("n", "<leader>mm", ":Mason<CR>", { desc = "Open Mason" })
+
 -- Increment and decrement numbers
 keymap.set("n", "+", "<C-a>", { desc = "Increment number" })
 keymap.set("n", "-", "<C-x>", { desc = "Decrement number" })
