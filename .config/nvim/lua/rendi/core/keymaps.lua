@@ -2,8 +2,9 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
-keymap.set("n", "<leader>xs", ":LspStop<CR>", { noremap = true, silent = true, desc = "Stop standard LSP" })
-keymap.set("n", "<leader>as", ":LspStart<CR>", { noremap = true, silent = true, desc = "Start standard LSP" })
+keymap.set("n", "<leader>lx", ":LspStop<CR>", { noremap = true, silent = true, desc = "Stop standard LSP" })
+keymap.set("n", "<leader>ls", ":LspStart<CR>", { noremap = true, silent = true, desc = "Start standard LSP" })
+keymap.set("n", "<leader>lr", ":LspRestart<CR>", { noremap = true, silent = true, desc = "Restart standard LSP" })
 
 keymap.set(
   "n",
