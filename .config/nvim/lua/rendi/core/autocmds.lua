@@ -1,9 +1,3 @@
--- Filetype detection for Dockerfiles
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = { "Dockerfile", "DockerFile*" },
-  command = "set filetype=dockerfile",
-})
-
 -- Turn off paste mode when leaving insert
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = "*",
