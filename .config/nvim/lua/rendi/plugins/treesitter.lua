@@ -1,7 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
-  build = ":TSUpdate",
+  -- build = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
   },
@@ -18,11 +18,12 @@ return {
 
     treesitter.setup({
       sync_install = false,
-      auto_install = true,
+      auto_install = false,
       highlight = { enable = true },
       indent = { enable = true },
       ensure_installed = {
         "json",
+        -- "dockerfile",
         "javascript",
         "java",
         "typescript",
