@@ -9,7 +9,7 @@ return {
     "LukasPietzschmann/telescope-tabs",
     {
       "folke/todo-comments.nvim",
-      opts = {}, -- add this line to trigger setup()
+      opts = {},
     },
   },
   config = function()
@@ -33,7 +33,7 @@ return {
         mappings = {
           i = {
             ["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
-            ["<C-t>"] = trouble_telescope.open,
+            ["<C-s>"] = trouble_telescope.open,
           },
         },
       },
@@ -41,7 +41,7 @@ return {
 
     telescope.load_extension("fzf")
     telescope.load_extension("telescope-tabs")
-    pcall(telescope.load_extension, "todo-comments") -- <- avoid crash on load
+    pcall(telescope.load_extension, "todo-comments")
 
     local keymap = vim.keymap.set
     keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })

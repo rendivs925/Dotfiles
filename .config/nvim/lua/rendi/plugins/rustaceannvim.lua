@@ -2,7 +2,20 @@ vim.g.rustaceanvim = {
   server = {
     settings = {
       ["rust-analyzer"] = {
-        procMacro = { enable = true },
+        procMacro = {
+          enable = true,
+        },
+
+        cargo = {
+          allFeatures = true,
+          loadOutDirsFromCheck = true,
+          runBuildScripts = true,
+        },
+
+        checkOnSave = {
+          enable = true,
+          command = "clippy",
+        },
 
         completion = {
           autoimport = { enable = false },
@@ -17,20 +30,11 @@ vim.g.rustaceanvim = {
         inlayHints = { enable = false },
         semanticHighlighting = { enable = false },
         lens = { enable = false },
+
         hover = {
           actions = {
             enable = false,
           },
-        },
-
-        cargo = {
-          allFeatures = false,
-          loadOutDirsFromCheck = false,
-          runBuildScripts = false,
-        },
-
-        checkOnSave = {
-          enable = false,
         },
 
         files = {
@@ -38,6 +42,7 @@ vim.g.rustaceanvim = {
         },
       },
     },
+
     on_attach = function(client, bufnr)
       if client.server_capabilities.semanticTokensProvider then
         client.server_capabilities.semanticTokensProvider = nil
