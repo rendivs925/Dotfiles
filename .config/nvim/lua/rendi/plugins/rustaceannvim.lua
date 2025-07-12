@@ -13,13 +13,12 @@ vim.g.rustaceanvim = {
         },
 
         checkOnSave = {
-          enable = true,
-          command = "clippy",
+          enable = false,
         },
 
         completion = {
-          autoimport = { enable = false },
-          postfix = { enable = false },
+          autoimport = { enable = true },
+          postfix = { enable = true },
         },
 
         diagnostics = {
@@ -53,6 +52,8 @@ vim.g.rustaceanvim = {
       end
 
       map("<leader>ca", vim.lsp.buf.code_action)
+      map("gr", vim.lsp.buf.references)
+      map("K", vim.lsp.buf.hover)
     end,
   },
 }
