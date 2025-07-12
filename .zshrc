@@ -17,6 +17,7 @@ zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # ──[ Environment Variables ]────────────────────────────────────────────────────
 export SHELL="$(which zsh)"
+export DOCKER_BUILDKIT=1
 export BROWSER="/usr/bin/qutebrowser"
 export LEPTOS_TAILWIND_VERSION="v4.0.0"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
