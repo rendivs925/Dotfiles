@@ -6,7 +6,7 @@ return {
     vim.g.mkdp_filetypes = { "markdown" }
     vim.cmd([[
       function! OpenMarkdownPreview(url)
-        call jobstart(["qutebrowser", a:url], {"detach": v:true})
+        call jobstart(["firefox", a:url], {"detach": v:true})
       endfunction
       let g:mkdp_browserfunc = "OpenMarkdownPreview"
     ]])

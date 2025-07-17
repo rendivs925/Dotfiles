@@ -17,6 +17,8 @@ zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # ──[ Environment Variables ]────────────────────────────────────────────────────
 export SHELL="$(which zsh)"
+export OPENSSL_DIR="/usr"
+export LEPTOS_TAILWIND_VERSION=v4.1.11
 export DOCKER_BUILDKIT=1
 export BROWSER="/usr/bin/qutebrowser"
 export LEPTOS_TAILWIND_VERSION="v4.0.0"
@@ -95,6 +97,14 @@ setopt hist_no_store
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
+
+autoload -Uz add-zsh-hook
+function cargo_target_chpwd {
+	local dir=$PWD:t # just the last path component of the project
+	export CARGO_TARGET_DIR=~/.cache/cargo-target/$dir
+}
+add-zsh-hook chpwd cargo_target_chpwd
+cargo_target_chpwd # initial shell start
 
 # ──[ Vi Keybindings ]──────────────────────────────────────────────────────────
 bindkey -v
