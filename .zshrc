@@ -270,5 +270,11 @@ edit_and_execute_command() {
   rm "$temp_file"
 }
 
+# Disable line wrapping by default in Alacritty
+if [[ "$TERM_PROGRAM" == "Alacritty" ]]; then
+  printf '\e[?7l'  # disable line wrap
+fi
+
+
 zle -N edit_and_execute_command
 bindkey -s '^e' "edit_and_execute_command^M"
