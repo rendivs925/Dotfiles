@@ -131,12 +131,12 @@ bindsym $mod+s split h
 bindsym $mod+w split v
 
 # Toggle floating, set initial size, and center
-bindsym $mod+Shift+space floating toggle, resize set 1000 600, move position center
+bindsym $mod+Shift+space floating toggle, resize set 1720 1020, move position center
 
-# Make floating window bigger (wider than taller)
+# Make floating window bigger 
 bindsym $mod+plus resize grow width 60 px or 60 ppt, resize grow height 30 px or 30 ppt, move position center
 
-# Make floating window smaller (wider than taller)
+# Make floating window smaller 
 bindsym $mod+minus resize shrink width 60 px or 60 ppt, resize shrink height 30 px or 30 ppt, move position center
 
 bindsym $mod+space focus mode_toggle
