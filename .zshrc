@@ -145,6 +145,7 @@ alias sn="sudoedit"
 alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira Mono Bold 20" --opacity 0.9 --bg-color "#000000" --font-color "#CBE0F0" --mods-mode emacs --persist --no-systray --bak-mode full --timeout 0.3"'
 alias nowrap='echo -e "\e[?7l"'
 alias wrap='echo -e "\e[?7h"'
+alias dual_monitor="xrandr --output eDP1 --mode 1920x1080 --primary --pos 0x0 --output HDMI1 --mode 2560x1440 --rate 99.95 --pos 1920x0"
 
 # ──[ Aliases: Shell Reload ]───────────────────────────────────────────────────
 alias soz="source ~/.zshrc"
