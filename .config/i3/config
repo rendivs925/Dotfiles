@@ -41,9 +41,9 @@ bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
 # Place those workspaces on the laptop screen
 workspace 1 output eDP1
-workspace 2 output eDP1
 
-# All other workspaces (3 and up) on external monitor
+# All other workspaces (2 and up) on external monitor
+workspace 2 output HDMI1
 workspace 3 output HDMI1
 workspace 4 output HDMI1
 workspace 5 output HDMI1
@@ -72,17 +72,17 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Background wallpaper
-exec_always --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-winter-5120x2880-19913.jpg
+exec_always --no-startup-id feh --bg-scale ./images/rain-forest.jpg
 # exec_always --no-startup-id feh --bg-scale ~/Downloads/26419-1920x1080-desktop-full-hd-black-hole-background.jpg
 # exec_always --no-startup-id feh --bg-scale ~/Downloads/26444-3840x2160-desktop-4k-black-hole-background.jpg
 # exec_always --no-startup-id feh --bg-scale ~/Downloads/26491-1920x1080-desktop-1080p-black-hole-background.jpg
 # exec_always --no-startup-id feh --bg-scale ~/Downloads/26427-3840x2160-desktop-4k-black-hole-wallpaper-image.jpg
-bindsym ctrl+3 exec --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-banff-5120x3200-15827.jpg
-bindsym ctrl+2 exec --no-startup-id feh --bg-scale ./.config/i3/images/cyberpunk.jpg
-bindsym ctrl+1 exec --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-winter-5120x2880-19913.jpg
-bindsym ctrl+4 exec --no-startup-id feh --bg-scale ./.config/i3/images/switzerland-3840x2160-5k-4k-wallpaper-8k-hd-mountains-sunset-hills-5303.jpg
+bindsym ctrl+3 exec --no-startup-id feh --bg-scale ./images/john-deleon-A8IFOpD3rGo-unsplash.jpg
+bindsym ctrl+2 exec --no-startup-id feh --bg-scale ./images/pine-watt-2Hzmz15wGik-unsplash.jpg
+bindsym ctrl+1 exec --no-startup-id feh --bg-scale ./images/rain-forest.jpg
+bindsym ctrl+4 exec --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-banff-5120x3200-15827.jpg
 bindsym ctrl+5 exec --no-startup-id feh --bg-scale ./.config/i3/images/moraine-lake-banff-national-park-valley-of-the-ten-peaks-6000x3376-4828.jpg
-bindsym ctrl+6 exec --no-startup-id feh --bg-scale ./.config/i3/images/moraine-lake-canada-reflection-landscape-snow-covered-5120x3200-3933.jpg
+bindsym ctrl+6 exec --no-startup-id feh --bg-scale ./images/wallpaperflare.com_wallpaper.jpg
 
 # Enable scroll lock
 exec --no-startup-id xmodmap -e "add mod3 = Scroll_Lock"
