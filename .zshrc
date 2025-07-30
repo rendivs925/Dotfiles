@@ -146,6 +146,8 @@ alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira M
 alias nowrap='echo -e "\e[?7l"'
 alias wrap='echo -e "\e[?7h"'
 alias dual_monitor="xrandr --output eDP1 --mode 1920x1080 --primary --pos 0x0 --output HDMI1 --mode 2560x1440 --rate 99.95 --pos 1920x0"
+alias external_only="xrandr --output eDP1 --off --output HDMI1 --mode 2560x1440 --rate 99.95 --primary --pos 0x0"
+alias internal_only="xrandr --output HDMI1 --off --output eDP1 --auto --primary --pos 0x0"
 
 # ──[ Aliases: Shell Reload ]───────────────────────────────────────────────────
 alias soz="source ~/.zshrc"
