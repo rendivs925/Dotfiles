@@ -53,9 +53,6 @@ workspace 8 output HDMI1
 workspace 9 output HDMI1
 workspace 10 output HDMI1
 
-# Set screen layout: laptop left, external right
-exec --no-startup-id xrandr --output eDP1 --mode 1920x1080 --primary --pos 0x0 --output HDMI1 --mode 2560x1440 --rate 99.95 --pos 1920x0
-
 # left click 
 bindsym Mod4+Return exec --no-startup-id ~/.config/i3/scripts/left_click_and_stop.sh
 
