@@ -18,7 +18,7 @@ zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 # ──[ Environment Variables ]────────────────────────────────────────────────────
 export SHELL="$(which zsh)"
 export OPENSSL_DIR="/usr"
-export LEPTOS_TAILWIND_VERSION=v4.1.11
+# export LEPTOS_TAILWIND_VERSION=v4.1.11
 export DOCKER_BUILDKIT=1
 export BROWSER="/usr/bin/qutebrowser"
 export LEPTOS_TAILWIND_VERSION="v4.0.0"
