@@ -170,6 +170,7 @@ alias jsa="just sa"
 alias dcu="docker compose up"
 alias dcw="docker compose watch"
 alias cw='cargo watch -q -c -w src/ -x "run -q"'
+alias vibe='cd /home/rendi/Workspace/Programs/apps/vibespeak; cargo run'
 
 # ──[ Aliases: Git Basics ]─────────────────────────────────────────────────────
 alias ga="git add"
