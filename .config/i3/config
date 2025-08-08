@@ -62,6 +62,7 @@ bindsym Mod4+Control+n exec --no-startup-id ~/.config/i3/scripts/hold_left_click
 # Enable XDG autostart
 exec --no-startup-id dex --autostart --environment i3
 
+exec --no-startup-id dunst
 # Touchpad settings
 exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput Tapping Enabled" 1
 
