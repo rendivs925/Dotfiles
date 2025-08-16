@@ -5,39 +5,8 @@ vim.g.rustaceanvim = {
         procMacro = {
           enable = true,
         },
-
-        cargo = {
-          allFeatures = true,
-          loadOutDirsFromCheck = true,
-          runBuildScripts = true,
-        },
-
         checkOnSave = {
           enable = false,
-        },
-
-        completion = {
-          autoimport = { enable = true },
-          postfix = { enable = true },
-        },
-
-        diagnostics = {
-          enable = true,
-          experimental = { enable = false },
-        },
-
-        inlayHints = { enable = false },
-        semanticHighlighting = { enable = false },
-        lens = { enable = false },
-
-        hover = {
-          actions = {
-            enable = false,
-          },
-        },
-
-        files = {
-          watcher = "client",
         },
       },
     },
