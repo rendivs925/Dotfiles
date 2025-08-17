@@ -145,9 +145,32 @@ alias sn="sudoedit"
 alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira Mono Bold 20" --opacity 0.9 --bg-color "#000000" --font-color "#CBE0F0" --mods-mode emacs --persist --no-systray --bak-mode full --timeout 0.3"'
 alias nowrap='echo -e "\e[?7l"'
 alias wrap='echo -e "\e[?7h"'
-alias dual_monitor="xrandr --output eDP1 --mode 1920x1080 --primary --pos 0x0 --output HDMI1 --mode 2560x1440 --rate 99.95 --pos 1920x0"
-alias external_only="xrandr --output eDP1 --off --output HDMI1 --mode 2560x1440 --rate 99.95 --primary --pos 0x0"
-alias internal_only="xrandr --output HDMI1 --off --output eDP1 --auto --primary --pos 0x0"
+# Dual monitor layout
+alias dual_monitor='
+  xrandr --output eDP --auto --primary --pos 0x0 \
+         --output HDMI-1-0 --auto --pos 2560x0 &&
+  i3-msg "workspace 1; move workspace to output eDP" &&
+  i3-msg "workspace 2; move workspace to output eDP" &&
+  for ws in 3 4 5 6 7 8 9 10; do
+    i3-msg "workspace $ws; move workspace to output HDMI-1-0"
+  done
+'
+
+# External monitor only
+alias external_only='
+  xrandr --output eDP --off --output HDMI-1-0 --auto --primary --pos 0x0 &&
+  for ws in 1 2 3 4 5 6 7 8 9 10; do
+    i3-msg "workspace $ws; move workspace to output HDMI-1-0"
+  done
+'
+
+# Internal monitor only
+alias internal_only='
+  xrandr --output HDMI-1-0 --off --output eDP --auto --primary --pos 0x0 &&
+  for ws in 1 2 3 4 5 6 7 8 9 10; do
+    i3-msg "workspace $ws; move workspace to output eDP"
+  done
+'
 
 # ──[ Aliases: Shell Reload ]───────────────────────────────────────────────────
 alias soz="source ~/.zshrc"

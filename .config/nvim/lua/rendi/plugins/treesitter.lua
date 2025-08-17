@@ -36,7 +36,7 @@ return {
         "prisma",
         "hurl",
         "python",
-        "rust_with_rstml",
+        -- "rust_with_rstml",
         "markdown",
         "markdown_inline",
         "graphql",

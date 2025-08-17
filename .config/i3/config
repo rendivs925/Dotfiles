@@ -6,8 +6,8 @@ set $mod Mod1
 floating_modifier $mod
 
 # Font configuration
-# font pango:"JetBrains Mono" 8
-font pango:"Hack Nerd Font" 10
+font pango:"JetBrains Mono" 12
+# font pango:"Hack Nerd Font" 10
 
 # Client color configurations
 client.focused          #005B73 #005B73 #FFFFFF
@@ -39,19 +39,19 @@ bindsym Mod4+Shift+l exec --no-startup-id xdotool mousemove_relative -- 200 0
 bindsym Mod4+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -100
 bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
-# Place those workspaces on the laptop screen
-workspace 1 output eDP1
+# Laptop (internal display)
+workspace 1 output eDP
+workspace 2 output eDP
 
-# All other workspaces (2 and up) on external monitor
-workspace 2 output HDMI1
-workspace 3 output HDMI1
-workspace 4 output HDMI1
-workspace 5 output HDMI1
-workspace 6 output HDMI1
-workspace 7 output HDMI1
-workspace 8 output HDMI1
-workspace 9 output HDMI1
-workspace 10 output HDMI1
+# External monitor
+workspace 3 output HDMI-1-0
+workspace 4 output HDMI-1-0
+workspace 5 output HDMI-1-0
+workspace 6 output HDMI-1-0
+workspace 7 output HDMI-1-0
+workspace 8 output HDMI-1-0
+workspace 9 output HDMI-1-0
+workspace 10 output HDMI-1-0
 
 # left click 
 bindsym Mod4+Return exec --no-startup-id ~/.config/i3/scripts/left_click_and_stop.sh
@@ -70,7 +70,7 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Background wallpaper
-exec_always --no-startup-id feh --bg-scale ./images/rain-forest.jpg
+exec_always --no-startup-id feh --bg-scale ./images/wallpaperflare.com_wallpaper.jpg
 # exec_always --no-startup-id feh --bg-scale ~/Downloads/26419-1920x1080-desktop-full-hd-black-hole-background.jpg
 # exec_always --no-startup-id feh --bg-scale ~/Downloads/26444-3840x2160-desktop-4k-black-hole-background.jpg
 # exec_always --no-startup-id feh --bg-scale ~/Downloads/26491-1920x1080-desktop-1080p-black-hole-background.jpg
@@ -98,7 +98,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Run picom (uncomment to enable)
-# exec --no-startup-id picom
+exec --no-startup-id picom
 
 # Application bindings
 bindsym $mod+Return exec --no-startup-id alacritty

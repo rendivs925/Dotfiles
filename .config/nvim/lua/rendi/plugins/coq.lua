@@ -94,20 +94,20 @@ return {
         root_dir = lsp.util.root_pattern(".git") or vim.fn.getcwd(),
       })
 
-      -- setup_lsp("cssls", {
-      --   filetypes = { "css", "scss" },
-      -- })
+      setup_lsp("cssls", {
+        filetypes = { "css", "scss" },
+      })
 
       -- setup_lsp("asm_lsp", {
       --   filetypes = { "asm", "nasm" },
       -- })
 
-      -- setup_lsp("tailwindcss", {
-      --   filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescriptreact" },
-      --   root_dir = function(fname)
-      --     return lsp.util.root_pattern("tailwind.config.js", ".git")(fname) or vim.fn.getcwd()
-      --   end,
-      -- })
+      setup_lsp("tailwindcss", {
+        filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescriptreact" },
+        root_dir = function(fname)
+          return lsp.util.root_pattern("tailwind.config.js", ".git")(fname) or vim.fn.getcwd()
+        end,
+      })
 
       setup_lsp("lua_ls", {
         filetypes = { "lua" },
@@ -123,13 +123,13 @@ return {
         },
       })
 
-      -- setup_lsp("graphql", {
-      --   filetypes = { "graphql", "gql" },
-      -- })
+      setup_lsp("graphql", {
+        filetypes = { "graphql", "gql" },
+      })
 
-      -- setup_lsp("emmet_ls", {
-      --   filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact" },
-      -- })
+      setup_lsp("emmet_ls", {
+        filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact" },
+      })
 
       -- setup_lsp("prismals", {
       --   filetypes = { "prisma" },
