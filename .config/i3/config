@@ -41,9 +41,10 @@ bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
 # Laptop (internal display)
 workspace 1 output eDP
-workspace 2 output eDP
+# workspace 2 output eDP
 
 # External monitor
+workspace 2 output HDMI-1-0
 workspace 3 output HDMI-1-0
 workspace 4 output HDMI-1-0
 workspace 5 output HDMI-1-0

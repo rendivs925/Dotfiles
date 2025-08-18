@@ -49,8 +49,8 @@ zsh-defer '[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion
 zsh-defer source /usr/share/nvm/init-nvm.sh
 
 # ──[ FZF Bindings & Widgets ]──────────────────────────────────────────────────
-zsh-defer source ~/.config/zsh/plugins/fzf/shell/completion.zsh
-zsh-defer source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
+zsh-defer source /usr/share/fzf/completion.zsh
+zsh-defer source /usr/share/fzf/key-bindings.zsh
 autoload -Uz fzf-file-widget fzf-history-widget
 zle -N fzf-file-widget
 zle -N fzf-history-widget
@@ -150,8 +150,7 @@ alias dual_monitor='
   xrandr --output eDP --auto --primary --pos 0x0 \
          --output HDMI-1-0 --auto --pos 2560x0 &&
   i3-msg "workspace 1; move workspace to output eDP" &&
-  i3-msg "workspace 2; move workspace to output eDP" &&
-  for ws in 3 4 5 6 7 8 9 10; do
+  for ws in 2 3 4 5 6 7 8 9 10; do
     i3-msg "workspace $ws; move workspace to output HDMI-1-0"
   done
 '
