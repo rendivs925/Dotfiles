@@ -44,15 +44,15 @@ workspace 1 output eDP
 # workspace 2 output eDP
 
 # External monitor
-workspace 2 output HDMI-1-0
-workspace 3 output HDMI-1-0
-workspace 4 output HDMI-1-0
-workspace 5 output HDMI-1-0
-workspace 6 output HDMI-1-0
-workspace 7 output HDMI-1-0
-workspace 8 output HDMI-1-0
-workspace 9 output HDMI-1-0
-workspace 10 output HDMI-1-0
+workspace 2 output DisplayPort-0
+workspace 3 output DisplayPort-0
+workspace 4 output DisplayPort-0
+workspace 5 output DisplayPort-0
+workspace 6 output DisplayPort-0
+workspace 7 output DisplayPort-0
+workspace 8 output DisplayPort-0
+workspace 9 output DisplayPort-0
+workspace 10 output DisplayPort-0
 
 # left click 
 bindsym Mod4+Return exec --no-startup-id ~/.config/i3/scripts/left_click_and_stop.sh
