@@ -145,30 +145,30 @@ alias sn="sudoedit"
 alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira Mono Bold 20" --opacity 0.9 --bg-color "#000000" --font-color "#CBE0F0" --mods-mode emacs --persist --no-systray --bak-mode full --timeout 0.3"'
 alias nowrap='echo -e "\e[?7l"'
 alias wrap='echo -e "\e[?7h"'
-# Dual monitor layout (internal + external)
+# Dual monitor layout (internal + external) @ 60 Hz
 alias dual_monitor='
-  xrandr --output eDP --auto --primary --pos 0x0 \
-         --output DisplayPort-0 --auto --pos 2560x0 &&
+  xrandr --output eDP --auto --rate 60 --primary --pos 0x0 \
+         --output DisplayPort-0 --auto --rate 60 --pos 2560x0 &&
   i3-msg "workspace 1; move workspace to output eDP" &&
-  for ws in 2 3 4 5 6 7 8 9 10; do
+  for ws in 2; do
     i3-msg "workspace $ws; move workspace to output DisplayPort-0"
   done
 '
 
-# External monitor only
+# External monitor only @ 60 Hz
 alias external_only='
   xrandr --output eDP --off \
-         --output DisplayPort-0 --auto --primary --pos 0x0 &&
-  for ws in 1 2 3 4 5 6 7 8 9 10; do
+         --output DisplayPort-0 --auto --rate 60 --primary --pos 0x0 &&
+  for ws in 1; do
     i3-msg "workspace $ws; move workspace to output DisplayPort-0"
   done
 '
 
-# Internal monitor only
+# Internal monitor only @ 60 Hz
 alias internal_only='
   xrandr --output DisplayPort-0 --off \
-         --output eDP --auto --primary --pos 0x0 &&
-  for ws in 1 2 3 4 5 6 7 8 9 10; do
+         --output eDP --auto --rate 60 --primary --pos 0x0 &&
+  for ws in 1; do
     i3-msg "workspace $ws; move workspace to output eDP"
   done
 '
