@@ -54,6 +54,8 @@ workspace 8 output DisplayPort-0
 workspace 9 output DisplayPort-0
 workspace 10 output DisplayPort-0
 
+exec --no-startup-id xrandr --output eDP --mode 2560x1600 --rate 60
+
 # left click 
 bindsym Mod4+Return exec --no-startup-id ~/.config/i3/scripts/left_click_and_stop.sh
 

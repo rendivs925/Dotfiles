@@ -145,7 +145,8 @@ alias sn="sudoedit"
 alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira Mono Bold 20" --opacity 0.9 --bg-color "#000000" --font-color "#CBE0F0" --mods-mode emacs --persist --no-systray --bak-mode full --timeout 0.3"'
 alias nowrap='echo -e "\e[?7l"'
 alias wrap='echo -e "\e[?7h"'
-# Dual monitor layout (internal + external) @ 60 Hz
+alias fps_60="xrandr --output eDP --mode 2560x1600 --rate 60"
+# Dual monitor (internal + external) @ 60 Hz
 alias dual_monitor='
   xrandr --output eDP --auto --rate 60 --primary --pos 0x0 \
          --output DisplayPort-0 --auto --rate 60 --pos 2560x0 &&
