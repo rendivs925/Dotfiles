@@ -153,26 +153,26 @@ alias dual_monitor='
   i3-msg "workspace 1; move workspace to output eDP" &&
   for ws in 2; do
     i3-msg "workspace $ws; move workspace to output DisplayPort-0"
-  done
+  done && fps_60
 '
 
 # External monitor only @ 60 Hz
 alias external_only='
   xrandr --output eDP --off \
          --output DisplayPort-0 --auto --rate 60 --primary --pos 0x0 &&
-  for ws in 1; do
-    i3-msg "workspace $ws; move workspace to output DisplayPort-0"
-  done
+  i3-msg "workspace 1; move workspace to output DisplayPort-0" &&
+  fps_60
 '
 
 # Internal monitor only @ 60 Hz
 alias internal_only='
   xrandr --output DisplayPort-0 --off \
          --output eDP --auto --rate 60 --primary --pos 0x0 &&
-  for ws in 1; do
-    i3-msg "workspace $ws; move workspace to output eDP"
-  done
+  i3-msg "workspace 1; move workspace to output eDP" &&
+  fps_60
 '
+
+alias brightness='xrandr --output eDP --brightness $1 --output DisplayPort-0 --brightness $1'
 
 # ──[ Aliases: Shell Reload ]───────────────────────────────────────────────────
 alias soz="source ~/.zshrc"
