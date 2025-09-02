@@ -12,7 +12,7 @@ opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,te
 opt.relativenumber = true
 opt.number = true
 opt.guicursor = ""
-opt.mouse = ""
+opt.mouse = "a"
 
 -- Indentation
 opt.autoindent = true

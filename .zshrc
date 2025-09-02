@@ -172,7 +172,10 @@ alias internal_only='
   fps_60
 '
 
-alias brightness='xrandr --output eDP --brightness $1 --output DisplayPort-0 --brightness $1'
+brightness() {
+  xrandr --output eDP --brightness "$1" \
+         --output DisplayPort-0 --brightness "$1"
+}
 
 # ──[ Aliases: Shell Reload ]───────────────────────────────────────────────────
 alias soz="source ~/.zshrc"
