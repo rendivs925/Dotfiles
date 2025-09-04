@@ -72,18 +72,19 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 # Screenshot command
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
-# Background wallpaper
-exec_always --no-startup-id feh --bg-scale ./images/wallpaperflare.com_wallpaper.jpg
-# exec_always --no-startup-id feh --bg-scale ~/Downloads/26419-1920x1080-desktop-full-hd-black-hole-background.jpg
-# exec_always --no-startup-id feh --bg-scale ~/Downloads/26444-3840x2160-desktop-4k-black-hole-background.jpg
-# exec_always --no-startup-id feh --bg-scale ~/Downloads/26491-1920x1080-desktop-1080p-black-hole-background.jpg
-# exec_always --no-startup-id feh --bg-scale ~/Downloads/26427-3840x2160-desktop-4k-black-hole-wallpaper-image.jpg
-bindsym ctrl+3 exec --no-startup-id feh --bg-scale ./images/john-deleon-A8IFOpD3rGo-unsplash.jpg
-bindsym ctrl+2 exec --no-startup-id feh --bg-scale ./images/pine-watt-2Hzmz15wGik-unsplash.jpg
-bindsym ctrl+1 exec --no-startup-id feh --bg-scale ./images/rain-forest.jpg
-bindsym ctrl+4 exec --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-banff-5120x3200-15827.jpg
-bindsym ctrl+5 exec --no-startup-id feh --bg-scale ./.config/i3/images/moraine-lake-banff-national-park-valley-of-the-ten-peaks-6000x3376-4828.jpg
-bindsym ctrl+6 exec --no-startup-id feh --bg-scale ./images/wallpaperflare.com_wallpaper.jpg
+# Set default wallpaper on startup
+exec_always --no-startup-id feh --bg-scale ~/Downloads/wallpaperflare.com_wallpaper3.jpg
+
+# Wallpapers bindings
+bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/wallpaperflare.com_wallpaper1.jpg
+bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/wallpaperflare.com_wallpaper2.jpg
+bindsym ctrl+3 exec --no-startup-id feh --bg-scale ~/Downloads/wallpaperflare.com_wallpaper3.jpg
+bindsym ctrl+4 exec --no-startup-id feh --bg-scale ~/Downloads/wallpaperflare.com_wallpaper4.jpg
+bindsym ctrl+5 exec --no-startup-id feh --bg-scale ~/Downloads/wallpaperflare.com_wallpaper5.jpg
+bindsym ctrl+6 exec --no-startup-id feh --bg-scale ~/Downloads/pexels-bru-no-1461027.jpg
+bindsym ctrl+7 exec --no-startup-id feh --bg-scale ~/Downloads/pexels-therato-3855632.jpg
+bindsym ctrl+8 exec --no-startup-id feh --bg-scale ~/Downloads/145397.jpg
+bindsym ctrl+9 exec --no-startup-id feh --bg-scale ~/Downloads/wp9181131-4k-pasture-wallpapers.jpg
 
 # Enable scroll lock
 exec --no-startup-id xmodmap -e "add mod3 = Scroll_Lock"
@@ -92,7 +93,7 @@ exec --no-startup-id xmodmap -e "add mod3 = Scroll_Lock"
 exec --no-startup-id unclutter -idle 1 -root
 
 # Shutdown the system with $mod+Escape
-bindsym $mod+Shift+Escape exec --no-startup-id shutdown now
+# bindsym $mod+Shift+Escape exec --no-startup-id shutdown now
 
 # Lock screen and power management
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
@@ -161,7 +162,7 @@ bindsym $mod+r mode "resize"
 
 # Gaps configuration
 gaps inner 20
-gaps outer 20
+gaps outer 40
 
 # Workspace definitions
 set $ws1 "1"

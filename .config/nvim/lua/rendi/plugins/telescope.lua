@@ -11,6 +11,7 @@ return {
       "folke/todo-comments.nvim",
       opts = {},
     },
+    "nvim-telescope/telescope-file-browser.nvim",
   },
   config = function()
     local telescope = require("telescope")
@@ -45,6 +46,9 @@ return {
 
     local keymap = vim.keymap.set
     keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
+    keymap("n", "<space>fb", function()
+      require("telescope").extensions.file_browser.file_browser()
+    end)
     keymap("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
     keymap("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
     keymap("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
