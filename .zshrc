@@ -146,17 +146,14 @@ alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira M
 alias nowrap='echo -e "\e[?7l"'
 alias wrap='echo -e "\e[?7h"'
 alias fps_60="xrandr --output eDP --mode 2560x1600 --rate 60"
-# Dual monitor (internal + external) @ 60 Hz
+
+# Dual monitor (extended)
 alias dual_monitor='
-  xrandr --output eDP --auto --rate 60 --primary --pos 0x0 \
-         --output DisplayPort-0 --auto --rate 60 --pos 2560x0 &&
-  i3-msg "workspace 1; move workspace to output eDP" &&
-  for ws in 2; do
-    i3-msg "workspace $ws; move workspace to output DisplayPort-0"
-  done && fps_60
+  xrandr --auto --output eDP --primary --mode 2560x1600 --pos 0x0 \
+       --output DisplayPort-0 --mode 2560x1440 --right-of eDP --auto
 '
 
-# External monitor only @ 60 Hz
+# External only
 alias external_only='
   xrandr --output eDP --off \
          --output DisplayPort-0 --auto --rate 60 --primary --pos 0x0 &&
@@ -164,7 +161,7 @@ alias external_only='
   fps_60
 '
 
-# Internal monitor only @ 60 Hz
+# Internal only
 alias internal_only='
   xrandr --output DisplayPort-0 --off \
          --output eDP --auto --rate 60 --primary --pos 0x0 &&
