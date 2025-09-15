@@ -40,7 +40,7 @@ bindsym Mod4+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -100
 bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
 # Laptop (eDP) → telemetry / logs / background
-workspace 0 output eDP      
+# workspace 0 output eDP      
 workspace 8 output eDP      
 workspace 9 output eDP      
 workspace 10 output eDP     
