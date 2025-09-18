@@ -50,7 +50,7 @@ keymap.set("n", "<leader>dcl", [[:%s/\n\{3,}/\r\r/gc<CR>]], { desc = "Collapse b
 keymap.set("n", "<leader>sc", [[:/\v(#|--|\/\/|;|<!--.*-->|\/\*.*\*\/).*<CR>]], { desc = "Search comments" })
 
 -- Select all
-keymap.set("n", "<C-s>", "gg<S-v>G", { desc = "Select all" })
+keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 
 -- Black hole ops
 keymap.set("n", "x", '"_x', { desc = "Del no copy" })
