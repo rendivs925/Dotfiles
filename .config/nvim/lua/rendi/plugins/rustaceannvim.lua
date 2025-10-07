@@ -14,7 +14,38 @@ vim.g.rustaceanvim = {
       vim.keymap.set("n", "K", function()
         vim.cmd.RustLsp({ "hover", "actions" })
       end, opts)
+
+      -- Monitor memory usage (optional)
+      vim.keymap.set("n", "<leader>rm", function()
+        vim.cmd.RustLsp("restart")
+        print("Restarted rust-analyzer due to memory usage")
+      end, opts)
     end,
+
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = { enable = false },
+        cargo = {
+          loadOutDirsFromCheck = false,
+          buildScripts = { enable = false },
+        },
+        diagnostics = { enable = false },
+        procMacro = { enable = false },
+        completion = { autoimport = { enable = false } },
+        lens = { enable = false },
+        hover = { enable = false },
+        files = {
+          excludeDirs = {
+            "target",
+            "**/target",
+            "node_modules",
+            "**/build",
+            "**/dist",
+            "**/.git",
+          },
+        },
+      },
+    },
   },
 }
 

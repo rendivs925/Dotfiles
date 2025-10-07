@@ -17,13 +17,12 @@ zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # ──[ Environment Variables ]────────────────────────────────────────────────────
 export SHELL="$(which zsh)"
-export OPENSSL_DIR="/usr"
-# export LEPTOS_TAILWIND_VERSION=v4.1.11
+export OPENSSL_DIR="/usr" # export LEPTOS_TAILWIND_VERSION=v4.1.11
 export DOCKER_BUILDKIT=1
 export BROWSER="/usr/bin/qutebrowser"
 export LEPTOS_TAILWIND_VERSION="v4.0.0"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-export JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk/-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
 export SUDO_EDITOR="nvim"
 export EDITOR="nvim"
@@ -33,8 +32,17 @@ export PATH="$HOME/.cargo/bin:/opt/nvim-linux64/bin:/home/rendi/.local/bin:$PATH
 export PATH="$HOME/.espressif/tools/xtensa-esp-elf/bin:$PATH"
 export PATH="$HOME/.espressif/xtensa-esp32-elf/bin:$PATH"
 export PYTHONPATH="/home/rendi/Downloads/pwndbg-2024.08.29/.venv/lib/python3.13/site-packages"
-export ANDROID_HOME="/opt/android-sdk"
-export NDK_HOME="/opt/android-ndk"
+# Android SDK
+export ANDROID_HOME=/opt/android-sdk
+export ANDROID_SDK_ROOT=/opt/android-sdk
+
+# Android NDK
+export ANDROID_NDK_HOME=/opt/android-ndk
+
+# Add tools to PATH
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH="/home/rendi/perl5/bin${PATH:+:${PATH}}"
 export PERL5LIB="/home/rendi/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
 export PERL_LOCAL_LIB_ROOT="/home/rendi/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
@@ -304,3 +312,4 @@ edit_and_execute_command() {
 
 zle -N edit_and_execute_command
 bindkey -s '^e' "edit_and_execute_command^M"
+export PATH=$HOME/.local/bin:$PATH

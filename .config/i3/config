@@ -101,6 +101,12 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # Network and audio applets
 exec --no-startup-id nm-applet
 
+# === HiDPI Scaling Fix (16" 2K Display) ===
+exec_always --no-startup-id export GDK_SCALE=1.25
+exec_always --no-startup-id export GDK_DPI_SCALE=0.8
+exec_always --no-startup-id export QT_AUTO_SCREEN_SCALE_FACTOR=1
+exec_always --no-startup-id export QT_SCALE_FACTOR=1.25
+
 # Run picom (uncomment to enable)
 exec --no-startup-id picom
 
@@ -163,8 +169,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Gaps configuration
-gaps inner 20
-gaps outer 20
+gaps inner 10
+gaps outer 10
 
 # Workspace definitions
 set $ws1 "1"
