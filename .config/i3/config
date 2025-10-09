@@ -41,6 +41,8 @@ bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
 # Laptop (eDP) → telemetry / logs / background
 # workspace 0 output eDP      
+workspace 6 output eDP      
+workspace 7 output eDP      
 workspace 8 output eDP      
 workspace 9 output eDP      
 workspace 10 output eDP     
@@ -51,8 +53,6 @@ workspace 2 output DisplayPort-0
 workspace 3 output DisplayPort-0   
 workspace 4 output DisplayPort-0   
 workspace 5 output DisplayPort-0   
-workspace 6 output DisplayPort-0   
-workspace 7 output DisplayPort-0   
 
 exec --no-startup-id xrandr --output eDP --mode 2560x1600 --rate 60
 
