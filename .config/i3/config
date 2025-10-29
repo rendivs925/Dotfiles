@@ -112,7 +112,7 @@ exec_always --no-startup-id export QT_SCALE_FACTOR=1.1
 exec --no-startup-id picom
 
 # Application bindings
-bindsym $mod+Return exec --no-startup-id warp-terminal
+bindsym $mod+Return exec --no-startup-id alacritty  
 bindsym $mod+c exec flameshot gui
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+q kill
