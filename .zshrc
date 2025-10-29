@@ -285,31 +285,11 @@ alias gclean="git clean -fd"
 alias gprune="git fetch -p && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
 # ──[ Command Editor ]──────────────────────────────────────────────────────────
-edit_and_execute_command() {
-  local temp_file
-  temp_file=$(mktemp /tmp/zsh_command.XXXXXX) || { echo "[ERROR] Cannot create temp file"; return; }
+# Load the edit-command-line widget
+autoload -Uz edit-command-line
+zle -N edit-command-line
 
-  nvim "$temp_file" || { echo "[ERROR] Failed to open in Neovim"; rm "$temp_file"; return; }
+# Remap Ctrl+E to open the current command in $EDITOR (Neovim)
+bindkey '^E' edit-command-line
 
-  local last_command
-  last_command=$(<"$temp_file")
-  echo "[COMMAND]"
-  echo "$last_command"
-
-  echo "$last_command" | xclip -selection clipboard
-  echo "$last_command" >> ~/.zsh_history
-  fc -A
-
-  local response
-  response=$(eval "$last_command" 2>&1)
-  if [[ $? -eq 0 ]]; then
-    [[ -n "$response" ]] && echo -e "\n[OUTPUT]\n$response"
-  else
-    echo -e "\n[ERROR]\n$response"
-  fi
-  rm "$temp_file"
-}
-
-zle -N edit_and_execute_command
-bindkey -s '^e' "edit_and_execute_command^M"
 export PATH=$HOME/.local/bin:$PATH
