@@ -1,5 +1,6 @@
 [ env ]
 TERM = "xterm-256color"
+COLORTERM = "truecolor"
 
 [window]
 # padding.x = 10

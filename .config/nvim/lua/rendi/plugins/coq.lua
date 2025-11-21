@@ -22,7 +22,7 @@ return {
   end,
   config = function()
     local coq = require("coq")
-    local lsp_util = require("lspconfig.util") -- needed for root_pattern
+    local lsp_util = require("lspconfig.util")
 
     -- Toggle diagnostics
     local function configure_diagnostics(enabled)
@@ -49,22 +49,29 @@ return {
         configure_diagnostics(true)
       end, { desc = "Show Diagnostics" })
 
-      -- Completion keymaps
+      -- === Fixed mappings ===
       local expr_opts = { expr = true, silent = true }
-      buf_map("i", "<Esc>", [[pumvisible() ? "\<C-e><Esc>" : "\<Esc>"]], expr_opts)
-      buf_map("i", "<C-c>", [[pumvisible() ? "\<C-e><C-c>" : "\<C-c>"]], expr_opts)
+
+      -- Escape gracefully, without triggering mark placement
+      buf_map("i", "<Esc>", [[pumvisible() ? "\<C-e>" : "\<Esc>"]], expr_opts)
+
+      -- Prevent BS from closing popup with error marks
       buf_map("i", "<BS>", [[pumvisible() ? "\<C-e><BS>" : "\<BS>"]], expr_opts)
+
+      -- Fixed <Tab> to avoid “No more marks available”
       buf_map(
         "i",
         "<Tab>",
-        [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]],
+        [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e>" : "\<C-y>") : "\<CR>"]],
         expr_opts
       )
+
+      -- Navigation mappings
       buf_map("i", "<C-n>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], expr_opts)
       buf_map("i", "<C-p>", [[pumvisible() ? "\<C-p>" : "\<BS>"]], expr_opts)
     end
 
-    -- Helper to setup server with COQ capabilities
+    -- LSP server setup helper
     local function setup_server(server_name, opts)
       opts = opts or {}
       opts.on_attach = on_attach
@@ -75,7 +82,7 @@ return {
 
     configure_diagnostics(true)
 
-    -- === LSP servers ===
+    -- === LSP Servers ===
     setup_server("tsserver", {
       filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
       root_dir = lsp_util.root_pattern("package.json", "tsconfig.json", ".git"),
@@ -114,10 +121,5 @@ return {
     setup_server("emmet_ls", {
       filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact" },
     })
-
-    -- Uncomment to enable other servers
-    -- setup_server("pyright", { filetypes = { "python" }, settings = { python = { analysis = { typeCheckingMode = "basic" } } } })
-    -- setup_server("prismals", { filetypes = { "prisma" } })
-    -- setup_server("asm_lsp", { filetypes = { "asm", "nasm" } })
   end,
 }

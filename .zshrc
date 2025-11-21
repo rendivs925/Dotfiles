@@ -16,6 +16,9 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # ──[ Environment Variables ]────────────────────────────────────────────────────
+export W3MIMGDISPLAY=/usr/lib/w3m/w3mimgdisplay
+export TERM=xterm-256color
+export COLORTERM=truecolor
 export SHELL="$(which zsh)"
 export OPENSSL_DIR="/usr" # export LEPTOS_TAILWIND_VERSION=v4.1.11
 export DOCKER_BUILDKIT=1
@@ -148,6 +151,7 @@ alias nx="nvim ~/.xinitrc"
 alias e="exit"
 alias c="clear"
 alias n="nvim"
+alias nano="nvim"
 alias r="ranger"
 alias sn="sudoedit"
 alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira Mono Bold 20" --opacity 0.9 --bg-color "#000000" --font-color "#CBE0F0" --mods-mode emacs --persist --no-systray --bak-mode full --timeout 0.3"'
@@ -158,7 +162,7 @@ alias fps_60="xrandr --output eDP --mode 2560x1600 --rate 60"
 # Dual monitor (extended)
 alias dual_monitor='
   xrandr --auto --output eDP --primary --mode 2560x1600 --pos 0x0 \
-       --output DisplayPort-0 --mode 2560x1440 --right-of eDP --auto
+       --output DisplayPort-1 --mode 2560x1440 --right-of eDP --auto
 '
 
 # External only
