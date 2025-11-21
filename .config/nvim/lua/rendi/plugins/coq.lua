@@ -58,11 +58,10 @@ return {
       -- Prevent BS from closing popup with error marks
       buf_map("i", "<BS>", [[pumvisible() ? "\<C-e><BS>" : "\<BS>"]], expr_opts)
 
-      -- Fixed <Tab> to avoid “No more marks available”
       buf_map(
         "i",
         "<Tab>",
-        [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e>" : "\<C-y>") : "\<CR>"]],
+        [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e>" : "\<C-y>") : "\<Tab>"]],
         expr_opts
       )
 
