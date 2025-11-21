@@ -11,7 +11,7 @@ return {
       auto_start = true,
       keymap = {
         recommended = false,
-        jump_to_mark = "<c-m>",
+        jump_to_mark = "<c-g>",
       },
       display = {
         statusline = {
