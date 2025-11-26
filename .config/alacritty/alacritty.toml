@@ -13,7 +13,7 @@ decorations = "none"
 [font]
 # normal.family = "Hack Nerd Font"
 normal.family = "JetBrains Mono"
-size = 12
+size = 10
 
 [[keyboard.bindings]]
 action = "Paste"

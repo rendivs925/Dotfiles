@@ -157,33 +157,34 @@ alias sn="sudoedit"
 alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira Mono Bold 20" --opacity 0.9 --bg-color "#000000" --font-color "#CBE0F0" --mods-mode emacs --persist --no-systray --bak-mode full --timeout 0.3"'
 alias nowrap='echo -e "\e[?7l"'
 alias wrap='echo -e "\e[?7h"'
-alias fps_60="xrandr --output eDP --mode 2560x1600 --rate 60"
+alias fps_60="xrandr --output eDP-1-0 --mode 2560x1600 --rate 60"
 
-# Dual monitor (extended)
+# Dual monitor – laptop left 300 Hz + external right 100 Hz
 alias dual_monitor='
-  xrandr --auto --output eDP --primary --mode 2560x1600 --pos 0x0 \
-       --output DisplayPort-1 --mode 2560x1440 --right-of eDP --auto
+  xrandr --output eDP-1-0 --primary --mode 2560x1600 --rate 300 --pos 0x0 --rotate normal \
+         --output HDMI-0 --rate 99.95 --right-of eDP-1-0 --rotate normal &&
+  echo "Dual monitor active – laptop 300 Hz + external 100 Hz"
 '
 
-# External only
+# External monitor only – 100 Hz
 alias external_only='
-  xrandr --output eDP --off \
-         --output DisplayPort-0 --auto --rate 60 --primary --pos 0x0 &&
-  i3-msg "workspace 1; move workspace to output DisplayPort-0" &&
-  fps_60
+  xrandr --output eDP-1-0 --off \
+         --output HDMI-0 --primary --mode 2560x1440 --rate 99.95 --pos 0x0 --rotate normal &&
+  i3-msg "workspace 1; move workspace to output HDMI-0" &&
+  echo "External-only @ 100 Hz active"
 '
 
-# Internal only
+# Laptop screen only – 300 Hz
 alias internal_only='
-  xrandr --output DisplayPort-0 --off \
-         --output eDP --auto --rate 60 --primary --pos 0x0 &&
-  i3-msg "workspace 1; move workspace to output eDP" &&
-  fps_60
+  xrandr --output HDMI-0 --off \
+         --output eDP-1-0 --primary --mode 2560x1600 --rate 300 --pos 0x0 --rotate normal &&
+  i3-msg "workspace 1; move workspace to output eDP-1-0" &&
+  echo "Laptop-only @ 300 Hz active"
 '
 
 brightness() {
-  xrandr --output eDP --brightness "$1" \
-         --output DisplayPort-0 --brightness "$1"
+  xrandr --output eDP-1-0 --brightness "$1" \
+         --output HDMI-0 --brightness "$1"
 }
 
 # ──[ Aliases: Shell Reload ]───────────────────────────────────────────────────

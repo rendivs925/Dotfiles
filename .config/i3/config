@@ -39,22 +39,21 @@ bindsym Mod4+Shift+l exec --no-startup-id xdotool mousemove_relative -- 200 0
 bindsym Mod4+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -100
 bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
+# External (HDMI-1-0) → main coding surface
+workspace 1 output HDMI-1-0   
+workspace 2 output HDMI-1-0   
+workspace 3 output HDMI-1-0   
+workspace 4 output HDMI-1-0   
+workspace 5 output HDMI-1-0   
+
 # Laptop (eDP) → telemetry / logs / background
-# workspace 0 output eDP      
-workspace 6 output eDP      
-workspace 7 output eDP      
-workspace 8 output eDP      
-workspace 9 output eDP      
-workspace 10 output eDP     
+# workspace 0 output eDP-1-0
+workspace 6 output eDP-1-0   
+workspace 7 output eDP-1-0   
+workspace 8 output eDP-1-0   
+workspace 9 output eDP-1-0   
+workspace 10 output eDP-1-0     
 
-# External (DisplayPort-0) → main coding surface
-workspace 1 output DisplayPort-1   
-workspace 2 output DisplayPort-1   
-workspace 3 output DisplayPort-1   
-workspace 4 output DisplayPort-1   
-workspace 5 output DisplayPort-1   
-
-exec --no-startup-id xrandr --output eDP --mode 2560x1600 --rate 60
 
 exec --no-startup-id cliphist store
 # left click 
@@ -74,7 +73,7 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Set default wallpaper on startup
-exec_always --no-startup-id feh --bg-scale --randomize ~/Downloads/*pexels*
+exec_always --no-startup-id feh --bg-scale ~/Downloads/Images/wolf-on-rock-in-the-forest_3840x2160_xtrafondos.com.jpg  
 
 # Wallpapers bindings
 bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/Images/yosemite-wallpaper-3840x2160-apple-181.jpg 
@@ -103,11 +102,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # === HiDPI Scaling Fix (16" 2K Display, slightly smaller UI) ===
-exec_always --no-startup-id xrandr --dpi 115
-exec_always --no-startup-id export GDK_SCALE=1.1
-exec_always --no-startup-id export GDK_DPI_SCALE=0.9
-exec_always --no-startup-id export QT_AUTO_SCREEN_SCALE_FACTOR=1
-exec_always --no-startup-id export QT_SCALE_FACTOR=1.1
+# exec_always --no-startup-id xrandr --dpi 115
+# exec_always --no-startup-id export GDK_SCALE=1.1
+# exec_always --no-startup-id export GDK_DPI_SCALE=0.9
+# exec_always --no-startup-id export QT_AUTO_SCREEN_SCALE_FACTOR=1
+# exec_always --no-startup-id export QT_SCALE_FACTOR=1.1
 
 # Run picom (uncomment to enable)
 exec --no-startup-id picom
@@ -171,8 +170,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Gaps configuration
-gaps inner 0
-gaps outer 0
+gaps inner 20
 
 # Workspace definitions
 set $ws1 "1"
@@ -231,11 +229,5 @@ bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'Do you really want to exit i
 
 exec --no-startup-id qvm-start-gui --all --watch
 
-# Bar configuration
-bar {
-    mode hide
-    hidden_state hide
-    modifier Mod4+$mod
-    status_command i3status
-}
-
+# Polybar configuration
+exec_always --no-startup-id ~/.config/polybar/launch.sh
