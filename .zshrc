@@ -17,8 +17,8 @@ zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # ──[ Environment Variables ]────────────────────────────────────────────────────
 export W3MIMGDISPLAY=/usr/lib/w3m/w3mimgdisplay
-export TERM=xterm-256color
 export COLORTERM=truecolor
+export TERM=xterm-256color
 export SHELL="$(which zsh)"
 export OPENSSL_DIR="/usr" # export LEPTOS_TAILWIND_VERSION=v4.1.11
 export DOCKER_BUILDKIT=1
@@ -109,14 +109,14 @@ autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
 
-autoload -Uz add-zsh-hook
-function cargo_target_chpwd {
-	local dir=$PWD:t # just the last path component of the project
-	export CARGO_TARGET_DIR=~/.cache/cargo-target/$dir
+qwen_cli_widget() {
+  BUFFER="vibe_cli --chat"
+  zle accept-line
 }
-add-zsh-hook chpwd cargo_target_chpwd
-cargo_target_chpwd # initial shell start
+zle -N qwen_cli_widget
+bindkey '^G' qwen_cli_widget
 
+autoload -Uz add-zsh-hook
 # ──[ Vi Keybindings ]──────────────────────────────────────────────────────────
 bindkey -v
 bindkey -M vicmd 'p' paste
@@ -131,6 +131,7 @@ source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 # ──[ Aliases: Navigation ]─────────────────────────────────────────────────────
 alias cd="z"
+alias ai="vibe_cli"
 alias cdf="cd ~/Dotfiles/"
 alias cn="cd ~/.config/nvim"
 alias ca="cd ~/.config/alacritty"
@@ -157,28 +158,28 @@ alias sn="sudoedit"
 alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira Mono Bold 20" --opacity 0.9 --bg-color "#000000" --font-color "#CBE0F0" --mods-mode emacs --persist --no-systray --bak-mode full --timeout 0.3"'
 alias nowrap='echo -e "\e[?7l"'
 alias wrap='echo -e "\e[?7h"'
-alias fps_60="xrandr --output eDP-1-0 --mode 2560x1600 --rate 60"
+alias fps_60="xrandr --output eDP --mode 2560x1600 --rate 60"
 
 # Dual monitor – laptop left 300 Hz + external right 100 Hz
 alias dual_monitor='
-  xrandr --output eDP-1-0 --primary --mode 2560x1600 --rate 300 --pos 0x0 --rotate normal \
-         --output HDMI-0 --rate 99.95 --right-of eDP-1-0 --rotate normal &&
+  xrandr --output eDP --primary --mode 2560x1600 --rate 300 --pos 0x0 --rotate normal \
+         --output HDMI-1-0 --rate 99.95 --right-of eDP --rotate normal &&
   echo "Dual monitor active – laptop 300 Hz + external 100 Hz"
 '
 
 # External monitor only – 100 Hz
 alias external_only='
-  xrandr --output eDP-1-0 --off \
-         --output HDMI-0 --primary --mode 2560x1440 --rate 99.95 --pos 0x0 --rotate normal &&
-  i3-msg "workspace 1; move workspace to output HDMI-0" &&
+  xrandr --output eDP --off \
+         --output HDMI-1-0 --primary --mode 2560x1440 --rate 99.95 --pos 0x0 --rotate normal &&
+  i3-msg "workspace 1; move workspace to output HDMI-1-0" &&
   echo "External-only @ 100 Hz active"
 '
 
 # Laptop screen only – 300 Hz
 alias internal_only='
-  xrandr --output HDMI-0 --off \
-         --output eDP-1-0 --primary --mode 2560x1600 --rate 300 --pos 0x0 --rotate normal &&
-  i3-msg "workspace 1; move workspace to output eDP-1-0" &&
+  xrandr --output HDMI-1-0 --off \
+         --output eDP --primary --mode 2560x1600 --rate 300 --pos 0x0 --rotate normal &&
+  i3-msg "workspace 1; move workspace to output eDP" &&
   echo "Laptop-only @ 300 Hz active"
 '
 

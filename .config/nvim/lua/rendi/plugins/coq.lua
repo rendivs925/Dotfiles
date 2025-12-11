@@ -1,11 +1,13 @@
 return {
   "neovim/nvim-lspconfig",
   lazy = false,
+
   dependencies = {
     { "ms-jpq/coq_nvim", branch = "coq" },
     { "ms-jpq/coq.artifacts", branch = "artifacts" },
     { "ms-jpq/coq.thirdparty", branch = "3p" },
   },
+
   init = function()
     vim.g.coq_settings = {
       auto_start = true,
@@ -20,6 +22,7 @@ return {
       },
     }
   end,
+
   config = function()
     local coq = require("coq")
     local lsp_util = require("lspconfig.util")
@@ -45,29 +48,30 @@ return {
       buf_map("n", "<leader>dh", function()
         configure_diagnostics(false)
       end, { desc = "Hide Diagnostics" })
+
       buf_map("n", "<leader>ds", function()
         configure_diagnostics(true)
       end, { desc = "Show Diagnostics" })
 
-      -- === Fixed mappings ===
+      -- === FIXED COMPLETION MAPPINGS ===
       local expr_opts = { expr = true, silent = true }
 
-      -- Escape gracefully, without triggering mark placement
+      -- Escape closes popup cleanly
       buf_map("i", "<Esc>", [[pumvisible() ? "\<C-e>" : "\<Esc>"]], expr_opts)
 
-      -- Prevent BS from closing popup with error marks
+      -- Backspace does not break popup
       buf_map("i", "<BS>", [[pumvisible() ? "\<C-e><BS>" : "\<BS>"]], expr_opts)
 
-      buf_map(
-        "i",
-        "<Tab>",
-        [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e>" : "\<C-y>") : "\<Tab>"]],
-        expr_opts
-      )
+      -- 🔥 TAB BEHAVIOR FIXED
+      -- Tab accepts completion ONLY when popup is visible; otherwise does nothing
+      buf_map("i", "<Tab>", [[pumvisible() ? "\<C-y>" : ""]], expr_opts)
 
-      -- Navigation mappings
-      buf_map("i", "<C-n>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], expr_opts)
-      buf_map("i", "<C-p>", [[pumvisible() ? "\<C-p>" : "\<BS>"]], expr_opts)
+      -- Shift-Tab cancels popup; otherwise does nothing
+      buf_map("i", "<S-Tab>", [[pumvisible() ? "\<C-e>" : ""]], expr_opts)
+
+      -- Navigation
+      buf_map("i", "<C-n>", [[pumvisible() ? "\<C-n>" : ""]], expr_opts)
+      buf_map("i", "<C-p>", [[pumvisible() ? "\<C-p>" : ""]], expr_opts)
     end
 
     -- LSP server setup helper
@@ -97,7 +101,14 @@ return {
     })
 
     setup_server("tailwindcss", {
-      filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescriptreact" },
+      filetypes = {
+        "html",
+        "css",
+        "scss",
+        "javascript",
+        "javascriptreact",
+        "typescriptreact",
+      },
       root_dir = function(fname)
         return lsp_util.root_pattern("tailwind.config.js", ".git")(fname) or vim.fn.getcwd()
       end,
@@ -118,7 +129,13 @@ return {
     })
 
     setup_server("emmet_ls", {
-      filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact" },
+      filetypes = {
+        "html",
+        "css",
+        "scss",
+        "javascriptreact",
+        "typescriptreact",
+      },
     })
   end,
 }
