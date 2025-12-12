@@ -150,7 +150,8 @@ alias nx="nvim ~/.xinitrc"
 
 # ──[ Aliases: Shell Utils ]────────────────────────────────────────────────────
 alias e="exit"
-alias c="clear"
+alias c="tmux list-panes -a -F '#{pane_id}' | xargs -I {} tmux send-keys -t {} C-l; clear"
+alias clear="tmux list-panes -a -F '#{pane_id}' | xargs -I {} tmux send-keys -t {} C-l; clear"
 alias n="nvim"
 alias nano="nvim"
 alias r="ranger"
