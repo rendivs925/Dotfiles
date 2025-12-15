@@ -172,7 +172,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Gaps configuration
-gaps inner 10
+gaps inner 20
 
 # Workspace definitions
 set $ws1 "1"

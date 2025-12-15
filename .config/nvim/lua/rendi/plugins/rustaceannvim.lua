@@ -1,12 +1,6 @@
 vim.g.rustaceanvim = {
   server = {
     on_attach = function(client, bufnr)
-      -- Guard clause: ignore non-rust-analyzer clients
-      local name = client.name
-      if name ~= "rust_analyzer" and name ~= "rust-analyzer" then
-        return
-      end
-
       local opts = { silent = true, buffer = bufnr }
 
       -- Code actions
@@ -25,60 +19,6 @@ vim.g.rustaceanvim = {
         print("rust-analyzer restarted")
       end, opts)
     end,
-
-    settings = {
-      ["rust-analyzer"] = {
-        check = {
-          command = "check",
-        },
-
-        checkOnSave = {
-          enable = false,
-        },
-
-        cargo = {
-          loadOutDirsFromCheck = false,
-          buildScripts = {
-            enable = false,
-          },
-        },
-
-        diagnostics = {
-          enable = false,
-        },
-
-        procMacro = {
-          enable = false,
-        },
-
-        completion = {
-          autoimport = {
-            enable = false,
-          },
-        },
-
-        lens = {
-          enable = false,
-        },
-
-        hover = {
-          enable = false,
-        },
-
-        files = {
-          excludeDirs = {
-            "target",
-            "**/target",
-            "node_modules",
-            "**/node_modules",
-            "dist",
-            "**/dist",
-            ".git",
-            "**/.git",
-          },
-        },
-      },
-    },
   },
 }
 

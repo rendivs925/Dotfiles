@@ -119,10 +119,23 @@ bindkey '^G' qwen_cli_widget
 autoload -Uz add-zsh-hook
 # ──[ Vi Keybindings ]──────────────────────────────────────────────────────────
 bindkey -v
+
+# --- Paste widget
+paste() {
+  zle insert-string "$(xclip -selection clipboard -o)"
+}
+zle -N paste
+
+# --- Copy widget 
+copy() {
+  zle vi-yank
+  print -rn -- "$CUTBUFFER" | xclip -selection clipboard
+}
+zle -N copy
+
+# --- Bindings 
 bindkey -M vicmd 'p' paste
 bindkey -M vicmd 'y' copy
-zle -N paste
-zle -N copy
 
 # ──[ Theme ]────────────────────────────────────────────────────────────────────
 ZSH_THEME="powerlevel10k/powerlevel10k"
