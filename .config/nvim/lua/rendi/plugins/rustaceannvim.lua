@@ -13,7 +13,7 @@ vim.g.rustaceanvim = {
         vim.cmd.RustLsp({ "hover", "actions" })
       end, opts)
 
-      -- Restart analyzer (useful for memory spikes)
+      -- Restart rust-analyzer (useful for memory spikes)
       vim.keymap.set("n", "<leader>rr", function()
         vim.cmd.RustLsp("restart")
         print("rust-analyzer restarted")

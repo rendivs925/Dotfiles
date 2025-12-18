@@ -153,6 +153,7 @@ alias cq="cd ~/.config/qutebrowser/"
 
 # ──[ Aliases: Dotfile Editing ]────────────────────────────────────────────────
 alias nn="nvim ~/.config/nvim"
+alias np="nvim ~/.config/picom/picom.conf"
 alias na="nvim ~/.config/alacritty/alacritty.toml"
 alias ni="nvim ~/.config/i3/config"
 alias nq="nvim ~/.config/qutebrowser/config.py"
@@ -173,15 +174,15 @@ fi
 command clear
 '
 
-alias clear='
-if [ -n "$TMUX" ]; then
-  tmux list-panes -a -F "#{pane_id} #{pane_current_command} #{pane_in_mode}" \
-  | awk '"'"'$2 ~ /^(bash|zsh|fish|sh)$/ && $3 == 0 { print $1 }'"'"' \
-  | grep -v "$TMUX_PANE" \
-  | xargs -I {} tmux send-keys -t {} C-l
-fi
-command clear
-'
+# alias clear='
+# if [ -n "$TMUX" ]; then
+#   tmux list-panes -a -F "#{pane_id} #{pane_current_command} #{pane_in_mode}" \
+#   | awk '"'"'$2 ~ /^(bash|zsh|fish|sh)$/ && $3 == 0 { print $1 }'"'"' \
+#   | grep -v "$TMUX_PANE" \
+#   | xargs -I {} tmux send-keys -t {} C-l
+# fi
+# command clear
+# '
 alias n="nvim"
 alias nano="nvim"
 alias r="ranger"

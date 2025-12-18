@@ -74,7 +74,7 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Set default wallpaper on startup
-exec_always --no-startup-id feh --bg-scale ~/Downloads/peakpx.jpg 
+exec_always --no-startup-id feh --bg-scale ~/Downloads/mysterious-5120x2880-18150.jpg
 
 # Wallpapers bindings
 bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/Images/yosemite-wallpaper-3840x2160-apple-181.jpg 
@@ -172,7 +172,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Gaps configuration
-gaps inner 20
+gaps inner 10
 
 # Workspace definitions
 set $ws1 "1"
@@ -231,5 +231,8 @@ bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'Do you really want to exit i
 
 exec --no-startup-id qvm-start-gui --all --watch
 
+# Toggle polybar visibility
+bindsym $mod+Shift+p exec --no-startup-id polybar-msg cmd toggle
+
 # Polybar configuration
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id ~/.config/polybar/launch.sh
