@@ -15,6 +15,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
+# source ~/.config/vibe_cli/vibe_cli.zsh
+
 # ──[ Environment Variables ]────────────────────────────────────────────────────
 export W3MIMGDISPLAY=/usr/lib/w3m/w3mimgdisplay
 export COLORTERM=truecolor
@@ -241,7 +243,7 @@ alias jsa="just sa"
 alias dcu="docker compose up"
 alias dcw="docker compose watch"
 alias cw='cargo watch -q -c -w src/ -x "run -q"'
-alias vibe='cd /home/rendi/Workspace/Programs/apps/vibespeak; cargo run'
+# alias vibe='cd /home/rendi/Workspace/Programs/apps/vibespeak; cargo run'
 alias cr="cargo remote -c -r remote --"
 
 # ──[ Aliases: Git Basics ]─────────────────────────────────────────────────────
@@ -331,3 +333,6 @@ zle -N edit-command-line
 bindkey '^E' edit-command-line
 
 export PATH=$HOME/.local/bin:$PATH
+
+# opencode
+export PATH=/home/rendi/.opencode/bin:$PATH

@@ -74,12 +74,12 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Set default wallpaper on startup
-exec_always --no-startup-id feh --bg-scale ~/Downloads/mysterious-5120x2880-18150.jpg
+exec_always --no-startup-id feh --bg-scale ~/Downloads/1190670.jpg  
 
 # Wallpapers bindings
-bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/Images/yosemite-wallpaper-3840x2160-apple-181.jpg 
-bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/Images/maroon-bells-wallpaper-3840x2160-4k-resolution-outdoor-adventure-11987.jpg 
-bindsym ctrl+3 exec --no-startup-id feh --bg-scale ~/Downloads/Images/yosemite-wallpaper-3840x2160-8k-scenery-serene-wilderness-3955.jpg 
+bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/t567zuzuvi271.png  
+bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/ufo-scifi-4k-hb.jpg  
+bindsym ctrl+3 exec --no-startup-id feh --bg-scale ~/Downloads/wp10119463-aesthetic-scifi-wallpapers.jpg
 bindsym ctrl+4 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wallpaperflare.com_wallpaper4.jpg
 bindsym ctrl+5 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wallpaperflare.com_wallpaper5.jpg
 bindsym ctrl+6 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wolf-on-rock-in-the-forest_3840x2160_xtrafondos.com.jpg  
