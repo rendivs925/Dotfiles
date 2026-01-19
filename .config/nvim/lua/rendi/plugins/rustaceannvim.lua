@@ -1,68 +1,82 @@
 vim.g.rustaceanvim = {
-  -- Global settings for rust-analyzer performance
-  default_settings = {
-    ["rust-analyzer"] = {
-      -- 1. Disable aggressive indexing on startup to save initial memory
-      cachePriming = {
-        enable = false,
-      },
-      -- 2. Exclude large directories that don't contain Rust code (adjust paths as needed)
-      files = {
-        excludeDirs = {
-          "node_modules",
-          "dist",
-          "pkg", -- Example: exclude wasm-pack output
-          ".git", -- Generally good practice to exclude
-        },
-      },
-      -- 3. Separate RA's build artifacts from your main Cargo builds
-      cargo = {
-        extraArgs = { "--target-dir", "target-rust-analyzer" },
-      },
-      -- 4. Use 'clippy' as the default check command
-      check = {
-        command = "clippy",
-        -- optional: add extra arguments, e.g., to deny all warnings
-        -- extraArgs = { "--", "-D", "warnings" },
-      },
-      -- 5. Disable automatic checks on save to prevent memory spikes on every file save
-      checkOnSave = {
-        enable = false,
-      },
-      -- 6. Optional: Lower the LRU cache capacity to force RA to drop memory faster
-      -- lru = {
-      --   capacity = 44,
-      -- },
-    },
+  tools = {
+    -- optional: disable inlay hints/lens here too (some versions read from tools)
+    inlay_hints = { auto = false },
   },
 
-  -- LSP Server attachment and keymaps
   server = {
-    on_attach = function(client, bufnr)
+    on_attach = function(_, bufnr)
       local opts = { silent = true, buffer = bufnr }
 
-      -- Code actions
       vim.keymap.set({ "n", "x" }, "<leader>ca", function()
         vim.cmd.RustLsp("codeAction")
       end, opts)
 
-      -- Hover + actions
       vim.keymap.set("n", "K", function()
         vim.cmd.RustLsp({ "hover", "actions" })
       end, opts)
 
-      -- Restart rust-analyzer (useful for immediate memory reduction/refresh)
       vim.keymap.set("n", "<leader>rr", function()
         vim.cmd.RustLsp("restart")
-        print("rust-analyzer restarted")
       end, opts)
 
-      -- Manual trigger for Clippy/check diagnostics (since checkOnSave is false)
-      vim.keymap.set("n", "<leader>dc", function()
+      -- manual checks only
+      vim.keymap.set("n", "<leader>ck", function()
         vim.cmd.RustLsp("runFlycheck")
-        print("Running Clippy manually...")
+      end, opts)
+
+      vim.keymap.set("n", "<leader>cl", function()
+        vim.cmd.RustLsp({ "runFlycheck", "clippy" })
       end, opts)
     end,
+
+    default_settings = {
+      ["rust-analyzer"] = {
+        procMacro = { enable = true },
+
+        cargo = {
+          buildScripts = { enable = false },
+          allFeatures = false,
+          -- If you want to pin features, add:
+          -- features = { "csr" },
+        },
+
+        -- This is the correct shape (object, not boolean)
+        checkOnSave = { enable = false },
+
+        -- Used when you *manually* run flycheck / check
+        check = {
+          command = "check",
+          extraArgs = { "--target-dir", "target-rust-analyzer" },
+        },
+
+        -- These are valid and helpful
+        lens = { enable = false },
+        inlayHints = { enable = false },
+        diagnostics = { enable = true },
+
+        files = {
+          excludeDirs = {
+            "node_modules",
+            "dist",
+            "pkg",
+            ".git",
+            "target",
+            "target-rust-analyzer",
+            "debug",
+          },
+          watcherExclude = {
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/pkg/**",
+            "**/.git/**",
+            "**/target/**",
+            "**/target-rust-analyzer/**",
+            "**/debug/**",
+          },
+        },
+      },
+    },
   },
 }
 

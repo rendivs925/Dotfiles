@@ -46,9 +46,10 @@ return {
         -- "black",
         -- "pylint",
         -- "asmfmt",
-        -- "xmlformatter",
-        -- "google-java-format",
-        -- "clang-format",
+        "xmlformatter",
+        "google-java-format",
+        "clang-format",
+        "codelldb", -- Debug adapter for C/C++/Rust
       },
     })
   end,

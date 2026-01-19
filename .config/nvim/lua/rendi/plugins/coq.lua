@@ -27,6 +27,15 @@ return {
     local coq = require("coq")
     local lsp_util = require("lspconfig.util")
 
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "rust",
+      callback = function()
+        vim.opt_local.smartindent = false
+        vim.opt_local.autoindent = false
+        vim.opt_local.indentexpr = ""
+      end,
+    })
+
     -- Toggle diagnostics
     local function configure_diagnostics(enabled)
       vim.diagnostic.config({

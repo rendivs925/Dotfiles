@@ -44,6 +44,9 @@ export ANDROID_SDK_ROOT=/opt/android-sdk
 # Android NDK
 export ANDROID_NDK_HOME=/opt/android-ndk
 
+# export CARGO_BUILD_JOBS=4
+# export RUSTFLAGS="-Ccodegen-units=1"
+
 # Add tools to PATH
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
