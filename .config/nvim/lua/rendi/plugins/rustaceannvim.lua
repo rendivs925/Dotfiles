@@ -1,9 +1,4 @@
 vim.g.rustaceanvim = {
-  tools = {
-    -- optional: disable inlay hints/lens here too (some versions read from tools)
-    inlay_hints = { auto = false },
-  },
-
   server = {
     on_attach = function(_, bufnr)
       local opts = { silent = true, buffer = bufnr }
@@ -34,20 +29,12 @@ vim.g.rustaceanvim = {
       ["rust-analyzer"] = {
         procMacro = { enable = true },
 
-        cargo = {
-          buildScripts = { enable = false },
-          allFeatures = false,
-          -- If you want to pin features, add:
-          -- features = { "csr" },
-        },
-
-        -- This is the correct shape (object, not boolean)
+        -- This is the correct shape
         checkOnSave = { enable = false },
 
         -- Used when you *manually* run flycheck / check
         check = {
           command = "check",
-          extraArgs = { "--target-dir", "target-rust-analyzer" },
         },
 
         -- These are valid and helpful

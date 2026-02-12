@@ -123,15 +123,15 @@ return {
       end,
     })
 
-    setup_server("lua_ls", {
-      filetypes = { "lua" },
-      settings = {
-        Lua = {
-          workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-          telemetry = { enable = false },
-        },
-      },
-    })
+    -- setup_server("lua_ls", {
+    --   filetypes = { "lua" },
+    --   settings = {
+    --     Lua = {
+    --       workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+    --       telemetry = { enable = false },
+    --     },
+    --   },
+    -- })
 
     setup_server("graphql", {
       filetypes = { "graphql", "gql" },

@@ -7,6 +7,7 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-tree/nvim-web-devicons",
     "LukasPietzschmann/telescope-tabs",
+    "nvim-telescope/telescope-media-files.nvim",
     {
       "folke/todo-comments.nvim",
       opts = {},
@@ -72,7 +73,18 @@ return {
           },
         },
       },
+      extensions = {
+        media_files = {
+          -- filetypes whitelist
+          -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+          -- filetypes = { "png", "webp", "jpg", "jpeg" },
+          -- find command (defaults to `fd`)
+          find_cmd = "rg",
+        },
+      },
     })
+
+    telescope.load_extension("media_files")
 
     telescope.load_extension("fzf")
     telescope.load_extension("telescope-tabs")
