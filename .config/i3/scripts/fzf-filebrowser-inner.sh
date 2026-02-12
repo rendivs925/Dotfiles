@@ -19,40 +19,19 @@ export FZF_DEFAULT_OPTS="\
 tmpfile=$(mktemp)
 trap "rm -f $tmpfile" EXIT
 
-selected=$(find ~ \
--type d \( \
-    -path '*/.*' -o \
-    -name "node_modules" -o \
-    -name "dist" -o \
-    -name "venv" -o \
-    -name "build" -o \
-    -name "llama.cpp" -o \
-    -name "qmk_firmware" -o \
-    -name "go" -o \
-    -name "cvat" -o \
-    -name "venv*" -o \
-    -name "axolotl*" -o \
-    -name "yay" -o \
-    -name "target" -o \
-    -name ".git" -o \
-    -name ".cache" -o \
-    -name ".local/share" -o \
-    -name "Downloads" -o \
-    -name ".npm" -o \
-    -name ".cargo" -o \
-    -name ".rustup" \
-\) -prune -o \
--type f -print 2>/dev/null | \
+selected=$(fd --type f --hidden --exclude={.git,.cache,node_modules,dist,build,target,venv,llama.cpp,qmk_firmware,cvat,axolotl*,yay,.npm,.cargo,.rustup,Downloads,.local/share} . /home/rendi 2>/dev/null | \
     fzf \
         --preview 'bat --color=always --style=numbers --line-range :500 {}' \
         --preview-window=right:50%:wrap:border-left \
         --prompt='  ' \
-        --header='╭─ Enter:open  Ctrl-O:nvim  Ctrl-Y:copy  Ctrl-T:preview  Ctrl-N:down  Ctrl-P:up  Ctrl-J:scroll-down  Ctrl-K:scroll-up ─╮' \
+        --header='╭─ Enter:open  Ctrl-O:nvim  Ctrl-Y:copy  Ctrl-T:preview  Ctrl-N/P:move  Ctrl-J/K:scroll  Ctrl-D/U:half-page ─╮' \
         --header-first \
         --bind 'ctrl-n:down' \
         --bind 'ctrl-p:up' \
         --bind 'ctrl-j:preview-down' \
         --bind 'ctrl-k:preview-up' \
+        --bind 'ctrl-d:half-page-down' \
+        --bind 'ctrl-u:half-page-up' \
         --bind 'ctrl-o:execute(alacritty -e nvim {+})' \
         --bind 'ctrl-y:execute-silent(echo -n {+} | xclip -selection clipboard)+abort' \
         --bind 'ctrl-t:toggle-preview' \

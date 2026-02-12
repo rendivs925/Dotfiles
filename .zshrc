@@ -39,31 +39,9 @@ export FZF_DEFAULT_OPTS="\
 --marker='✓' \
 --height=40% \
 --preview-window=right:50%:wrap:border-left \
---bind 'ctrl-j:preview-down,ctrl-k:preview-up,ctrl-n:down,ctrl-p:up'"
+--bind 'ctrl-j:preview-down,ctrl-k:preview-up,ctrl-n:down,ctrl-p:up,ctrl-d:half-page-down,ctrl-u:half-page-up'"
 
-export FZF_CTRL_T_COMMAND="find ~ \
--type d \( \
-    -path '*/.*' -o \
-    -name node_modules -o \
-    -name dist -o \
-    -name venv -o \
-    -name build -o \
-    -name llama.cpp -o \
-    -name qmk_firmware -o \
-    -name go -o \
-    -name cvat -o \
-    -name 'venv*' -o \
-    -name 'axolotl*' -o \
-    -name yay -o \
-    -name target -o \
-    -name .git -o \
-    -name .cache -o \
-    -name '.local/share' -o \
-    -name Downloads -o \
-    -name .npm -o \
-    -name .cargo -o \
-    -name .rustup \
-\) -prune -o -type f -print 2>/dev/null"
+export FZF_CTRL_T_COMMAND="fd --type f --hidden --exclude={.git,.cache,node_modules,dist,build,target,venv,llama.cpp,qmk_firmware,cvat,axolotl*,yay,.npm,.cargo,.rustup,Downloads,.local/share} . /home/rendi 2>/dev/null"
 
 export FZF_CTRL_T_OPTS="\
 --preview 'bat --color=always --style=numbers --line-range :500 {}' \
