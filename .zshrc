@@ -43,9 +43,7 @@ export FZF_DEFAULT_OPTS="\
 
 export FZF_CTRL_T_COMMAND="fd -t f -H -E '.git' -E '.cache' -E 'node_modules' -E 'dist' -E 'build' -E 'target' -E 'venv' -E 'llama.cpp' -E 'qmk_firmware' -E 'cvat' -E 'axolotl*' -E 'yay' -E '.npm' -E '.cargo' -E '.rustup' -E 'Downloads' -E '.local/share' . $HOME 2>/dev/null"
 
-export FZF_CTRL_T_OPTS="\
---preview 'bat --color=always --style=numbers --line-range :500 {}' \
---preview-window=right:50%:wrap:border-left"
+export FZF_CTRL_T_OPTS="--height=100% --border=none --preview 'bat --color=always --style=numbers --line-range :500 {}' --preview-window=right:50%:wrap:border-left"
 
 export FZF_CTRL_R_OPTS="\
 --preview 'echo {}' \
