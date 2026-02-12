@@ -1,28 +1,15 @@
 #!/bin/bash
 
-# Lazy loading file browser using fzf inside terminal
-# Cool Night theme with transparency
-# Dynamically centered on any screen
+# Lazy loading file browser using fzf inside Alacritty
+# Window size and position handled by i3 (NOT here)
 
 tmpfile=$(mktemp)
 trap "rm -f $tmpfile" EXIT
 
-# Get screen dimensions
-screen=$(xrandr | grep '*' | head -1 | awk '{print $1}')
-screen_width=$(echo $screen | cut -d'x' -f1)
-screen_height=$(echo $screen | cut -d'x' -f2)
-
-# Window dimensions
-win_width=1400
-win_height=900
-
-# Calculate center position
-pos_x=$(( (screen_width - win_width) / 2 ))
-pos_y=$(( (screen_height - win_height) / 2 ))
-
-# Create temporary alacritty config with transparency and window size
+# Temporary Alacritty theme config
 alacritty_config=$(mktemp)
-cat > "$alacritty_config" << EOF
+
+cat > "$alacritty_config" << 'EOF'
 [window]
 opacity = 0.85
 padding = { x = 10, y = 10 }
@@ -59,8 +46,7 @@ EOF
 
 alacritty --config-file "$alacritty_config" \
     --class fzf-filebrowser \
-    --option window.dimensions.columns=160 \
-    --option window.dimensions.lines=40 \
+    --title fzf-filebrowser \
     -e bash -c "
     export FZF_DEFAULT_OPTS=\"\
         --color=bg:#011423,bg+:#0A2A3F,fg:#CBE0F0,fg+:#CBE0F0 \
@@ -77,7 +63,7 @@ alacritty --config-file "$alacritty_config" \
         --info=inline-right \
         --separator='─' \
         --scrollbar='│'\"
-    
+
     selected=\$(find ~ -type f 2>/dev/null | \
         fzf \
             --preview 'bat --color=always --style=numbers --line-range :500 {}' \
@@ -87,11 +73,11 @@ alacritty --config-file "$alacritty_config" \
             --header-first \
             --bind 'ctrl-n:down' \
             --bind 'ctrl-p:up' \
-            --bind 'ctrl-o:execute(alacritty --config-file $alacritty_config -e nvim {+})' \
+            --bind 'ctrl-o:execute(alacritty -e nvim {+})' \
             --bind 'ctrl-y:execute-silent(echo -n {+} | xclip -selection clipboard)+abort' \
             --bind 'ctrl-t:toggle-preview' \
             --bind 'enter:accept')
-    
+
     echo \"\$selected\" > $tmpfile
 "
 

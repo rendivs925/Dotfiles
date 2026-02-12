@@ -24,7 +24,7 @@ for_window [class="^.*"] border pixel 0
 # for_window [class=".*"] floating enable
 
 # Floating fzf file browser
-for_window [class="fzf-filebrowser"] floating enable, border pixel 0, resize set 1400 900, move position center
+# for_window [class="fzf-filebrowser"] floating enable, border pixel 0, resize set 1400 900, move position center
 
 # Border toggle keybindings
 bindsym $mod+Shift+b exec --no-startup-id i3-msg '[class="^.*"] border pixel 3'
@@ -114,6 +114,11 @@ exec --no-startup-id nm-applet
 # Run picom 
 exec --no-startup-id picom
 exec --no-startup-id flameshot
+
+for_window [class="fzf-filebrowser"] \
+    move to output current, \
+    floating disable, \
+    fullscreen enable
 
 # Application bindings
 bindsym $mod+Return exec --no-startup-id alacritty  
