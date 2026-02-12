@@ -39,9 +39,9 @@ export FZF_DEFAULT_OPTS="\
 --marker='✓' \
 --height=40% \
 --preview-window=right:50%:wrap:border-left \
---bind 'ctrl-j:preview-down,ctrl-k:preview-up,ctrl-n:down,ctrl-p:up,ctrl-d:half-page-down,ctrl-u:half-page-up'"
+--bind 'ctrl-j:preview-down,ctrl-k:preview-up,ctrl-n:down,ctrl-p:up,ctrl-d:preview-page-down,ctrl-u:preview-page-up'"
 
-export FZF_CTRL_T_COMMAND="fd --type f --hidden --exclude={.git,.cache,node_modules,dist,build,target,venv,llama.cpp,qmk_firmware,cvat,axolotl*,yay,.npm,.cargo,.rustup,Downloads,.local/share} . /home/rendi 2>/dev/null"
+export FZF_CTRL_T_COMMAND="fd -t f -H -E '.git' -E '.cache' -E 'node_modules' -E 'dist' -E 'build' -E 'target' -E 'venv' -E 'llama.cpp' -E 'qmk_firmware' -E 'cvat' -E 'axolotl*' -E 'yay' -E '.npm' -E '.cargo' -E '.rustup' -E 'Downloads' -E '.local/share' . $HOME 2>/dev/null"
 
 export FZF_CTRL_T_OPTS="\
 --preview 'bat --color=always --style=numbers --line-range :500 {}' \

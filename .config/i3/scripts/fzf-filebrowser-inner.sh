@@ -19,19 +19,19 @@ export FZF_DEFAULT_OPTS="\
 tmpfile=$(mktemp)
 trap "rm -f $tmpfile" EXIT
 
-selected=$(fd --type f --hidden --exclude={.git,.cache,node_modules,dist,build,target,venv,llama.cpp,qmk_firmware,cvat,axolotl*,yay,.npm,.cargo,.rustup,Downloads,.local/share} . /home/rendi 2>/dev/null | \
+selected=$(fd -t f -H -E '.git' -E '.cache' -E 'node_modules' -E 'dist' -E 'build' -E 'target' -E 'venv' -E 'llama.cpp' -E 'qmk_firmware' -E 'cvat' -E 'axolotl*' -E 'yay' -E '.npm' -E '.cargo' -E '.rustup' -E 'Downloads' -E '.local/share' . $HOME 2>/dev/null | \
     fzf \
         --preview 'bat --color=always --style=numbers --line-range :500 {}' \
         --preview-window=right:50%:wrap:border-left \
         --prompt='  ' \
-        --header='╭─ Enter:open  Ctrl-O:nvim  Ctrl-Y:copy  Ctrl-T:preview  Ctrl-N/P:move  Ctrl-J/K:scroll  Ctrl-D/U:half-page ─╮' \
+        --header='╭─ Enter:open  Ctrl-O:nvim  Ctrl-Y:copy  Ctrl-T:preview  Ctrl-N/P:move  Ctrl-J/K:scroll  Ctrl-D/U:preview-page ─╮' \
         --header-first \
         --bind 'ctrl-n:down' \
         --bind 'ctrl-p:up' \
         --bind 'ctrl-j:preview-down' \
         --bind 'ctrl-k:preview-up' \
-        --bind 'ctrl-d:half-page-down' \
-        --bind 'ctrl-u:half-page-up' \
+        --bind 'ctrl-d:preview-page-down' \
+        --bind 'ctrl-u:preview-page-up' \
         --bind 'ctrl-o:execute(alacritty -e nvim {+})' \
         --bind 'ctrl-y:execute-silent(echo -n {+} | xclip -selection clipboard)+abort' \
         --bind 'ctrl-t:toggle-preview' \
