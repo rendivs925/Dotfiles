@@ -4,7 +4,6 @@ while true; do
     day_num=$(date +%d)
     month_num=$(date +%m)
     time=$(date +%H:%M)
-    uptime_str=$(uptime -p | sed 's/up /UP /' | sed 's/,/ /')
 
     case $(date +%A) in
         Monday) day="Sen" ;;
@@ -31,6 +30,6 @@ while true; do
         12) month="Des" ;;
     esac
 
-    echo "$day $day_num $month | $time  $uptime_str"
+    echo "$day $day_num $month | $time"
     sleep 1
 done
