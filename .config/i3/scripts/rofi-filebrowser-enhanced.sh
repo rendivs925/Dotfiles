@@ -28,7 +28,7 @@ if [ -n "$selected" ]; then
             xdg-open "$selected"
             ;;
         10)
-            i3-sensible-terminal -e nvim "$selected"
+            alacritty -e nvim "$selected"
             ;;
         11)
             echo "$selected" | xclip -selection clipboard
