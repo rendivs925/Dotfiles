@@ -64,7 +64,7 @@ alacritty --config-file "$alacritty_config" \
         --separator='─' \
         --scrollbar='│'\"
 
-    selected=\$(find ~ \
+    selected=$(find ~ \
     -type d \( \
         -path '*/.*' -o \
         -name "node_modules" -o \
@@ -85,10 +85,12 @@ alacritty --config-file "$alacritty_config" \
             --preview 'bat --color=always --style=numbers --line-range :500 {}' \
             --preview-window=right:50%:wrap:border-left \
             --prompt='  ' \
-            --header='╭─ Enter:open  Ctrl-O:nvim  Ctrl-Y:copy  Ctrl-T:preview  Ctrl-N:down  Ctrl-P:up ─╮' \
+            --header='╭─ Enter:open  Ctrl-O:nvim  Ctrl-Y:copy  Ctrl-T:preview  Ctrl-N:down  Ctrl-P:up  Ctrl-J:scroll-down  Ctrl-K:scroll-up ─╮' \
             --header-first \
             --bind 'ctrl-n:down' \
             --bind 'ctrl-p:up' \
+            --bind 'ctrl-j:preview-down' \
+            --bind 'ctrl-k:preview-up' \
             --bind 'ctrl-o:execute(alacritty -e nvim {+})' \
             --bind 'ctrl-y:execute-silent(echo -n {+} | xclip -selection clipboard)+abort' \
             --bind 'ctrl-t:toggle-preview' \

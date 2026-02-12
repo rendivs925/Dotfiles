@@ -38,7 +38,8 @@ export FZF_DEFAULT_OPTS="\
 --pointer='>' \
 --marker='✓' \
 --height=40% \
---preview-window=right:50%:wrap:border-left"
+--preview-window=right:50%:wrap:border-left \
+--bind 'ctrl-j:preview-down,ctrl-k:preview-up,ctrl-n:down,ctrl-p:up'"
 
 export FZF_CTRL_T_OPTS="\
 --preview 'bat --color=always --style=numbers --line-range :500 {}' \
