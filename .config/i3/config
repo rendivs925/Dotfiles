@@ -66,7 +66,7 @@ bindsym Mod4+Control+n exec --no-startup-id ~/.config/i3/scripts/hold_left_click
 # Enable XDG autostart
 exec --no-startup-id dex --autostart --environment i3
 
-exec --no-startup-id dunst
+exec --no-startup-id deadd-notification-center
 # Touchpad settings
 exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput Tapping Enabled" 1
 
@@ -119,7 +119,9 @@ bindsym $mod+c exec flameshot gui
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id google-chrome-stable
-bindsym $mod+e exec --no-startup-id alacritty -e ranger
+bindsym $mod+e exec --no-startup-id ~/.config/i3/scripts/rofi-filebrowser-enhanced.sh
+bindsym $mod+g exec --no-startup-id alacritty -e yazi
+bindsym $mod+n exec --no-startup-id deadd-notification-center --toggle-panel
 
 exec --no-startup-id clipmenud
 
