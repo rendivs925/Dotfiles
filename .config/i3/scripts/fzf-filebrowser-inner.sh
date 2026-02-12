@@ -19,7 +19,7 @@ export FZF_DEFAULT_OPTS="\
 tmpfile=$(mktemp)
 trap "rm -f $tmpfile" EXIT
 
-selected=$(fd -t f -H -E '.git' -E '.cache' -E 'node_modules' -E 'dist' -E 'build' -E 'target' -E 'venv' -E 'llama.cpp' -E 'qmk_firmware' -E 'cvat' -E 'axolotl*' -E 'yay' -E '.npm' -E '.cargo' -E '.rustup' -E 'Downloads' -E '.local/share' . $HOME 2>/dev/null | \
+selected=$(fd -t f -H -E '.git' -E '.cache' -E 'node_modules' -E 'dist' -E 'build' -E 'target' -E 'venv' -E 'llama.cpp' -E 'qmk_firmware' -E 'cvat' -E 'axolotl*' -E 'yay' -E '.npm' -E '.cargo' -E '.rustup' -E 'Downloads' -E '.local/share' -E '.ollama' -E 'venv_trimesh' . $HOME 2>/dev/null | \
     fzf \
         --preview 'bat --color=always --style=numbers --line-range :500 {}' \
         --preview-window=right:50%:wrap:border-left \
