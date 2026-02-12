@@ -24,10 +24,7 @@ for_window [class="^.*"] border pixel 0
 # for_window [class=".*"] floating enable
 
 # Floating fzf file browser
-for_window [class="fzf-filebrowser"] floating enable
-for_window [class="fzf-filebrowser"] resize set 1400 900
-for_window [class="fzf-filebrowser"] move position center
-for_window [class="fzf-filebrowser"] border pixel 0
+for_window [class="fzf-filebrowser"] floating enable, border pixel 0, resize set 1400 900, move position center
 
 # Border toggle keybindings
 bindsym $mod+Shift+b exec --no-startup-id i3-msg '[class="^.*"] border pixel 3'
