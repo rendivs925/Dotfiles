@@ -33,7 +33,14 @@ selected=$(find ~ \
     -name "venv*" -o \
     -name "axolotl*" -o \
     -name "yay" -o \
-    -name "target" \
+    -name "target" -o \
+    -name ".git" -o \
+    -name ".cache" -o \
+    -name ".local/share" -o \
+    -name "Downloads" -o \
+    -name ".npm" -o \
+    -name ".cargo" -o \
+    -name ".rustup" \
 \) -prune -o \
 -type f -print 2>/dev/null | \
     fzf \
