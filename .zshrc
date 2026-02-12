@@ -13,9 +13,41 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' fzf-flags \
+  --color=bg:#011423,bg+:#0A2A3F,fg:#CBE0F0,fg+:#CBE0F0 \
+  --color=hl:#0FC5ED,hl+:#0FC5ED,info:#FFE073,prompt:#0FC5ED \
+  --color=pointer:#47FF9C,marker:#44FFB1,spinner:#24EAF7,header:#214969 \
+  --border=rounded \
+  --layout=reverse \
+  --info=inline-right
 zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # source ~/.config/vibe_cli/vibe_cli.zsh
+
+# ──[ FZF Global Theme ]────────────────────────────────────────────
+export FZF_DEFAULT_OPTS="\
+--color=bg:#011423,bg+:#0A2A3F,fg:#CBE0F0,fg+:#CBE0F0 \
+--color=hl:#0FC5ED,hl+:#0FC5ED,info:#FFE073,prompt:#0FC5ED \
+--color=pointer:#47FF9C,marker:#44FFB1,spinner:#24EAF7,header:#214969 \
+--color=border:#0A2A3F,gutter:#011423,query:#CBE0F0 \
+--border=rounded \
+--layout=reverse \
+--info=inline-right \
+--separator='─' \
+--scrollbar='│' \
+--pointer='>' \
+--marker='✓' \
+--height=40% \
+--preview-window=right:50%:wrap:border-left"
+
+export FZF_CTRL_T_OPTS="\
+--preview 'bat --color=always --style=numbers --line-range :500 {}' \
+--preview-window=right:50%:wrap:border-left"
+
+export FZF_CTRL_R_OPTS="\
+--preview 'echo {}' \
+--preview-window=down:3:hidden:wrap \
+--bind 'ctrl-t:toggle-preview'"
 
 # ──[ Environment Variables ]────────────────────────────────────────────────────
 export W3MIMGDISPLAY=/usr/lib/w3m/w3mimgdisplay
@@ -78,8 +110,7 @@ fzf_alias_widget() {
     | awk '{printf "%-15s %s\n", $1, substr($0, index($0,$2))}' \
     | fzf --no-preview \
           --prompt="Alias > " \
-          --header="Alias          Command" \
-          --layout=reverse)
+          --header="Alias          Command")
   if [[ -n "$selected" ]]; then
     local alias_name=$(echo "$selected" | awk '{print $1}')
     LBUFFER+="$alias_name "
