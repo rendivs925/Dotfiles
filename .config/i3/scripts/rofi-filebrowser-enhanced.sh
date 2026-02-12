@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fast recursive file browser with unlimited depth
-# Excludes common large directories to improve speed
+# Sorted by modification time (newest first)
 
 selected=$(find ~ -type f \
     ! -path "*/\.*" \
@@ -12,7 +12,9 @@ selected=$(find ~ -type f \
     ! -path "*/target/*" \
     ! -path "*/build/*" \
     ! -path "*/dist/*" \
-    2>/dev/null | \
+    -printf "%T@\t%p\n" 2>/dev/null | \
+    sort -rn | \
+    cut -f2 | \
     rofi -dmenu -i -p "Files" \
     -theme ~/.config/rofi/aura-dark.rasi \
     -theme-str 'window {width: 80%; height: 60%;}' \
