@@ -41,7 +41,7 @@ export FZF_DEFAULT_OPTS="\
 --preview-window=right:50%:wrap:border-left \
 --bind 'ctrl-j:preview-down,ctrl-k:preview-up,ctrl-n:down,ctrl-p:up,ctrl-d:preview-page-down,ctrl-u:preview-page-up'"
 
-export FZF_CTRL_T_COMMAND="fd -t f -H -E '.git' -E '.cache' -E 'node_modules' -E 'dist' -E 'build' -E 'target' -E 'venv' -E 'llama.cpp' -E 'qmk_firmware' -E 'cvat' -E 'axolotl*' -E 'yay' -E '.npm' -E '.cargo' -E '.rustup' -E 'Downloads' -E '.local/share' -E '.ollama' -E 'venv_trimesh' . $HOME 2>/dev/null"
+export FZF_CTRL_T_COMMAND="fd -t f -E '.*' -E 'venv*' -E 'node_modules' -E 'dist' -E 'build' -E 'target' -E 'llama.cpp' -E 'qmk_firmware' -E 'cvat' -E 'axolotl*' -E 'yay' -E 'Downloads' . $HOME 2>/dev/null"
 
 export FZF_CTRL_T_OPTS="--height=100% --border=none --preview 'bat --color=always --style=numbers --line-range :500 {}' --preview-window=right:50%:wrap:border-left"
 
