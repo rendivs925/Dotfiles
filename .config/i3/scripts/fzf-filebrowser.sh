@@ -64,23 +64,7 @@ alacritty --config-file "$alacritty_config" \
         --separator='─' \
         --scrollbar='│'\"
 
-    selected=$(find ~ \
-    -type d \( \
-        -path '*/.*' -o \
-        -name "node_modules" -o \
-        -name "dist" -o \
-        -name "venv" -o \
-        -name "build" -o \
-        -name "llama.cpp" -o \
-        -name "qmk_firmware" -o \
-        -name "go" -o \
-        -name "cvat" -o \
-        -name "venv*" -o \
-        -name "axolotl*" -o \
-        -name "yay" -o \
-        -name "target" \
-    \) -prune -o \
-    -type f -print 2>/dev/null | \
+    selected=$(fd -t f -E '.*' -E 'venv*' -E 'node_modules' -E 'dist' -E '*/go' -E 'go' -E 'build' -E 'target' -E 'llama.cpp' -E 'qmk_firmware' -E 'cvat' -E 'axolotl*' -E 'yay' -E 'Downloads' . 2>/dev/null | \
         fzf \
             --preview 'bat --color=always --style=numbers --line-range :500 {}' \
             --preview-window=right:50%:wrap:border-left \
