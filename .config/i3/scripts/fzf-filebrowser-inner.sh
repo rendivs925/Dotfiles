@@ -19,6 +19,25 @@ export FZF_DEFAULT_OPTS="\
 tmpfile=$(mktemp)
 trap "rm -f $tmpfile" EXIT
 
+open_file() {
+    file="$1"
+    ext="${file##*.}"
+    case "${ext,,}" in
+        jpg|jpeg|png|gif|bmp|webp|svg|ico|tiff)
+            setsid -f feh "$file" &
+            ;;
+        mp4|mkv|avi|mov|wmv|flv|webm)
+            setsid -f mpv "$file" &
+            ;;
+        pdf|doc|docx|xls|xlsx|ppt|pptx|odt|ods|odp)
+            setsid -f libreoffice "$file" &
+            ;;
+        *)
+            alacritty -e nvim "$file" &
+            ;;
+    esac
+}
+
 selected=$(fd -t f -E '.*' -E 'venv*' -E 'node_modules' -E 'dist' -E '*/go' -E 'go' -E 'build' -E 'target' -E 'llama.cpp' -E 'qmk_firmware' -E 'cvat' -E 'axolotl*' -E 'yay' -E 'Downloads' . $HOME 2>/dev/null | \
     fzf \
         --preview 'bat --color=always --style=numbers --line-range :500 {}' \
@@ -35,6 +54,6 @@ selected=$(fd -t f -E '.*' -E 'venv*' -E 'node_modules' -E 'dist' -E '*/go' -E '
         --bind 'ctrl-o:execute(alacritty -e nvim {+})' \
         --bind 'ctrl-y:execute-silent(echo -n {+} | xclip -selection clipboard)+abort' \
         --bind 'ctrl-t:toggle-preview' \
-        --bind 'enter:execute(xdg-open {} &)+abort')
+        --bind 'enter:execute(bash -c "open_file {}")+abort')
 
 echo "$selected" > "$tmpfile"
