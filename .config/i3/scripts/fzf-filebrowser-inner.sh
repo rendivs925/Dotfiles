@@ -35,6 +35,25 @@ selected=$(fd -t f -E '.*' -E 'venv*' -E 'node_modules' -E 'dist' -E '*/go' -E '
         --bind 'ctrl-o:execute(alacritty -e nvim {+})' \
         --bind 'ctrl-y:execute-silent(echo -n {+} | xclip -selection clipboard)+abort' \
         --bind 'ctrl-t:toggle-preview' \
-        --bind 'enter:execute/bash -c "file={}; ext=\${file##*.}; case \${ext,,} in jpg|jpeg|png|gif|bmp|webp|svg|ico|tiff) setsid -f feh \"\$file\" & ;; mp4|mkv|avi|mov|wmv|flv|webm) setsid -f mpv \"\$file\" & ;; pdf|doc|docx|xls|xlsx|ppt|pptx|odt|ods|odp) setsid -f libreoffice \"\$file\" & ;; *) alacritty -e nvim \"\$file\" & ;; esac"+abort')
+        --bind 'enter:accept')
+
+file="$selected"
+if [[ -n "$file" ]]; then
+    ext="${file##*.}"
+    case "${ext,,}" in
+        jpg|jpeg|png|gif|bmp|webp|svg|ico|tiff)
+            setsid -f feh "$file" &
+            ;;
+        mp4|mkv|avi|mov|wmv|flv|webm)
+            setsid -f mpv "$file" &
+            ;;
+        pdf|doc|docx|xls|xlsx|ppt|pptx|odt|ods|odp)
+            setsid -f libreoffice "$file" &
+            ;;
+        *)
+            alacritty -e nvim "$file" &
+            ;;
+    esac
+fi
 
 echo "$selected" > "$tmpfile"
