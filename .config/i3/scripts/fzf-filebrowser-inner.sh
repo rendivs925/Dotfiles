@@ -51,7 +51,11 @@ if [[ -n "$file" ]]; then
             setsid -f libreoffice "$file" &
             ;;
         *)
-            alacritty -e nvim "$file" &
+            if command -v alacritty &>/dev/null; then
+                setsid -f alacritty -e nvim "$file" &
+            else
+                setsid -f xdg-open "$file" &
+            fi
             ;;
     esac
 fi
