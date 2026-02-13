@@ -35,6 +35,6 @@ selected=$(fd -t f -E '.*' -E 'venv*' -E 'node_modules' -E 'dist' -E '*/go' -E '
         --bind 'ctrl-o:execute(alacritty -e nvim {+})' \
         --bind 'ctrl-y:execute-silent(echo -n {+} | xclip -selection clipboard)+abort' \
         --bind 'ctrl-t:toggle-preview' \
-        --bind 'enter:accept')
+        --bind 'enter:execute(xdg-open {})+abort')
 
 echo "$selected" > "$tmpfile"
