@@ -1,6 +1,13 @@
 vim.g.rustaceanvim = {
   server = {
-    cmd = { "systemd-run", "--scope", "-p", "Slice=rust-analyzer.slice", "rust-analyzer" },
+    cmd = {
+      "systemd-run",
+      "--scope",
+      "-p",
+      "Slice=rust-analyzer.slice",
+      "rust-analyzer",
+    },
+
     on_attach = function(_, bufnr)
       local opts = { silent = true, buffer = bufnr }
 
@@ -28,12 +35,8 @@ vim.g.rustaceanvim = {
     default_settings = {
       ["rust-analyzer"] = {
         procMacro = { enable = false },
-
         checkOnSave = { enable = false },
-
-        check = {
-          command = "check",
-        },
+        check = { command = "check" },
 
         lens = { enable = false },
         inlayHints = { enable = false },
@@ -68,7 +71,7 @@ vim.g.rustaceanvim = {
           },
         },
 
-        rusty Crane = {
+        ["rusty Crane"] = {
           liftComments = false,
         },
 
