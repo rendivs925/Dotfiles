@@ -1,5 +1,6 @@
 vim.g.rustaceanvim = {
   server = {
+    cmd = { "systemd-run", "--scope", "-p", "Slice=rust-analyzer.slice", "rust-analyzer" },
     on_attach = function(_, bufnr)
       local opts = { silent = true, buffer = bufnr }
 
@@ -15,7 +16,6 @@ vim.g.rustaceanvim = {
         vim.cmd.RustLsp("restart")
       end, opts)
 
-      -- manual checks only
       vim.keymap.set("n", "<leader>ck", function()
         vim.cmd.RustLsp("runFlycheck")
       end, opts)
@@ -27,20 +27,25 @@ vim.g.rustaceanvim = {
 
     default_settings = {
       ["rust-analyzer"] = {
-        procMacro = { enable = true },
+        procMacro = { enable = false },
 
-        -- This is the correct shape
         checkOnSave = { enable = false },
 
-        -- Used when you *manually* run flycheck / check
         check = {
           command = "check",
         },
 
-        -- These are valid and helpful
         lens = { enable = false },
         inlayHints = { enable = false },
         diagnostics = { enable = true },
+
+        cargo = {
+          allFeatures = false,
+          loadOutDirsFromCheck = false,
+          runBuildScriptsLocally = false,
+        },
+
+        compilationActions = { enable = false },
 
         files = {
           excludeDirs = {
@@ -61,6 +66,17 @@ vim.g.rustaceanvim = {
             "**/target-rust-analyzer/**",
             "**/debug/**",
           },
+        },
+
+        rusty Crane = {
+          liftComments = false,
+        },
+
+        memory = {
+          addressSpace = "100MiB",
+          declarativeItems = "100MiB",
+          proceduralMacros = "100MiB",
+          typeHints = "100MiB",
         },
       },
     },
