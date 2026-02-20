@@ -26,7 +26,7 @@ zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # ──[ FZF Global Theme ]────────────────────────────────────────────
 export FZF_DEFAULT_OPTS="\
---color=bg:#011423,bg+:#0A2A3F,fg:#CBE0F0,fg+:#CBE0F0 \
+--color=bg+:#0A2A3F,fg:#CBE0F0,fg+:#CBE0F0 \
 --color=hl:#0FC5ED,hl+:#0FC5ED,info:#FFE073,prompt:#0FC5ED \
 --color=pointer:#47FF9C,marker:#44FFB1,spinner:#24EAF7,header:#214969 \
 --color=border:#0A2A3F,gutter:#011423,query:#CBE0F0 \
