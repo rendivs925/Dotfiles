@@ -1,13 +1,5 @@
 vim.g.rustaceanvim = {
   server = {
-    cmd = {
-      "systemd-run",
-      "--scope",
-      "-p",
-      "Slice=rust-analyzer.slice",
-      "rust-analyzer",
-    },
-
     on_attach = function(_, bufnr)
       local opts = { silent = true, buffer = bufnr }
 
