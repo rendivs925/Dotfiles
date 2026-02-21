@@ -12,17 +12,15 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' fzf-command fzf
 zstyle ':fzf-tab:*' fzf-flags \
-  --color=bg:#011423,bg+:#0A2A3F,fg:#CBE0F0,fg+:#CBE0F0 \
+  --color=bg+:#0A2A3F,fg:#CBE0F0,fg+:#CBE0F0 \
   --color=hl:#0FC5ED,hl+:#0FC5ED,info:#FFE073,prompt:#0FC5ED \
   --color=pointer:#47FF9C,marker:#44FFB1,spinner:#24EAF7,header:#214969 \
-  --border=rounded \
+  --color=border:#0A2A3F,gutter:#011423,query:#CBE0F0 \
   --layout=reverse \
   --info=inline-right
 zsh-defer source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
-
-# source ~/.config/vibe_cli/vibe_cli.zsh
 
 # ──[ FZF Global Theme ]────────────────────────────────────────────
 export FZF_DEFAULT_OPTS="\
@@ -30,14 +28,12 @@ export FZF_DEFAULT_OPTS="\
 --color=hl:#0FC5ED,hl+:#0FC5ED,info:#FFE073,prompt:#0FC5ED \
 --color=pointer:#47FF9C,marker:#44FFB1,spinner:#24EAF7,header:#214969 \
 --color=border:#0A2A3F,gutter:#011423,query:#CBE0F0 \
---border=rounded \
 --layout=reverse \
 --info=inline-right \
 --separator='─' \
 --scrollbar='│' \
 --pointer='>' \
 --marker='✓' \
---height=40% \
 --preview-window=right:50%:wrap:border-left \
 --bind 'ctrl-j:preview-down,ctrl-k:preview-up,ctrl-n:down,ctrl-p:up,ctrl-d:preview-page-down,ctrl-u:preview-page-up'"
 
