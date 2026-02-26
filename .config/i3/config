@@ -77,10 +77,10 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Set default wallpaper on startup
-exec_always --no-startup-id feh --bg-scale ~/Downloads/wp10119463-aesthetic-scifi-wallpapers.jpg  
+exec_always --no-startup-id feh --bg-scale ~/Downloads/forest-wallpaper-3840x2160-mist-fog-5726.jpg 
 
 # Wallpapers bindings
-bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/t567zuzuvi271.png  
+bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/forest-wallpaper-3840x2160-nature-4k-3441.jpg
 bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/ufo-scifi-4k-hb.jpg  
 bindsym ctrl+3 exec --no-startup-id feh --bg-scale ~/Downloads/wp10119463-aesthetic-scifi-wallpapers.jpg
 bindsym ctrl+4 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wallpaperflare.com_wallpaper4.jpg
