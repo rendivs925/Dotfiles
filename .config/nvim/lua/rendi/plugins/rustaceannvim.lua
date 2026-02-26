@@ -26,7 +26,7 @@ vim.g.rustaceanvim = {
 
     default_settings = {
       ["rust-analyzer"] = {
-        procMacro = { enable = false },
+        procMacro = { enable = true },
         checkOnSave = { enable = false },
         check = { command = "check" },
 
