@@ -42,23 +42,9 @@ bindsym Mod4+Shift+l exec --no-startup-id xdotool mousemove_relative -- 200 0
 bindsym Mod4+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -100
 bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
-workspace 1 output HDMI-1-0
-workspace 2 output HDMI-1-0
-workspace 3 output HDMI-1-0
-workspace 4 output HDMI-1-0
-workspace 5 output HDMI-1-0
-workspace 6 output eDP
-workspace 7 output eDP
-workspace 8 output eDP
-workspace 9 output eDP
-workspace 10 output eDP
+exec_always --no-startup-id xrdb -merge ~/.Xresources
 
-# Set dual monitor layout at startup
-exec_always --no-startup-id xrandr \
-  --output eDP --mode 2560x1600 --scale 1x1 \
-  --output HDMI-1-0 --mode 2560x1440 --rate 60 --scale 1x1 --right-of eDP
-
-exec --no-startup-id xrandr --dpi 188
+exec_always --no-startup-id ~/.config/i3/scripts/set-workspace-outputs.sh
 
 # left click 
 bindsym Mod4+Return exec --no-startup-id ~/.config/i3/scripts/left_click_and_stop.sh
@@ -77,13 +63,13 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Set default wallpaper on startup
-exec_always --no-startup-id feh --bg-scale ~/Downloads/forest-wallpaper-3840x2160-mist-fog-5726.jpg 
+exec_always --no-startup-id feh --bg-scale ~/Downloads/blackhole_wp.png 
 
 # Wallpapers bindings
-bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/forest-wallpaper-3840x2160-nature-4k-3441.jpg
-bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/ufo-scifi-4k-hb.jpg  
-bindsym ctrl+3 exec --no-startup-id feh --bg-scale ~/Downloads/wp10119463-aesthetic-scifi-wallpapers.jpg
-bindsym ctrl+4 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wallpaperflare.com_wallpaper4.jpg
+bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/galactic.jpeg  
+bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/blackhoe_space.jpeg  
+bindsym ctrl+3 exec --no-startup-id feh --bg-scale ~/Downloads/blackhole_wp.png 
+bindsym ctrl+4 exec --no-startup-id feh --bg-scale ~/Downloads/milky_way_over_mountain.png  
 bindsym ctrl+5 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wallpaperflare.com_wallpaper5.jpg
 bindsym ctrl+6 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wolf-on-rock-in-the-forest_3840x2160_xtrafondos.com.jpg  
 bindsym ctrl+7 exec --no-startup-id feh --bg-scale ~/Downloads/Images/pexels-therato-3855632.jpg
@@ -127,7 +113,8 @@ bindsym $mod+c exec flameshot gui
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id google-chrome-stable
-bindsym $mod+e exec --no-startup-id alacritty --class fzf-filebrowser --title fzf-filebrowser -e bash -c "~/.config/i3/scripts/fzf-filebrowser-inner.sh"
+bindsym $mod+e exec --no-startup-id alacritty -e yazi
+# bindsym $mod+e exec --no-startup-id alacritty --class fzf-filebrowser --title fzf-filebrowser -e bash -c "~/.config/i3/scripts/fzf-filebrowser-inner.sh"
 bindsym $mod+g exec --no-startup-id alacritty -e yazi
 bindsym $mod+n exec --no-startup-id deadd-notification-center --toggle-panel
 

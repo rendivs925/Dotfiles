@@ -225,32 +225,32 @@ alias nowrap='echo -e "\e[?7l"'
 alias wrap='echo -e "\e[?7h"'
 alias fps_60="xrandr --output eDP --mode 2560x1600 --rate 60"
 
-# Dual monitor – laptop left 300 Hz + external right 100 Hz
 alias dual_monitor='
-  xrandr --output eDP --primary --mode 2560x1600 --rate 300 --pos 0x0 --rotate normal \
-         --output HDMI-1-0 --rate 99.95 --right-of eDP --rotate normal &&
-  echo "Dual monitor active – laptop 300 Hz + external 100 Hz"
+rate=$(xrandr | awk "/^HDMI-1-0 connected/{f=1} f && /3840x2160/{for(i=2;i<=NF;i++){gsub(/[^0-9.]/,\"\",\$i); if(\$i>max) max=\$i}} END{print max}");
+xrandr --output eDP --primary --auto --pos 0x0 --rotate normal \
+       --output HDMI-1-0 --mode 3840x2160 --rate $rate --right-of eDP --rotate normal &&
+echo "Dual monitor active – 4K @$rate Hz"
 '
 
-# External monitor only – 100 Hz
 alias external_only='
-  xrandr --output eDP --off \
-         --output HDMI-1-0 --primary --mode 2560x1440 --rate 99.95 --pos 0x0 --rotate normal &&
-  i3-msg "workspace 1; move workspace to output HDMI-1-0" &&
-  echo "External-only @ 100 Hz active"
+rate=$(xrandr | awk "/^HDMI-1-0 connected/{f=1} f && /3840x2160/{for(i=2;i<=NF;i++){gsub(/[^0-9.]/,\"\",\$i); if(\$i>max) max=\$i}} END{print max}");
+xrandr --output eDP --off \
+       --output HDMI-1-0 --primary --mode 3840x2160 --rate $rate --pos 0x0 --rotate normal &&
+i3-msg "workspace 1; move workspace to output HDMI-1-0" &&
+echo "External-only monitor active – 4K @$rate Hz"
 '
 
-# Laptop screen only – 300 Hz
 alias internal_only='
-  xrandr --output HDMI-1-0 --off \
-         --output eDP --primary --mode 2560x1600 --rate 300 --pos 0x0 --rotate normal &&
-  i3-msg "workspace 1; move workspace to output eDP" &&
-  echo "Laptop-only @ 300 Hz active"
+rate=$(xrandr | awk "/^eDP connected/{f=1} f && /2560x1600/{for(i=2;i<=NF;i++){gsub(/[^0-9.]/,\"\",\$i); if(\$i>max) max=\$i}} END{print max}");
+xrandr --output HDMI-1-0 --off \
+       --output eDP --primary --mode 2560x1600 --rate $rate --pos 0x0 --rotate normal &&
+i3-msg "workspace 1; move workspace to output eDP" &&
+echo "Laptop-only mode active – 2560x1600 @$rate Hz"
 '
 
 brightness() {
-  xrandr --output eDP-1-0 --brightness "$1" \
-         --output HDMI-0 --brightness "$1"
+  xrandr --output eDP --brightness "$1" \
+         --output HDMI-1-0 --brightness "$1"
 }
 
 # ──[ Aliases: Shell Reload ]───────────────────────────────────────────────────
