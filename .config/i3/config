@@ -142,12 +142,12 @@ for_window [class="fzf-filebrowser"] \
     floating disable, \
     fullscreen enable
 
-for_window [class="(?i)ksnip"] floating enable, move position center
+for_window [class="ksnip"] floating enable, resize set 2800 1600, move position center
 
 # Application bindings
 bindsym $mod+Return exec --no-startup-id alacritty  
 bindsym $mod+a exec --no-startup-id signal-desktop  
-bindsym $mod+c exec --no-startup-id sh -c 'maim -s -u -m 10 /tmp/screen.png && ksnip /tmp/screen.png'
+bindsym $mod+c exec --no-startup-id sh -c 'maim -s -u -p 0 | xclip -selection clipboard -t image/png -i'
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id google-chrome-stable

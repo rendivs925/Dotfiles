@@ -9,5 +9,8 @@ return {
   {
     "L3MON4D3/LuaSnip",
     event = "InsertEnter",
+    dependencies = {
+      { "mlaursen/vim-react-snippets", opts = {} },
+    },
   },
 }
