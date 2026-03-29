@@ -1,53 +1,53 @@
-# Deadd Notification Center Configuration - Premium
+# Deadd Notification Center Configuration - Premium - 1.5x Scale
 
 follow-mouse: false
 monitor: 0
 
-width: 500
+width: 750
 
 margin-top: 0
-margin-right: 20
+margin-right: 30
 margin-bottom: 0
 margin-left: 0
 
 notification:
   use-markup: true
   parse-html-entities: true
-  icon-size: 48
+  icon-size: 72
   app-icon:
     guess-icon-from-name: true
-    icon-size: 32
+    icon-size: 48
   image:
-    size: 80
-    margin-top: 10
-    margin-bottom: 10
-    margin-left: 10
+    size: 120
+    margin-top: 15
+    margin-bottom: 15
+    margin-left: 15
     margin-right: 0
-  margin-top: 15
-  margin-right: 15
-  margin-bottom: 15
-  margin-left: 15
+  margin-top: 22
+  margin-right: 22
+  margin-bottom: 22
+  margin-left: 22
 
 notification-center:
   follow-mouse: false
   monitor: 0
-  width: 500
+  width: 750
   margin-top: 0
-  margin-right: 20
+  margin-right: 30
   margin-bottom: 0
   hide-on-mouse-leave: true
   new-first: true
   ignore-transient: false
   buttons:
     buttons-per-row: 4
-    buttons-height: 50
-    buttons-margin: 5
+    buttons-height: 75
+    buttons-margin: 8
 
 popup:
   default-timeout: 8000
-  margin-top: 50
-  margin-right: 50
-  margin-between: 15
+  margin-top: 75
+  margin-right: 75
+  margin-between: 22
   max-lines-in-body: 4
   follow-mouse: false
   monitor: 0

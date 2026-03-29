@@ -1,56 +1,56 @@
-/* Coolnight Theme - Match Terminal */
+/* Coolnight Theme - Match Terminal - 1.5x Scale */
 
 .blurredBG, #main_window, .blurredBG.low, .blurredBG.normal {
     background: rgba(1, 20, 35, 0.7);
 }
 
 .noti-center.time {
-    font-size: 48px;
+    font-size: 72px;
     font-weight: 300;
     color: #CBE0F0;
 }
 
 .noti-center.date {
-    font-size: 16px;
+    font-size: 24px;
     color: #214969;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 /* Notifications */
 .notification.content {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 22px;
+    margin-bottom: 22px;
 }
 
 .title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 27px;
     color: #CBE0F0;
 }
 
 .appname {
-    font-size: 13px;
+    font-size: 20px;
     color: #0FC5ED;
     font-weight: 500;
 }
 
 .body {
-    font-size: 14px;
+    font-size: 21px;
     color: #CBE0F0;
-    margin-top: 8px;
+    margin-top: 12px;
 }
 
 .time {
-    font-size: 11px;
+    font-size: 16px;
     color: #214969;
 }
 
 .blurredBG.notification {
     background: rgba(1, 32, 57, 0.7);
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 18px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
 }
 
 .blurredBG.notification.critical {
@@ -60,9 +60,9 @@
 
 .notificationInCenter {
     background: rgba(1, 40, 69, 0.5);
-    border-radius: 12px;
-    margin: 8px;
-    padding: 15px;
+    border-radius: 18px;
+    margin: 12px;
+    padding: 22px;
 }
 
 .notificationInCenter.critical {
@@ -89,28 +89,28 @@ label.critical {
 
 /* Progress Bar */
 progressbar {
-    border-radius: 4px;
+    border-radius: 6px;
     background: #214969;
 }
 
 progressbar progress {
     background: linear-gradient(90deg, #0FC5ED, #a277ff);
-    border-radius: 4px;
+    border-radius: 6px;
 }
 
 /* Buttons */
 button {
     background: rgba(33, 73, 105, 0.4);
     color: #CBE0F0;
-    border-radius: 8px;
+    border-radius: 12px;
     border-width: 0px;
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: 12px 24px;
+    font-size: 20px;
 }
 
 button:hover {
     background: rgba(15, 197, 237, 0.3);
-    border-radius: 8px;
+    border-radius: 12px;
     border-width: 0px;
     color: #fff;
 }
@@ -118,8 +118,8 @@ button:hover {
 button.actionbutton {
     background: rgba(15, 197, 237, 0.2);
     color: #0FC5ED;
-    border-radius: 6px;
-    padding: 6px 12px;
+    border-radius: 9px;
+    padding: 9px 18px;
 }
 
 button.actionbutton:hover {
@@ -131,7 +131,7 @@ button.button-close {
     background: transparent;
     color: #214969;
     border-radius: 50%;
-    padding: 4px;
+    padding: 6px;
 }
 
 button.button-close:hover {
@@ -142,13 +142,13 @@ button.button-close:hover {
 /* Custom Buttons */
 .userbutton {
     background: rgba(33, 73, 105, 0.6);
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: 18px;
+    padding: 18px;
 }
 
 .userbuttonlabel {
     color: #CBE0F0;
-    font-size: 12px;
+    font-size: 18px;
     font-weight: 500;
 }
 
@@ -186,18 +186,18 @@ button.buttonState2:hover {
 
 /* Images */
 image.deadd-noti-center.notification.image {
-    margin-left: 15px;
-    border-radius: 8px;
+    margin-left: 22px;
+    border-radius: 12px;
 }
 
 image.deadd-noti-center.notification.icon {
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 /* Delete All Button */
 label.delete-all {
     color: #E52E2E;
-    font-size: 12px;
+    font-size: 18px;
 }
 
 label.delete-all:hover {
@@ -211,7 +211,7 @@ scrollbar {
 
 scrollbar slider {
     background: rgba(15, 197, 237, 0.3);
-    border-radius: 4px;
+    border-radius: 6px;
 }
 
 scrollbar slider:hover {
