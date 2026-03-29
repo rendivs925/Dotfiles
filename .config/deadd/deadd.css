@@ -1,0 +1,219 @@
+/* Coolnight Theme - Match Terminal */
+
+.blurredBG, #main_window, .blurredBG.low, .blurredBG.normal {
+    background: rgba(1, 20, 35, 0.7);
+}
+
+.noti-center.time {
+    font-size: 48px;
+    font-weight: 300;
+    color: #CBE0F0;
+}
+
+.noti-center.date {
+    font-size: 16px;
+    color: #214969;
+    margin-bottom: 20px;
+}
+
+/* Notifications */
+.notification.content {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 18px;
+    color: #CBE0F0;
+}
+
+.appname {
+    font-size: 13px;
+    color: #0FC5ED;
+    font-weight: 500;
+}
+
+.body {
+    font-size: 14px;
+    color: #CBE0F0;
+    margin-top: 8px;
+}
+
+.time {
+    font-size: 11px;
+    color: #214969;
+}
+
+.blurredBG.notification {
+    background: rgba(1, 32, 57, 0.7);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.blurredBG.notification.critical {
+    background: rgba(229, 46, 46, 0.2);
+    border: 1px solid rgba(229, 46, 46, 0.5);
+}
+
+.notificationInCenter {
+    background: rgba(1, 40, 69, 0.5);
+    border-radius: 12px;
+    margin: 8px;
+    padding: 15px;
+}
+
+.notificationInCenter.critical {
+    background: rgba(229, 46, 46, 0.15);
+    border: 1px solid rgba(229, 46, 46, 0.3);
+}
+
+/* Labels */
+label {
+    color: #CBE0F0;
+}
+
+label.notification {
+    color: #CBE0F0;
+}
+
+label.critical {
+    color: #E52E2E;
+}
+
+.notificationInCenter label.critical {
+    color: #E52E2E;
+}
+
+/* Progress Bar */
+progressbar {
+    border-radius: 4px;
+    background: #214969;
+}
+
+progressbar progress {
+    background: linear-gradient(90deg, #0FC5ED, #a277ff);
+    border-radius: 4px;
+}
+
+/* Buttons */
+button {
+    background: rgba(33, 73, 105, 0.4);
+    color: #CBE0F0;
+    border-radius: 8px;
+    border-width: 0px;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+button:hover {
+    background: rgba(15, 197, 237, 0.3);
+    border-radius: 8px;
+    border-width: 0px;
+    color: #fff;
+}
+
+button.actionbutton {
+    background: rgba(15, 197, 237, 0.2);
+    color: #0FC5ED;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+button.actionbutton:hover {
+    background: rgba(15, 197, 237, 0.4);
+    color: #fff;
+}
+
+button.button-close {
+    background: transparent;
+    color: #214969;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+button.button-close:hover {
+    background: rgba(229, 46, 46, 0.3);
+    color: #E52E2E;
+}
+
+/* Custom Buttons */
+.userbutton {
+    background: rgba(33, 73, 105, 0.6);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.userbuttonlabel {
+    color: #CBE0F0;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.userbutton:hover {
+    background: rgba(15, 197, 237, 0.3);
+}
+
+.userbuttonlabel:hover {
+    color: #fff;
+}
+
+button.buttonState1 {
+    background: rgba(15, 197, 237, 0.4);
+}
+
+.userbuttonlabel.buttonState1 {
+    color: #fff;
+}
+
+button.buttonState1:hover {
+    background: rgba(15, 197, 237, 0.6);
+}
+
+button.buttonState2 {
+    background: rgba(162, 119, 255, 0.3);
+}
+
+.userbuttonlabel.buttonState2 {
+    color: #a277ff;
+}
+
+button.buttonState2:hover {
+    background: rgba(162, 119, 255, 0.5);
+}
+
+/* Images */
+image.deadd-noti-center.notification.image {
+    margin-left: 15px;
+    border-radius: 8px;
+}
+
+image.deadd-noti-center.notification.icon {
+    border-radius: 8px;
+}
+
+/* Delete All Button */
+label.delete-all {
+    color: #E52E2E;
+    font-size: 12px;
+}
+
+label.delete-all:hover {
+    color: #ff6b6b;
+}
+
+/* Scrollbar */
+scrollbar {
+    background: transparent;
+}
+
+scrollbar slider {
+    background: rgba(15, 197, 237, 0.3);
+    border-radius: 4px;
+}
+
+scrollbar slider:hover {
+    background: rgba(15, 197, 237, 0.5);
+}
