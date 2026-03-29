@@ -1,6 +1,6 @@
 # Deadd Notification Center Configuration - Premium - 1.5x Scale
 
-follow-mouse: false
+follow-mouse: true
 monitor: 0
 
 width: 750
@@ -29,7 +29,7 @@ notification:
   margin-left: 22
 
 notification-center:
-  follow-mouse: false
+  follow-mouse: true
   monitor: 0
   width: 750
   margin-top: 0
@@ -49,7 +49,7 @@ popup:
   margin-right: 75
   margin-between: 22
   max-lines-in-body: 4
-  follow-mouse: false
+  follow-mouse: true
   monitor: 0
   click-behavior:
     dismiss: mouse1
