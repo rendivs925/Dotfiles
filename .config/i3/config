@@ -153,7 +153,8 @@ bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id google-chrome-stable
 bindsym $mod+e exec --no-startup-id alacritty -e yazi
 # bindsym $mod+e exec --no-startup-id alacritty --class fzf-filebrowser --title fzf-filebrowser -e bash -c "~/.config/i3/scripts/fzf-filebrowser-inner.sh"
-bindsym $mod+g exec --no-startup-id alacritty -e yazi
+for_window [instance="crx_gdfaincndogidkdcdkhapmbffkckdkhn"] floating enable, resize set 2800 1600, move position center
+bindsym $mod+g exec --no-startup-id google-chrome-stable --app-id=gdfaincndogidkdcdkhapmbffkckdkhn
 bindsym $mod+n exec --no-startup-id deadd-notification-center --toggle-panel
 
 exec --no-startup-id clipmenud
