@@ -99,18 +99,18 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Set default wallpaper on startup
-exec_always --no-startup-id feh --bg-scale ~/Downloads/vecteezy_a-landscape-of-meadows-and-mountains-at-sunset-with-4k_47422343.jpg 
+exec_always --no-startup-id feh --bg-scale ~/Downloads/forest-wallpaper-3840x2160-mist-fog-5726.jpg 
 
 # Wallpapers bindings
-bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/galactic.jpeg  
-bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/blackhoe_space.jpeg  
-bindsym ctrl+3 exec --no-startup-id feh --bg-scale ~/Downloads/blackhole_wp.png 
-bindsym ctrl+4 exec --no-startup-id feh --bg-scale ~/Downloads/milky_way_over_mountain.png  
-bindsym ctrl+5 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wallpaperflare.com_wallpaper5.jpg
+bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/vashishtha-jogi-bClr95glx6k-unsplash.jpg 
+bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/vecteezy_a-landscape-of-meadows-and-mountains-at-sunset-with-4k_47422343.jpg 
+bindsym ctrl+3 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wp11976330-interstellar-black-hole-wallpapers.jpg 
+bindsym ctrl+4 exec --no-startup-id feh --bg-scale ~/Downloads/Images/stars-1761153480430-1570.jpg  
+bindsym ctrl+5 exec --no-startup-id feh --bg-scale ~/Downloads/Images/themilkywaygalaxy-1761153409478-2067.jpg  
 bindsym ctrl+6 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wolf-on-rock-in-the-forest_3840x2160_xtrafondos.com.jpg  
-bindsym ctrl+7 exec --no-startup-id feh --bg-scale ~/Downloads/Images/pexels-therato-3855632.jpg
-bindsym ctrl+8 exec --no-startup-id feh --bg-scale ~/Downloads/Images/ufo-in-suburbs-blue-night-vibes-desktop-wallpaper-4k.jpg 
-bindsym ctrl+9 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wp9181131-4k-pasture-wallpapers.jpg
+bindsym ctrl+7 exec --no-startup-id feh --bg-scale ~/Downloads/Images/yosemite-wallpaper-3840x2160-apple-181.jpg  
+bindsym ctrl+8 exec --no-startup-id feh --bg-scale ~/Downloads/Images/yosemite-wallpaper-3840x2160-8k-scenery-serene-wilderness-3955.jpg 
+bindsym ctrl+9 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wp11976290-interstellar-black-hole-wallpapers.jpg 
 
 # Enable scroll lock
 exec --no-startup-id xmodmap -e "add mod3 = Scroll_Lock"
@@ -147,7 +147,8 @@ for_window [class="ksnip"] floating enable, resize set 2800 1600, move position 
 # Application bindings
 bindsym $mod+Return exec --no-startup-id alacritty  
 bindsym $mod+a exec --no-startup-id signal-desktop  
-bindsym $mod+c exec --no-startup-id sh -c 'maim -s -u -p 0 | xclip -selection clipboard -t image/png -i'
+# bindsym $mod+c exec --no-startup-id sh -c 'maim -s -u -p 0 | xclip -selection clipboard -t image/png -i'
+bindsym $mod+c exec --no-startup-id flameshot gui
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id google-chrome-stable
