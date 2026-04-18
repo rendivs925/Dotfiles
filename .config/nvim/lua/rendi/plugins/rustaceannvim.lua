@@ -24,57 +24,57 @@ vim.g.rustaceanvim = {
       end, opts)
     end,
 
-    default_settings = {
-      ["rust-analyzer"] = {
-        procMacro = { enable = true },
-        checkOnSave = { enable = false },
-        check = { command = "check" },
-
-        lens = { enable = false },
-        inlayHints = { enable = false },
-        diagnostics = { enable = true },
-
-        cargo = {
-          allFeatures = false,
-          loadOutDirsFromCheck = false,
-          runBuildScriptsLocally = false,
-        },
-
-        compilationActions = { enable = false },
-
-        files = {
-          excludeDirs = {
-            "node_modules",
-            "dist",
-            "pkg",
-            ".git",
-            "target",
-            "target-rust-analyzer",
-            "debug",
-          },
-          watcherExclude = {
-            "**/node_modules/**",
-            "**/dist/**",
-            "**/pkg/**",
-            "**/.git/**",
-            "**/target/**",
-            "**/target-rust-analyzer/**",
-            "**/debug/**",
-          },
-        },
-
-        ["rusty Crane"] = {
-          liftComments = false,
-        },
-
-        memory = {
-          addressSpace = "100MiB",
-          declarativeItems = "100MiB",
-          proceduralMacros = "100MiB",
-          typeHints = "100MiB",
-        },
-      },
-    },
+    -- default_settings = {
+    --   ["rust-analyzer"] = {
+    --     procMacro = { enable = true },
+    --     checkOnSave = { enable = false },
+    --     check = { command = "check" },
+    --
+    --     lens = { enable = false },
+    --     inlayHints = { enable = false },
+    --     diagnostics = { enable = true },
+    --
+    --     cargo = {
+    --       allFeatures = false,
+    --       loadOutDirsFromCheck = false,
+    --       runBuildScriptsLocally = false,
+    --     },
+    --
+    --     compilationActions = { enable = false },
+    --
+    --     files = {
+    --       excludeDirs = {
+    --         "node_modules",
+    --         "dist",
+    --         "pkg",
+    --         ".git",
+    --         "target",
+    --         "target-rust-analyzer",
+    --         "debug",
+    --       },
+    --       watcherExclude = {
+    --         "**/node_modules/**",
+    --         "**/dist/**",
+    --         "**/pkg/**",
+    --         "**/.git/**",
+    --         "**/target/**",
+    --         "**/target-rust-analyzer/**",
+    --         "**/debug/**",
+    --       },
+    --     },
+    --
+    --     ["rusty Crane"] = {
+    --       liftComments = false,
+    --     },
+    --
+    --     memory = {
+    --       addressSpace = "100MiB",
+    --       declarativeItems = "100MiB",
+    --       proceduralMacros = "100MiB",
+    --       typeHints = "100MiB",
+    --     },
+    --   },
+    -- },
   },
 }
 
