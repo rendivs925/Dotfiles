@@ -44,6 +44,8 @@ bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
 exec_always --no-startup-id xrdb -merge ~/.Xresources
 
+exec_always --no-startup-id i3-auto-layout
+
 # Auto-detect monitors (autorandr saves/restores layouts by profile)
 # exec_always --no-startup-id autorandr --change
 
@@ -214,6 +216,7 @@ bindsym $mod+r mode "resize"
 
 # Gaps configuration
 gaps inner 10
+# gaps outer 20
 
 # Workspace definitions
 set $ws1 "1"
