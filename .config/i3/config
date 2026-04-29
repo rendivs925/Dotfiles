@@ -187,7 +187,7 @@ bindsym $mod+s split h
 bindsym $mod+w split v
 
 # Toggle floating, set initial size, and center
-bindsym $mod+Shift+space floating toggle, resize set 2800 1600, move position center
+bindsym $mod+Shift+space floating toggle; resize set width 65 ppt, resize set height 65 ppt; move position center; [tiling] resize set width 50 ppt, resize set height 50 ppt
 
 # Make floating window bigger 
 bindsym $mod+plus resize grow width 60 px or 60 ppt, resize grow height 30 px or 30 ppt, move position center
@@ -214,9 +214,14 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Gaps configuration
-gaps inner 10
-# gaps outer 20
+#################################
+#      Gaps Configuration       #
+#################################
+
+gaps inner 12
+gaps outer 5
+
+smart_gaps on
 
 # Workspace definitions
 set $ws1 "1"
