@@ -44,6 +44,9 @@ bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
 exec_always --no-startup-id xrdb -merge ~/.Xresources
 
+# Auto-detect monitors (autorandr saves/restores layouts by profile)
+# exec_always --no-startup-id autorandr --change
+
 # All workspaces on internal
 # workspace 1 output eDP
 # workspace 2 output eDP
@@ -56,19 +59,19 @@ exec_always --no-startup-id xrdb -merge ~/.Xresources
 # workspace 9 output eDP
 # workspace 10 output eDP
 
-# Workspaces 1–5 → external
-workspace 1 output HDMI-1-0
-workspace 2 output HDMI-1-0
-workspace 3 output HDMI-1-0
-workspace 4 output HDMI-1-0
-workspace 5 output HDMI-1-0
-
-# Workspaces 6–10 → internal
-workspace 6 output eDP
-workspace 7 output eDP
-workspace 8 output eDP
-workspace 9 output eDP
-workspace 10 output eDP
+# # Workspaces 1–5 → external
+# workspace 1 output HDMI-1-0
+# workspace 2 output HDMI-1-0
+# workspace 3 output HDMI-1-0
+# workspace 4 output HDMI-1-0
+# workspace 5 output HDMI-1-0
+#
+# # Workspaces 6–10 → internal
+# workspace 6 output eDP
+# workspace 7 output eDP
+# workspace 8 output eDP
+# workspace 9 output eDP
+# workspace 10 output eDP
 
 # workspace 1 output DP-1
 # workspace 2 output DP-1
@@ -99,11 +102,11 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Set default wallpaper on startup
-exec_always --no-startup-id feh --bg-scale ~/Downloads/forest-wallpaper-3840x2160-mist-fog-5726.jpg 
+exec_always --no-startup-id feh --bg-scale ~/Downloads/vashishtha-jogi-bClr95glx6k-unsplash.jpg 
 
 # Wallpapers bindings
 bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/vashishtha-jogi-bClr95glx6k-unsplash.jpg 
-bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/vecteezy_a-landscape-of-meadows-and-mountains-at-sunset-with-4k_47422343.jpg 
+bindsym ctrl+2 exec --no-startup-id feh --bg-scale ~/Downloads/forest-wallpaper-3840x2160-mist-fog-5726.jpg
 bindsym ctrl+3 exec --no-startup-id feh --bg-scale ~/Downloads/Images/wp11976330-interstellar-black-hole-wallpapers.jpg 
 bindsym ctrl+4 exec --no-startup-id feh --bg-scale ~/Downloads/Images/stars-1761153480430-1570.jpg  
 bindsym ctrl+5 exec --no-startup-id feh --bg-scale ~/Downloads/Images/themilkywaygalaxy-1761153409478-2067.jpg  
@@ -149,9 +152,10 @@ bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+a exec --no-startup-id signal-desktop  
 # bindsym $mod+c exec --no-startup-id sh -c 'maim -s -u -p 0 | xclip -selection clipboard -t image/png -i'
 bindsym $mod+c exec --no-startup-id flameshot gui
-bindsym $mod+Shift+z exec zathura
+bindsym $mod+z exec zathura
 bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id google-chrome-stable
+# bindsym $mod+o exec --no-startup-id zathura
 bindsym $mod+e exec --no-startup-id alacritty -e yazi
 # bindsym $mod+e exec --no-startup-id alacritty --class fzf-filebrowser --title fzf-filebrowser -e bash -c "~/.config/i3/scripts/fzf-filebrowser-inner.sh"
 for_window [instance="crx_gdfaincndogidkdcdkhapmbffkckdkhn"] floating enable, resize set 2800 1600, move position center
