@@ -1,1 +1,1692 @@
-/home/rendi/.aliases
+# ~/.aliases - ultimate text-surgery aliases/functions for bash or zsh
+
+# Prevent existing aliases from breaking function definitions in zsh
+unalias ff fdext fdir rgi rgf rgc rgctx todo sdrun sdall sdrxrun sdrxall trimfiles freq words sumcol avgcol topfield rxonly jpp jpick csvview ws1 lower upper snake cutc between untilpat splitby catuniq intersect commdiff cbcopy cbpaste brightness fdcount fdsize fddel rgurl rgip rgemail glogf gchange gpr grem gloc gstas gcon gignore diffstat diffword csvjoin csvdedup csvsort csvcol csvstats csvslice jsonvalid jsonflat jsonwalk b64enc b64dec urlenc urldec hexencode hexdecode camel kebab title batchrn batchcp batchchmod batchconvert batchresize dedupfiles deduplines tarc tarx tarl portscan fastscan listenports detectservices netinfo myip myips dnscheck dnsptr dnsmail httpstatus httpheader httpbody apicheck apiscan cookiecheck headcheck csrfcheck sslcheck ssltest recon-audit recon-webcheck sec-status sec-tools suspicious analyze stringsx hexview entropy cmpbin peek exif genpass genpass-simple genuuid totp hash hashall crypt decrypt seal unseal gpg-enc gpg-dec logcheck secwatch sudocheck lastlogins mkcd hist histn extract here cheat epoch count size findtext colors path fm paint sysinfo sysdisk sysmem syscpu sysuptime systemp procs prockill proctop procmon 2>/dev/null
+
+# ──[ System & Process ]────────────────────────────────────────────
+
+# Example: sysinfo
+sysinfo() {
+  printf 'Kernel: %s\n' "$(uname -r)"
+  printf 'Hostname: %s\n' "$(hostname)"
+  printf 'Uptime: '
+  uptime
+  if command -v lscpu >/dev/null 2>&1; then
+    printf 'CPU: %s\n' "$(lscpu | awk -F': +' '/Model name/ {print $2}')"
+  else
+    printf 'CPU: %s\n' "$(awk -F': ' '/model name/ {print $2; exit}' /proc/cpuinfo)"
+  fi
+  free -h | awk '/^Mem:/ {printf "Memory: %s / %s\n", $3, $2}'
+}
+
+# Example: sysdisk
+sysdisk() {
+  df -h "$@" | rg -v 'tmpfs|devtmpfs|squashfs|overlay'
+}
+
+# Example: sysmem
+sysmem() {
+  free -h
+}
+
+# Example: syscpu
+syscpu() {
+  if command -v lscpu >/dev/null 2>&1; then
+    lscpu | rg -E 'Model name|^CPU\(s\)|Core|Thread|Architecture|MHz'
+  else
+    awk -F': ' '/model name|cpu cores|siblings|cpu MHz/ {print $1 ": " $2; exit}' /proc/cpuinfo
+  fi
+}
+
+# Example: sysuptime
+sysuptime() {
+  if command -v uptime >/dev/null 2>&1; then
+    uptime
+  else
+    cat /proc/uptime | awk '{printf "%d days %d hours %d minutes\n", $1/86400, ($1%86400)/3600, ($1%3600)/60}'
+  fi
+}
+
+# Example: systemp
+systemp() {
+  if command -v sensors >/dev/null 2>&1; then
+    sensors | rg -E 'Core|Package|Tctl|Tdie' || sensors
+  else
+    printf 'sensors not found. Install: sudo pacman -S lm_sensors\n' >&2
+    return 127
+  fi
+}
+
+# Example: procs firefox
+procs() {
+  [ "$#" -ge 1 ] || { printf 'usage: procs NAME\n' >&2; return 2; }
+  ps aux | rg -i "$1" | rg -v "rg.*$1"
+}
+
+# Example: prockill firefox
+prockill() {
+  [ "$#" -ge 1 ] || { printf 'usage: prockill NAME\n' >&2; return 2; }
+  pkill -f "$1"
+}
+
+# Example: proctop cpu
+proctop() {
+  [ "$#" -ge 1 ] || { printf 'usage: proctop cpu|mem\n' >&2; return 2; }
+  case "$1" in
+    cpu) ps aux --sort=-%cpu | head -20 ;;
+    mem) ps aux --sort=-%mem | head -20 ;;
+    *) printf 'usage: proctop cpu|mem\n' >&2; return 2 ;;
+  esac
+}
+
+# Example: procmon firefox
+procmon() {
+  [ "$#" -ge 1 ] || { printf 'usage: procmon NAME\n' >&2; return 2; }
+  if command -v watch >/dev/null 2>&1; then
+    watch -n 1 "ps aux | rg '$1' | rg -v 'rg.*$1'"
+  else
+    printf 'watch not found. Install: sudo pacman -S procps-ng\n' >&2
+    return 127
+  fi
+}
+
+# ──[ Display ]─────────────────────────────────────────────────────
+
+alias fps_60="xrandr --output eDP --mode 2560x1600 --rate 60"
+
+alias dual_monitor='
+rate=$(xrandr | awk "/^HDMI-1-0 connected/{f=1} f && /3840x2160/{for(i=2;i<=NF;i++){gsub(/[^0-9.]/,\"\",\$i); if(\$i>max) max=\$i}} END{print max}");
+xrandr --output eDP --primary --auto --pos 0x0 --rotate normal \
+       --output HDMI-1-0 --mode 3840x2160 --rate $rate --right-of eDP --rotate normal &&
+echo "Dual monitor active – 4K @$rate Hz"
+'
+
+alias external_only='
+rate=$(xrandr | awk "/^HDMI-1-0 connected/{f=1} f && /3840x2160/{for(i=2;i<=NF;i++){gsub(/[^0-9.]/,\"\",\$i); if(\$i>max) max=\$i}} END{print max}");
+xrandr --output eDP --off \
+       --output HDMI-1-0 --primary --mode 3840x2160 --rate $rate --pos 0x0 --rotate normal &&
+i3-msg "workspace 1; move workspace to output HDMI-1-0" &&
+echo "External-only monitor active – 4K @$rate Hz"
+'
+
+alias internal_only='
+rate=$(xrandr | awk "/^eDP connected/{f=1} f && /2560x1600/{for(i=2;i<=NF;i++){gsub(/[^0-9.]/,\"\",\$i); if(\$i>max) max=\$i}} END{print max}");
+xrandr --output HDMI-1-0 --off \
+       --output eDP --primary --mode 2560x1600 --rate $rate --pos 0x0 --rotate normal &&
+i3-msg "workspace 1; move workspace to output eDP" &&
+echo "Laptop-only mode active – 2560x1600 @$rate Hz"
+'
+
+# Example: brightness 0.8
+brightness() {
+  xrandr --output eDP --brightness "$1" \
+         --output HDMI-1-0 --brightness "$1"
+}
+
+# ──[ Navigation ]──────────────────────────────────────────────────
+
+alias cd="z"
+alias cdf="cd ~/Dotfiles/"
+alias cn="cd ~/.config/nvim"
+alias ca="cd ~/.config/alacritty"
+alias ci="cd ~/.config/i3"
+alias cq="cd ~/.config/qutebrowser/"
+alias cgh="cd ~/.config/ghostty"
+alias cbt="cd ~/.config/btop"
+alias cpoly="cd ~/.config/polybar"
+alias crof="cd ~/.config/rofi"
+
+# ──[ Dotfile Editing ]─────────────────────────────────────────────
+
+alias nn="nvim ~/.config/nvim"
+alias np="nvim ~/.config/picom/picom.conf"
+alias na="nvim ~/.config/alacritty/alacritty.toml"
+alias ni="nvim ~/.config/i3/config"
+alias nq="nvim ~/.config/qutebrowser/config.py"
+alias nz="nvim ~/.zshrc"
+alias nt="nvim ~/.tmux.conf"
+alias nb="nvim ~/.bashrc"
+alias nx="nvim ~/.xinitrc"
+alias nali="nvim ~/.aliases"
+alias npo="nvim ~/.config/polybar/config"
+alias nro="nvim ~/.config/rofi/config.rasi"
+alias nla="nvim ~/.config/lazygit/config.yml"
+
+# ──[ Shell Reload ]────────────────────────────────────────────────
+
+alias soz="source ~/.zshrc"
+alias sob="source ~/.bashrc"
+alias sot="tmux source ~/.tmux.conf"
+alias soa="source ~/.aliases"
+
+# ──[ Shell Utils ]─────────────────────────────────────────────────
+
+alias e="exit"
+alias c='
+if [ -n "$TMUX" ]; then
+  tmux list-panes -a -F "#{pane_id} #{pane_current_command} #{pane_in_mode}" \
+  | awk '"'"'$2 ~ /^(bash|zsh|fish|sh)$/ && $3 == 0 { print $1 }'"'"' \
+  | grep -v "$TMUX_PANE" \
+  | xargs -I {} tmux send-keys -t {} C-l
+fi
+command clear
+'
+alias n="nvim"
+alias nano="nvim"
+alias r="ranger"
+alias sn="sudoedit"
+alias skey='screenkey --position fixed --geometry 240x60+1660+980 --font "Fira Mono Bold 20" --opacity 0.9 --bg-color "#000000" --font-color "#CBE0F0" --mods-mode emacs --persist --no-systray --bak-mode full --timeout 0.3"'
+alias nowrap='echo -e "\e[?7l"'
+alias wrap='echo -e "\e[?7h"'
+alias cat="bat --paging=never"
+alias grep="rg"
+
+# ──[ File & Search ]───────────────────────────────────────────────
+
+# 1. ff: fuzzy-find files, with bat preview when interactive; otherwise prints file list.
+# Example: ff "config"
+ff() {
+  local q="${1:-.}"
+  if command -v fzf >/dev/null 2>&1 && [ -t 1 ]; then
+    fd --hidden --follow --exclude .git --type f "$q" . |
+      fzf --ansi --reverse --preview 'bat --style=numbers --color=always --line-range=:200 -- {} 2>/dev/null || sed -n "1,200p" -- {}'
+  else
+    fd --hidden --follow --exclude .git --type f "$q" .
+  fi
+}
+
+# 2. fdext: find files by extension safely.
+# Example: fdext json
+fdext() {
+  [ "$#" -eq 1 ] || { printf 'usage: fdext EXT\n' >&2; return 2; }
+  fd --hidden --follow --exclude .git --type f --extension "$1"
+}
+
+# 3. fdir: fuzzy-find directories, falling back to plain directory listing.
+# Example: fdir cache
+fdir() {
+  local q="${1:-.}"
+  if command -v fzf >/dev/null 2>&1 && [ -t 1 ]; then
+    fd --hidden --follow --exclude .git --type d "$q" . | fzf --reverse
+  else
+    fd --hidden --follow --exclude .git --type d "$q" .
+  fi
+}
+
+# 4. rgi: search text with rg, fuzzy-select matches with previews when interactive.
+# Example: rgi "TODO|FIXME"
+rgi() {
+  [ "$#" -ge 1 ] || { printf 'usage: rgi PATTERN [PATH...]\n' >&2; return 2; }
+
+  if command -v fzf >/dev/null 2>&1 && [ -t 1 ]; then
+    rg --hidden --glob '!.git' --line-number --column --color=always --smart-case "$@" |
+      fzf --ansi \
+        --delimiter ':' \
+        --layout=reverse \
+        --preview '
+          sh -c '"'"'
+            file=$1
+            line=$2
+
+            case "$line" in
+              ""|*[!0-9]*) line=1 ;;
+            esac
+
+            start=$((line - 20))
+            end=$((line + 80))
+            [ "$start" -lt 1 ] && start=1
+
+            if command -v bat >/dev/null 2>&1; then
+              bat --style=numbers --color=always --highlight-line "$line" --line-range "$start:$end" -- "$file" 2>/dev/null
+            else
+              sed -n "${start},${end}p" -- "$file"
+            fi
+          '"'"' sh {1} {2}
+        '
+  else
+    rg --hidden --glob '!.git' --line-number --column --smart-case "$@"
+  fi
+}
+
+# 5. rgf: list files containing a pattern.
+# Example: rgf "api_key"
+rgf() {
+  [ "$#" -ge 1 ] || { printf 'usage: rgf PATTERN [PATH...]\n' >&2; return 2; }
+  rg --hidden --glob '!.git' --files-with-matches --smart-case "$@"
+}
+
+# 6. rgc: count matches per file, sorted descending.
+# Example: rgc "error"
+rgc() {
+  [ "$#" -ge 1 ] || { printf 'usage: rgc PATTERN [PATH...]\n' >&2; return 2; }
+  rg --hidden --glob '!.git' --count-matches --smart-case "$@" |
+    awk -F: 'NF>=2 {print $NF "\t" substr($0, 1, length($0)-length($NF)-1)}' |
+    sort -rn |
+    column -t -s '	'
+}
+
+# 7. rgctx: search with generous context and file headings.
+# Example: rgctx "timeout" .
+rgctx() {
+  [ "$#" -ge 1 ] || { printf 'usage: rgctx PATTERN [PATH...]\n' >&2; return 2; }
+  rg --hidden --glob '!.git' --smart-case --line-number --heading --context 3 "$@"
+}
+
+# 8. todo: fast scan for common note markers.
+# Example: todo
+todo() {
+  rg --hidden --glob '!.git' --line-number --column --smart-case '\b(TODO|FIXME|HACK|BUG|XXX|NOTE)\b' "${@:-.}"
+}
+
+# 9. fdcount: count files matching pattern.
+# Example: fdcount '*.rs'
+fdcount() {
+  [ "$#" -ge 1 ] || { printf 'usage: fdcount PATTERN\n' >&2; return 2; }
+  fd --hidden --follow --exclude .git --type f "$1" . | wc -l
+}
+
+# 10. fdsize: total size of files matching pattern.
+# Example: fdsize '*.log'
+fdsize() {
+  [ "$#" -ge 1 ] || { printf 'usage: fdsize PATTERN\n' >&2; return 2; }
+  fd --hidden --follow --exclude .git --type f "$1" . -0 | xargs -0 du -ch | tail -1
+}
+
+# 11. fddel: delete files matching fd pattern with confirmation.
+# Example: fddel '*.tmp'
+fddel() {
+  [ "$#" -ge 1 ] || { printf 'usage: fddel PATTERN\n' >&2; return 2; }
+  fd --hidden --follow --exclude .git --type f "$1" . -0 | xargs -0 -p rm
+}
+
+# 12. rgurl: extract URLs from files.
+# Example: rgurl index.html
+rgurl() {
+  [ "$#" -ge 1 ] || { printf 'usage: rgurl FILE...\n' >&2; return 2; }
+  rg -o 'https?://[^"'\''<> ]+' "$@"
+}
+
+# 13. rgip: extract IP addresses.
+# Example: rgip access.log
+rgip() {
+  [ "$#" -ge 1 ] || { printf 'usage: rgip FILE...\n' >&2; return 2; }
+  rg -o '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' "$@"
+}
+
+# 14. rgemail: extract email addresses.
+# Example: rgemail contacts.txt
+rgemail() {
+  [ "$#" -ge 1 ] || { printf 'usage: rgemail FILE...\n' >&2; return 2; }
+  rg -o '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' "$@"
+}
+
+# ──[ Replace & Trim ]──────────────────────────────────────────────
+
+# 9. sdrun: dry-run literal replacement across files using sd.
+# Example: sdrun "old text" "new text" "*.md"
+sdrun() {
+  [ "$#" -ge 2 ] || { printf 'usage: sdrun OLD NEW [FD_PATTERN]\n' >&2; return 2; }
+  local old="$1" new="$2" pat="${3:-.}"
+  fd --hidden --follow --exclude .git --type f "$pat" . -0 |
+    xargs -0 rg --fixed-strings --line-number --color=always -- "$old"
+  printf '\n# Dry run only. Apply with: sdall %q %q %q\n' "$old" "$new" "$pat" >&2
+}
+
+# 10. sdall: safely replace literal text across matching files.
+# Example: sdall "old text" "new text" "*.txt"
+sdall() {
+  [ "$#" -ge 2 ] || { printf 'usage: sdall OLD NEW [FD_PATTERN]\n' >&2; return 2; }
+  local old="$1" new="$2" pat="${3:-.}"
+  fd --hidden --follow --exclude .git --type f "$pat" . -0 |
+    xargs -0 sd --fixed-strings "$old" "$new"
+}
+
+# 11. sdrxrun: dry-run regex replacement across files using sd.
+# Example: sdrxrun '[[:space:]]+$' '' '*.sh'
+sdrxrun() {
+  [ "$#" -ge 2 ] || { printf 'usage: sdrxrun REGEX REPLACEMENT [FD_PATTERN]\n' >&2; return 2; }
+  local rx="$1" repl="$2" pat="${3:-.}"
+  fd --hidden --follow --exclude .git --type f "$pat" . -0 |
+    xargs -0 rg --line-number --color=always -- "$rx"
+  printf '\n# Dry run only. Apply with: sdrxall %q %q %q\n' "$rx" "$repl" "$pat" >&2
+}
+
+# 12. sdrxall: apply regex replacement across matching files.
+# Example: sdrxall '[[:space:]]+$' '' '*.md'
+sdrxall() {
+  [ "$#" -ge 2 ] || { printf 'usage: sdrxall REGEX REPLACEMENT [FD_PATTERN]\n' >&2; return 2; }
+  local rx="$1" repl="$2" pat="${3:-.}"
+  fd --hidden --follow --exclude .git --type f "$pat" . -0 |
+    xargs -0 sd "$rx" "$repl"
+}
+
+# 13. trimfiles: remove trailing whitespace from matching text files.
+# Example: trimfiles '*.txt'
+trimfiles() {
+  local pat="${1:-.}"
+  fd --hidden --follow --exclude .git --type f "$pat" . -0 |
+    xargs -0 sd '[ \t]+$' ''
+}
+
+# ──[ Git ]─────────────────────────────────────────────────────────
+
+alias ga="git add"
+alias gs="git status"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias gc="git checkout"
+alias gcb="git checkout -b"
+alias gb="git branch"
+alias gba="git branch -a"
+alias gl="git log --graph --oneline --decorate --all"
+alias gcl="git clone"
+alias gpl="git pull"
+alias gp="git push"
+alias gpo="git push origin"
+alias gpf="git push --force-with-lease"
+alias gco="git commit"
+alias gcm="git commit -m"
+alias gca="git commit --amend"
+alias gundo="git reset --soft HEAD~1"
+alias grb="git rebase"
+alias grbi="git rebase -i"
+alias grbc="git rebase --continue"
+alias grba="git rebase --abort"
+alias grbs="git rebase --skip"
+alias grbm="git rebase origin/main"
+alias grbmf="git fetch origin && git rebase origin/main"
+alias gra="git remote add"
+alias grv="git remote -v"
+alias grr="git remote remove"
+alias gr="git reset"
+alias grh="git reset --hard"
+alias grs="git restore"
+alias grss="git restore --staged"
+alias gst="git stash"
+alias gsta="git stash apply"
+alias gstp="git stash pop"
+alias gstd="git stash drop"
+alias gsts="git stash show --patch"
+alias gtags="git tag"
+alias gtl="git tag -l"
+alias gcp="git cherry-pick"
+alias gcpa="git cherry-pick --abort"
+alias gcpc="git cherry-pick --continue"
+alias gbs="git bisect"
+alias gbss="git bisect start"
+alias gbsg="git bisect good"
+alias gbsb="git bisect bad"
+alias gbse="git bisect reset"
+alias gsmu="git submodule update --init --recursive"
+alias gsma="git submodule add"
+alias gsms="git submodule status"
+alias gsmsync="git submodule sync"
+alias grfl="git reflog"
+alias gsw="git switch"
+alias gswc="git switch -c"
+alias gclean="git clean -fd"
+alias gprune="git fetch -p && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+# Example: glogf src/main.rs
+glogf() {
+  [ "$#" -ge 1 ] || { printf 'usage: glogf FILE\n' >&2; return 2; }
+  git log --oneline -- "$1"
+}
+
+# Example: gchange
+gchange() {
+  git diff --name-only HEAD~5..HEAD | sort -u
+}
+
+# Example: gpr 42
+gpr() {
+  [ "$#" -ge 1 ] || { printf 'usage: gpr PR_NUMBER\n' >&2; return 2; }
+  git fetch origin "pull/$1/head:pr-$1" && git switch "pr-$1"
+}
+
+# Example: grem
+grem() {
+  git remote -v
+}
+
+# Example: gloc
+gloc() {
+  if command -v cloc >/dev/null 2>&1; then
+    cloc .
+  elif command -v tokei >/dev/null 2>&1; then
+    tokei .
+  elif command -v sloccount >/dev/null 2>&1; then
+    sloccount .
+  else
+    git ls-files 2>/dev/null | xargs wc -l 2>/dev/null | tail -1 || printf 'Not a git repo or no files\n' >&2
+  fi
+}
+
+# Example: gstas
+gstas() {
+  git stash list --date=short --format='%gd: %gs (%ai)'
+}
+
+# Example: gcon
+gcon() {
+  git shortlog -sn --all
+}
+
+# Example: gignore '*.log'
+gignore() {
+  [ "$#" -ge 1 ] || { printf 'usage: gignore PATTERN\n' >&2; return 2; }
+  printf '%s\n' "$1" >> .gitignore
+}
+
+# Example: diffstat
+diffstat() {
+  git diff --stat "$@"
+}
+
+# Example: diffword
+diffword() {
+  git diff --word-diff "$@"
+}
+
+# ──[ Build Tools ]─────────────────────────────────────────────────
+
+alias j="just"
+alias jsb="just sb"
+alias jsf="just sf"
+alias jcf="just cf"
+alias jsa="just sa"
+alias dcu="docker compose up"
+alias dcw="docker compose watch"
+alias cw='cargo watch -q -c -w src/ -x "run -q"'
+alias cr="cargo remote -c -r remote --"
+alias dcd="docker compose down"
+alias dcl="docker compose logs -f"
+alias dce="docker compose exec"
+alias dcps="docker compose ps"
+alias dcrm="docker compose rm"
+alias dip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
+alias dprune="docker system prune -af"
+alias dbuild="docker build -t"
+alias dcupr="docker compose up -d --remove-orphans"
+alias dcres="docker compose restart"
+alias cac="cargo check"
+alias ct="cargo test"
+alias caf="cargo fmt"
+alias cad="cargo doc --open"
+alias cab="cargo build"
+alias car="cargo run"
+alias caclean="cargo clean"
+
+# ──[ Tmux ]────────────────────────────────────────────────────────
+
+alias t="tmux"
+alias tl="tmux list-session"
+alias tn="tmux new -s"
+alias ta="tmux attach -t"
+alias tk="tmux kill-session -t"
+alias tks="tmux kill-server"
+alias tw="tmux list-windows"
+alias ts="tmux list-sessions"
+
+# ──[ Text Surgery ]────────────────────────────────────────────────
+
+# 14. freq: frequency table for exact lines from stdin.
+# Example: printf '%s\n' a b a | freq
+freq() {
+  awk '{count[$0]++} END {for (line in count) print count[line] "\t" line}' |
+    sort -rn |
+    column -t -s '	'
+}
+
+# 15. words: frequency table of words from files or stdin.
+# Example: words file.txt
+words() {
+  awk '{for (i=1;i<=NF;i++){gsub(/^[[:punct:]]+|[[:punct:]]+$/, "", $i); if ($i!="") print tolower($i)}}' "$@" |
+    sort |
+    uniq -c |
+    sort -rn
+}
+
+# 16. sumcol: sum one 1-based column from delimited input.
+# Example: cat data.csv | sumcol 3 ','
+sumcol() {
+  [ "$#" -ge 1 ] || { printf 'usage: sumcol COLUMN [DELIMITER]\n' >&2; return 2; }
+  local col="$1" delim="${2:-[[:space:]]+}"
+  awk -v c="$col" -v FS="$delim" '{gsub(/,/,"",$c); if ($c ~ /^-?[0-9]+([.][0-9]+)?$/) s+=$c} END {print s+0}'
+}
+
+# 17. avgcol: average numeric values in one 1-based column.
+# Example: cat metrics.tsv | avgcol 5 '\t'
+avgcol() {
+  [ "$#" -ge 1 ] || { printf 'usage: avgcol COLUMN [DELIMITER]\n' >&2; return 2; }
+  local col="$1" delim="${2:-[[:space:]]+}"
+  awk -v c="$col" -v FS="$delim" '{gsub(/,/,"",$c); if ($c ~ /^-?[0-9]+([.][0-9]+)?$/) {s+=$c; n++}} END {print n ? s/n : 0}'
+}
+
+# 18. topfield: frequency table for one 1-based delimited field.
+# Example: cat access.log | topfield 1
+topfield() {
+  [ "$#" -ge 1 ] || { printf 'usage: topfield COLUMN [DELIMITER]\n' >&2; return 2; }
+  local col="$1" delim="${2:-[[:space:]]+}"
+  awk -v c="$col" -v FS="$delim" 'NF>=c && $c!="" {count[$c]++} END {for (v in count) print count[v] "\t" v}' |
+    sort -rn |
+    column -t -s '	'
+}
+
+# 19. rxonly: extract only regex matches from files or stdin.
+# Example: rxonly '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' file.txt
+rxonly() {
+  [ "$#" -ge 1 ] || { printf 'usage: rxonly REGEX [FILE...]\n' >&2; return 2; }
+  local rx="$1"; shift
+  rg --only-matching --no-line-number --no-filename -- "$rx" "$@"
+}
+
+# 20. jpp: pretty-print JSON from file or stdin.
+# Example: jpp data.json
+jpp() {
+  jq --sort-keys '.' "$@"
+}
+
+# 21. jpick: extract JSON paths as TSV using jq.
+# Example: jpick '.users[] | [.id, .email] | @tsv' users.json
+jpick() {
+  [ "$#" -ge 1 ] || { printf 'usage: jpick JQ_FILTER [FILE...]\n' >&2; return 2; }
+  local filter="$1"; shift
+  jq -r "$filter" "$@"
+}
+
+# 22. csvview: align delimited text into columns.
+# Example: csvview ',' data.csv
+csvview() {
+  [ "$#" -ge 1 ] || { printf 'usage: csvview DELIMITER [FILE...]\n' >&2; return 2; }
+  local delim="$1"; shift
+  column -t -s "$delim" "$@" | sed 's/[[:space:]]*$//'
+}
+
+# 23. ws1: normalize runs of horizontal whitespace to one space.
+# Example: cat messy.txt | ws1
+ws1() {
+  sed -E 's/[[:blank:]]+/ /g; s/^ //; s/ $//'
+}
+
+# 24. lower: lowercase stdin or files.
+# Example: lower names.txt
+lower() {
+  awk '{print tolower($0)}' "$@"
+}
+
+# 25. upper: uppercase stdin or files.
+# Example: upper names.txt
+upper() {
+  awk '{print toupper($0)}' "$@"
+}
+
+# 26. snake: convert text to lowercase snake_case.
+# Example: printf 'Hello World!' | snake
+snake() {
+  awk '{print tolower($0)}' "$@" |
+    sed -E 's/[^[:alnum:]]+/_/g; s/^_+//; s/_+$//; s/_+/_/g'
+}
+
+# 27. cutc: extract 1-based delimited columns without breaking on spaces in filenames.
+# Example: cat data.csv | cutc '1,3,5' ','
+cutc() {
+  [ "$#" -ge 1 ] || { printf 'usage: cutc COLUMNS [DELIMITER]\n' >&2; return 2; }
+  local cols="$1" delim="${2:-[[:space:]]+}"
+  awk -v cols="$cols" -v FS="$delim" -v OFS="$delim" '
+    BEGIN {n=split(cols,a,",")}
+    {out=""; for(i=1;i<=n;i++){out=(i==1?$a[i]:out OFS $a[i])} print out}
+  '
+}
+
+# 28. between: print lines between two regex patterns, inclusive.
+# Example: between '^BEGIN' '^END' file.txt
+between() {
+  [ "$#" -ge 2 ] || { printf 'usage: between START_REGEX END_REGEX [FILE...]\n' >&2; return 2; }
+  local start="$1" end="$2"; shift 2
+  awk -v s="$start" -v e="$end" '$0 ~ s {on=1} on {print} $0 ~ e {on=0}' "$@"
+}
+
+# 29. untilpat: print from start until first line matching regex, inclusive.
+# Example: untilpat '^---$' file.txt
+untilpat() {
+  [ "$#" -ge 1 ] || { printf 'usage: untilpat REGEX [FILE...]\n' >&2; return 2; }
+  local rx="$1"; shift
+  awk -v r="$rx" '{print} $0 ~ r {exit}' "$@"
+}
+
+# 30. splitby: split input file whenever a regex line appears.
+# Example: splitby '^### ' notes.md chunk_
+splitby() {
+  [ "$#" -ge 2 ] || { printf 'usage: splitby REGEX PREFIX [FILE]\n' >&2; return 2; }
+  local rx="$1" prefix="$2" file="${3:--}"
+  awk -v r="$rx" -v p="$prefix" '
+    BEGIN {n=0; out=sprintf("%s%04d.txt", p, n)}
+    $0 ~ r && NR > 1 {close(out); n++; out=sprintf("%s%04d.txt", p, n)}
+    {print > out}
+  ' "$file"
+}
+
+# 31. catuniq: concatenate files, preserving first occurrence of each exact line.
+# Example: catuniq a.txt b.txt c.txt
+catuniq() {
+  awk '!seen[$0]++' "$@"
+}
+
+# 32. intersect: print lines present in both files.
+# Example: intersect old.txt new.txt
+intersect() {
+  [ "$#" -eq 2 ] || { printf 'usage: intersect FILE_A FILE_B\n' >&2; return 2; }
+  command grep -Fxf "$1" "$2"
+}
+
+# 33. commdiff: show only lines unique to either file after sorting.
+# Example: commdiff a.txt b.txt
+commdiff() {
+  [ "$#" -eq 2 ] || { printf 'usage: commdiff FILE_A FILE_B\n' >&2; return 2; }
+  comm -3 <(sort "$1") <(sort "$2") | sed 's/^\t/> /; s/^/< /'
+}
+
+# 34. cbcopy: copy stdin or files to clipboard using pbcopy or xclip.
+# Example: rg "token" | cbcopy
+cbcopy() {
+  if command -v pbcopy >/dev/null 2>&1; then
+    cat "$@" | pbcopy
+  elif command -v xclip >/dev/null 2>&1; then
+    cat "$@" | xclip -selection clipboard
+  else
+    printf 'cbcopy: need pbcopy or xclip\n' >&2
+    return 127
+  fi
+}
+
+# 35. cbpaste: paste clipboard to stdout using pbpaste or xclip.
+# Example: cbpaste | jq .
+cbpaste() {
+  if command -v pbpaste >/dev/null 2>&1; then
+    pbpaste
+  elif command -v xclip >/dev/null 2>&1; then
+    xclip -selection clipboard -o
+  else
+    printf 'cbpaste: need pbpaste or xclip\n' >&2
+    return 127
+  fi
+}
+
+# ──[ CSV & Data ]──────────────────────────────────────────────────
+
+# Example: csvjoin file1.csv file2.csv 1
+csvjoin() {
+  [ "$#" -eq 3 ] || { printf 'usage: csvjoin FILE1 FILE2 COL\n' >&2; return 2; }
+  awk -v col="$3" 'NR==FNR {key=$col; sub(/.*,/, "", $col); a[key]=$0; next} {key=$col; sub(/.*,/, "", $col); print a[key] "," $0}' "$1" "$2"
+}
+
+# Example: csvdedup data.csv 1
+csvdedup() {
+  [ "$#" -eq 2 ] || { printf 'usage: csvdedup FILE COL\n' >&2; return 2; }
+  awk -v col="$2" '!seen[$col]++' "$1"
+}
+
+# Example: csvsort data.csv 3
+csvsort() {
+  [ "$#" -ge 2 ] || { printf 'usage: csvsort FILE COL\n' >&2; return 2; }
+  local file="$1" col="$2"; shift 2
+  head -1 "$file" && tail -n +2 "$file" | sort -t, -k "$col" "$@"
+}
+
+# Example: csvcol data.csv
+csvcol() {
+  [ "$#" -ge 1 ] || { printf 'usage: csvcol FILE\n' >&2; return 2; }
+  head -1 "$1" | tr ',' '\n' | awk '{printf "%d: %s\n", NR, $0}'
+}
+
+# Example: csvstats data.csv 3
+csvstats() {
+  [ "$#" -eq 2 ] || { printf 'usage: csvstats FILE COL\n' >&2; return 2; }
+  awk -v col="$2" -F, '
+    NR>1 && $col ~ /^-?[0-9]+([.][0-9]+)?$/ {
+      sum+=$col; count++
+      if (NR==2 || $col<min) min=$col
+      if (NR==2 || $col>max) max=$col
+    }
+    END {
+      if (count) printf "Count: %d\nMin: %.2f\nMax: %.2f\nSum: %.2f\nAvg: %.2f\n", count, min+0, max+0, sum+0, sum/count
+      else printf "No numeric data found in column %d\n", col
+    }' "$1"
+}
+
+# Example: csvslice data.csv 2 10
+csvslice() {
+  [ "$#" -eq 3 ] || { printf 'usage: csvslice FILE START END\n' >&2; return 2; }
+  awk -v start="$2" -v end="$3" 'NR==1 || (NR>=start+1 && NR<=end+1)' "$1"
+}
+
+# ──[ JSON ]────────────────────────────────────────────────────────
+
+alias jsonfmt="jq --sort-keys '.'"
+
+# Example: jsonvalid data.json
+jsonvalid() {
+  [ "$#" -ge 1 ] || { printf 'usage: jsonvalid FILE...\n' >&2; return 2; }
+  for f in "$@"; do
+    if jq '.' "$f" >/dev/null 2>&1; then
+      printf 'valid: %s\n' "$f"
+    else
+      printf 'invalid: %s\n' "$f" >&2
+    fi
+  done
+}
+
+# Example: jsonflat .users data.json
+jsonflat() {
+  [ "$#" -ge 2 ] || { printf 'usage: jsonflat KEY FILE...\n' >&2; return 2; }
+  local key="$1"; shift
+  jq -r "$key | .[]?" "$@"
+}
+
+# Example: jsonwalk data.json
+jsonwalk() {
+  [ "$#" -ge 1 ] || { printf 'usage: jsonwalk FILE\n' >&2; return 2; }
+  if command -v fzf >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
+    local file="$1"
+    jq -r 'paths(scalars) | join(".")' "$file" |
+      fzf --preview "jq '{$(echo {})}' '$file'" --preview-window=right:60%:wrap
+  else
+    jq '.' "$1"
+  fi
+}
+
+# ──[ Encoding ]────────────────────────────────────────────────────
+
+# Example: echo hello | b64enc
+b64enc() {
+  if [ "$#" -eq 0 ]; then
+    base64
+  else
+    base64 "$@"
+  fi
+}
+
+# Example: echo aGVsbG8= | b64dec
+b64dec() {
+  if [ "$#" -eq 0 ]; then
+    base64 -d
+  else
+    base64 -d "$@"
+  fi
+}
+
+# Example: echo 'hello world' | urlenc
+urlenc() {
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -c 'import sys,urllib.parse; sys.stdout.write(urllib.parse.quote(sys.stdin.read()))'
+  elif command -v perl >/dev/null 2>&1; then
+    perl -MURI::Escape -ne 'print uri_escape($_)'
+  else
+    printf 'urlenc needs python3 or perl\n' >&2
+    return 127
+  fi
+}
+
+# Example: echo 'hello%20world' | urldec
+urldec() {
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -c 'import sys,urllib.parse; sys.stdout.write(urllib.parse.unquote(sys.stdin.read()))'
+  elif command -v perl >/dev/null 2>&1; then
+    perl -MURI::Escape -ne 'print uri_unescape($_)'
+  else
+    printf 'urldec needs python3 or perl\n' >&2
+    return 127
+  fi
+}
+
+# Example: echo hello | hexencode
+hexencode() {
+  xxd -p "$@"
+}
+
+# Example: echo 68656c6c6f | hexdecode
+hexdecode() {
+  xxd -r -p "$@"
+}
+
+# ──[ Text Transform ]──────────────────────────────────────────────
+
+# Example: printf 'hello world' | camel
+camel() {
+  sed -E 's/[^[:alnum:]]+/ /g' "$@" | awk '{printf "%s", tolower(substr($0,1,1)); for(i=2;i<=NF;i++) printf "%s", toupper(substr($i,1,1)) tolower(substr($i,2)); print ""}'
+}
+
+# Example: printf 'Hello World' | kebab
+kebab() {
+  awk '{print tolower($0)}' "$@" | sed -E 's/[^[:alnum:]]+/-/g; s/^-+//; s/-+$//; s/-+/-/g'
+}
+
+# Example: printf 'hello world' | title
+title() {
+  if [ "$#" -eq 0 ]; then
+    awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))} 1'
+  else
+    awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))} 1' "$@"
+  fi
+}
+
+# ──[ Batch Ops ]───────────────────────────────────────────────────
+
+# Example: batchrn '\.txt$' '.md'
+batchrn() {
+  [ "$#" -eq 2 ] || { printf 'usage: batchrn PATTERN REPLACEMENT\n' >&2; return 2; }
+  for f in *"$1"*; do
+    [ -e "$f" ] || continue
+    local new="${f/$1/$2}"
+    [ "$f" != "$new" ] && mv -v "$f" "$new"
+  done
+}
+
+# Example: batchcp '*.conf' '.bak'
+batchcp() {
+  [ "$#" -ge 2 ] || { printf 'usage: batchcp PATTERN SUFFIX\n' >&2; return 2; }
+  local suffix="$2"; shift 2
+  for f in "$@"; do
+    [ -e "$f" ] && cp -v "$f" "${f}${suffix}"
+  done
+}
+
+# Example: batchchmod 755 '*.sh'
+batchchmod() {
+  [ "$#" -ge 2 ] || { printf 'usage: batchchmod PERMS PATTERN\n' >&2; return 2; }
+  local perms="$1"; shift
+  chmod -v "$perms" "$@"
+}
+
+# Example: batchconvert png '*.jpg'
+batchconvert() {
+  [ "$#" -ge 2 ] || { printf 'usage: batchconvert FORMAT PATTERN\n' >&2; return 2; }
+  local fmt="$1"; shift
+  if command -v magick >/dev/null 2>&1; then
+    for f in "$@"; do
+      [ -e "$f" ] && magick "$f" "${f%.*}.$fmt"
+    done
+  elif command -v convert >/dev/null 2>&1; then
+    for f in "$@"; do
+      [ -e "$f" ] && convert "$f" "${f%.*}.$fmt"
+    done
+  else
+    printf 'batchconvert needs imagemagick. Install: sudo pacman -S imagemagick\n' >&2
+    return 127
+  fi
+}
+
+# Example: batchresize 800x600 '*.jpg'
+batchresize() {
+  [ "$#" -ge 2 ] || { printf 'usage: batchresize WxH PATTERN\n' >&2; return 2; }
+  local size="$1"; shift
+  if command -v magick >/dev/null 2>&1; then
+    for f in "$@"; do
+      [ -e "$f" ] && magick "$f" -resize "$size" "${f%.*}_${size}.${f##*.}"
+    done
+  elif command -v convert >/dev/null 2>&1; then
+    for f in "$@"; do
+      [ -e "$f" ] && convert "$f" -resize "$size" "${f%.*}_${size}.${f##*.}"
+    done
+  else
+    printf 'batchresize needs imagemagick. Install: sudo pacman -S imagemagick\n' >&2
+    return 127
+  fi
+}
+
+# Example: dedupfiles /tmp
+dedupfiles() {
+  [ "$#" -ge 1 ] || { printf 'usage: dedupfiles DIR\n' >&2; return 2; }
+  local dir="${1:-.}"
+  find "$dir" -type f -exec md5sum {} \; 2>/dev/null | sort | awk '{
+    if ($1 == prev) {printf "DUPLICATE: %s = %s\n", $2, file; printf "rm '"'"'%s'"'"'\n", $2}
+    prev=$1; file=$2
+  }'
+}
+
+# Example: deduplines file.txt
+deduplines() {
+  [ "$#" -eq 1 ] || { printf 'usage: deduplines FILE\n' >&2; return 2; }
+  if command -v sponge >/dev/null 2>&1; then
+    awk '!seen[$0]++' "$1" | sponge "$1"
+  else
+    awk '!seen[$0]++' "$1" > "${1}.tmp" && mv "${1}.tmp" "$1"
+  fi
+}
+
+# ──[ Archive ]─────────────────────────────────────────────────────
+
+# Example: tarc project.tar.gz src/ docs/
+tarc() {
+  [ "$#" -ge 2 ] || { printf 'usage: tarc NAME.tar.gz FILES...\n' >&2; return 2; }
+  tar -czf "$@"
+}
+
+# Example: tarx archive.tar.gz
+tarx() {
+  [ "$#" -eq 1 ] || { printf 'usage: tarx FILE\n' >&2; return 2; }
+  case "$1" in
+    *.tar.gz|*.tgz)    tar -xzf "$1" ;;
+    *.tar.bz2|*.tbz2)  tar -xjf "$1" ;;
+    *.tar.xz|*.txz)    tar -xJf "$1" ;;
+    *.tar.zst|*.tzst)  tar --zstd -xf "$1" ;;
+    *.tar)             tar -xf "$1" ;;
+    *.zip)             unzip "$1" ;;
+    *.rar)             unrar x "$1" ;;
+    *.7z)              7z x "$1" ;;
+    *.gz)              gunzip "$1" ;;
+    *.bz2)             bunzip2 "$1" ;;
+    *.xz)              unxz "$1" ;;
+    *.zst)             zstd -d "$1" ;;
+    *)                 printf 'tarx: unknown archive format: %s\n' "$1" >&2; return 2 ;;
+  esac
+}
+
+# Example: tarl archive.tar.gz
+tarl() {
+  [ "$#" -eq 1 ] || { printf 'usage: tarl FILE\n' >&2; return 2; }
+  case "$1" in
+    *.tar.gz|*.tgz)    tar -tzf "$1" ;;
+    *.tar.bz2|*.tbz2)  tar -tjf "$1" ;;
+    *.tar.xz|*.txz)    tar -tJf "$1" ;;
+    *.tar.zst|*.tzst)  tar --zstd -tf "$1" ;;
+    *.tar)             tar -tf "$1" ;;
+    *.zip)             unzip -l "$1" ;;
+    *.rar)             unrar l "$1" ;;
+    *.7z)              7z l "$1" ;;
+    *)                 printf 'tarl: unknown archive format: %s\n' "$1" >&2; return 2 ;;
+  esac
+}
+
+# ──[ Network & Port ]──────────────────────────────────────────────
+
+# Example: portscan example.com 22,80,443
+portscan() {
+  [ "$#" -ge 1 ] || { printf 'usage: portscan HOST [PORTS]\n' >&2; return 2; }
+  local host="$1" ports="${2:-22,80,443,8080,3000,3306,5432,6379,27017}"
+  if command -v nmap >/dev/null 2>&1; then
+    nmap -sV "$host" -p "$ports"
+  else
+    echo "$ports" | tr ',' '\n' | while read -r port; do
+      timeout 1 bash -c "echo >/dev/tcp/$host/$port" 2>/dev/null &&
+        printf '  OPEN  %s:%-5s\n' "$host" "$port" ||
+        printf '  CLOSED %s:%-5s\n' "$host" "$port"
+    done
+  fi
+}
+
+# Example: fastscan example.com
+fastscan() {
+  [ "$#" -ge 1 ] || { printf 'usage: fastscan HOST\n' >&2; return 2; }
+  local host="$1" ports="22,80,443,8080,3000,3306,5432,6379,27017,8443,9090,5000,8000,9000,9200,5601,3001,8081"
+  echo "$ports" | tr ',' '\n' | while read -r port; do
+    timeout 1 bash -c "echo >/dev/tcp/$host/$port" 2>/dev/null && printf '  OPEN  %s:%-5s\n' "$host" "$port"
+  done
+}
+
+# Example: listenports
+listenports() {
+  ss -tlnp | rg -v '^State' | awk '{
+    split($4, a, ":")
+    port = a[length(a)]
+    split($7, b, "\"")
+    proc = b[2] ? b[2] : $7
+    printf "%-8s %-6s %s\n", $1, port, proc
+  }'
+}
+
+# Example: detectservices example.com
+detectservices() {
+  [ "$#" -ge 1 ] || { printf 'usage: detectservices HOST\n' >&2; return 2; }
+  for port in 22 80 443 8080 3000 3306 5432 6379; do
+    timeout 2 bash -c "echo >/dev/tcp/$1/$port" 2>/dev/null && {
+      printf 'Port %s: ' "$port"
+      timeout 2 bash -c "exec 3<>/dev/tcp/$1/$port; printf 'HEAD / HTTP/1.0\r\n\r\n' >&3; head -1 <&3" 2>/dev/null || printf 'open (no banner)\n'
+    }
+  done
+}
+
+alias netstat="ss -tulanp"
+
+# Example: myip
+myip() {
+  if command -v curl >/dev/null 2>&1; then
+    curl -s https://ifconfig.me 2>/dev/null || curl -s https://ipinfo.io/ip 2>/dev/null || printf 'Could not determine public IP\n' >&2
+  else
+    printf 'myip needs curl. Install: sudo pacman -S curl\n' >&2
+    return 127
+  fi
+}
+
+# Example: myips
+myips() {
+  if command -v ip >/dev/null 2>&1; then
+    ip -brief addr show | rg -v ' lo$'
+  else
+    hostname -I 2>/dev/null || ifconfig | rg -E 'inet ' | awk '{print $2}'
+  fi
+}
+
+# Example: netinfo example.com
+netinfo() {
+  [ "$#" -ge 1 ] || { printf 'usage: netinfo HOST\n' >&2; return 2; }
+  local host="$1"
+  printf '=== DNS Resolution ===\n'
+  if command -v dig >/dev/null 2>&1; then
+    dig +short "$host" A 2>/dev/null
+  elif command -v host >/dev/null 2>&1; then
+    host "$host" 2>/dev/null
+  else
+    getent hosts "$host" 2>/dev/null
+  fi
+  printf '\n=== Ping ===\n'
+  ping -c 2 "$host" 2>&1 | tail -3
+  if command -v traceroute >/dev/null 2>&1; then
+    printf '\n=== Traceroute ===\n'
+    traceroute -n -q 1 "$host" 2>&1 | tail -10
+  fi
+  printf '\n=== Common Ports ===\n'
+  fastscan "$host"
+}
+
+# ──[ DNS ]─────────────────────────────────────────────────────────
+
+# Example: dnscheck example.com
+dnscheck() {
+  [ "$#" -ge 1 ] || { printf 'usage: dnscheck DOMAIN\n' >&2; return 2; }
+  local domain="$1"
+  if command -v dig >/dev/null 2>&1; then
+    printf '=== A Records ===\n'
+    dig +short "$domain" A
+    printf '\n=== AAAA Records ===\n'
+    dig +short "$domain" AAAA
+    printf '\n=== MX Records ===\n'
+    dig +short "$domain" MX | sort
+    printf '\n=== NS Records ===\n'
+    dig +short "$domain" NS | sort
+    printf '\n=== TXT Records ===\n'
+    dig +short "$domain" TXT
+    printf '\n=== CNAME ===\n'
+    dig +short "$domain" CNAME
+  elif command -v host >/dev/null 2>&1; then
+    host -a "$domain" 2>&1
+  elif command -v nslookup >/dev/null 2>&1; then
+    nslookup "$domain" 2>&1
+  else
+    printf 'dnscheck needs dig, host, or nslookup\n' >&2
+    return 127
+  fi
+}
+
+# Example: dnsptr 8.8.8.8
+dnsptr() {
+  [ "$#" -ge 1 ] || { printf 'usage: dnsptr IP\n' >&2; return 2; }
+  if command -v dig >/dev/null 2>&1; then
+    dig +short -x "$1"
+  elif command -v host >/dev/null 2>&1; then
+    host "$1"
+  else
+    printf 'dnsptr needs dig or host\n' >&2
+    return 127
+  fi
+}
+
+# Example: dnsmail example.com
+dnsmail() {
+  [ "$#" -ge 1 ] || { printf 'usage: dnsmail DOMAIN\n' >&2; return 2; }
+  if command -v dig >/dev/null 2>&1; then
+    dig +short "$1" MX | sort
+  elif command -v host >/dev/null 2>&1; then
+    host -t MX "$1"
+  else
+    printf 'dnsmail needs dig or host\n' >&2
+    return 127
+  fi
+}
+
+# ──[ HTTP & API ]──────────────────────────────────────────────────
+
+# Example: httpstatus https://example.com
+httpstatus() {
+  [ "$#" -ge 1 ] || { printf 'usage: httpstatus URL\n' >&2; return 2; }
+  curl -s -o /dev/null -w "%{http_code}" "$1"
+  echo
+}
+
+# Example: httpheader https://example.com
+httpheader() {
+  [ "$#" -ge 1 ] || { printf 'usage: httpheader URL\n' >&2; return 2; }
+  curl -sI "$@"
+}
+
+# Example: httpbody https://example.com
+httpbody() {
+  [ "$#" -ge 1 ] || { printf 'usage: httpbody URL\n' >&2; return 2; }
+  curl -s "$@"
+}
+
+# Example: apicheck https://api.example.com/users
+apicheck() {
+  [ "$#" -ge 1 ] || { printf 'usage: apicheck URL [METHOD]\n' >&2; return 2; }
+  local url="$1" method="${2:-GET}"
+  curl -s -X "$method" -w "\n---\nStatus: %{http_code}\nContent-Type: %{content_type}\nSize: %{size_download} bytes\n" "$url"
+}
+
+# Example: apiscan https://example.com
+apiscan() {
+  [ "$#" -ge 1 ] || { printf 'usage: apiscan URL\n' >&2; return 2; }
+  local base="${1%/}"
+  for path in /api /health /v1 /v2 /swagger /openapi.json /metrics /status /ping /version /graphql /docs /redoc /admin /login; do
+    local code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 "${base}${path}" 2>/dev/null)
+    [ "$code" != "000" ] && printf '%s %s %s\n' "$code" "$(curl -s -o /dev/null -w "%{content_type}" "${base}${path}" 2>/dev/null)" "${base}${path}"
+  done
+}
+
+# Example: cookiecheck https://example.com
+cookiecheck() {
+  [ "$#" -ge 1 ] || { printf 'usage: cookiecheck URL\n' >&2; return 2; }
+  curl -sIc "$1" | rg -i '^set-cookie' | while read -r line; do
+    local secure=""; local httponly=""; local samesite=""
+    echo "$line" | rg -qi 'secure' && secure="Secure"
+    echo "$line" | rg -qi 'httponly' && httponly="HttpOnly"
+    echo "$line" | rg -qi 'samesite' && samesite="SameSite"
+    printf '  %s [%s]\n' "$line" "${secure:-no-Secure} ${httponly:-no-HttpOnly} ${samesite:-no-SameSite}"
+  done
+}
+
+# Example: headcheck https://example.com
+headcheck() {
+  [ "$#" -ge 1 ] || { printf 'usage: headcheck URL\n' >&2; return 2; }
+  local url="$1"
+  local headers=$(curl -sI "$url" 2>/dev/null)
+  for h in "Strict-Transport-Security" "Content-Security-Policy" "X-Frame-Options" "X-Content-Type-Options" "X-XSS-Protection" "Referrer-Policy" "Permissions-Policy"; do
+    if echo "$headers" | rg -qi "^$h:"; then
+      printf '  PRESENT  %s\n' "$h"
+    else
+      printf '  MISSING  %s\n' "$h" >&2
+    fi
+  done
+}
+
+# Example: csrfcheck https://example.com/login
+csrfcheck() {
+  [ "$#" -ge 1 ] || { printf 'usage: csrfcheck URL\n' >&2; return 2; }
+  local body=$(curl -sL "$1" 2>/dev/null)
+  printf '=== CSRF Tokens ===\n'
+  echo "$body" | rg -oi 'csrf|token|_token|authenticity_token' | sort | uniq -c | sort -rn
+  printf '\n=== Hidden Inputs ===\n'
+  echo "$body" | rg -oi '<input[^>]*type=["'"'"']hidden["'"'"'][^>]*>' | head -5
+}
+
+# ──[ SSL ]─────────────────────────────────────────────────────────
+
+# Example: sslcheck example.com:443
+sslcheck() {
+  [ "$#" -ge 1 ] || { printf 'usage: sslcheck HOST:PORT\n' >&2; return 2; }
+  local host="${1%:*}" port="${1##*:}"
+  [[ "$port" == "$host" ]] && port=443
+  if command -v openssl >/dev/null 2>&1; then
+    echo | openssl s_client -connect "${host}:${port}" -servername "$host" 2>/dev/null | openssl x509 -noout -subject -issuer -dates 2>/dev/null || printf 'SSL connection failed to %s:%s\n' "$host" "$port" >&2
+  else
+    printf 'sslcheck needs openssl. Install: sudo pacman -S openssl\n' >&2
+    return 127
+  fi
+}
+
+# Example: ssltest example.com 443
+ssltest() {
+  [ "$#" -ge 1 ] || { printf 'usage: ssltest HOST [PORT]\n' >&2; return 2; }
+  local host="$1" port="${2:-443}"
+  if command -v openssl >/dev/null 2>&1; then
+    for proto in ssl2 ssl3 tls1 tls1_1 tls1_2 tls1_3; do
+      local result=$(echo | timeout 2 openssl s_client -connect "${host}:${port}" -"$proto" 2>&1)
+      if echo "$result" | rg -q 'CONNECTED'; then
+        printf '  SUPPORTED  %s\n' "$proto"
+      else
+        printf '  NOT SUPPORTED  %s\n' "$proto"
+      fi
+    done
+  else
+    printf 'ssltest needs openssl. Install: sudo pacman -S openssl\n' >&2
+    return 127
+  fi
+}
+
+# ──[ Security & Recon ]────────────────────────────────────────────
+
+# Example: recon-audit
+recon-audit() {
+  printf '=== Listening Ports ===\n'
+  ss -tlnp 2>/dev/null | head -20
+  printf '\n=== SUID Binaries ===\n'
+  find /usr/bin /usr/local/bin -type f -perm -4000 2>/dev/null | head -20
+  printf '\n=== World-Writable Files ===\n'
+  find /tmp -type f -perm -o+w 2>/dev/null | head -10
+  find /etc -type f -perm -o+w 2>/dev/null | head -10
+  printf '\n=== Sudo Entries (/etc/sudoers) ===\n'
+  rg -v '^#|^$' /etc/sudoers 2>/dev/null | head -20 || printf 'Cannot read /etc/sudoers\n' >&2
+  printf '\n=== Failed Logins ===\n'
+  lastb 2>/dev/null | head -10 || journalctl -q _COMM=sudo --since "1 week ago" 2>/dev/null | rg 'FAILED' | head -10 || printf 'No auth log available\n' >&2
+}
+
+# Example: recon-webcheck https://example.com
+recon-webcheck() {
+  [ "$#" -ge 1 ] || { printf 'usage: recon-webcheck URL\n' >&2; return 2; }
+  local url="$1"
+  printf '=== SSL Certificate ===\n'
+  sslcheck "$(echo "$url" | sed 's|https\?://||; s|/.*||')" 2>&1 | head -5
+  printf '\n=== HTTP Headers ===\n'
+  httpheader "$url" 2>&1 | head -20
+  printf '\n=== Security Headers ===\n'
+  headcheck "$url" 2>&1
+  printf '\n=== Common Paths ===\n'
+  apiscan "$url" 2>&1 | head -20
+  printf '\n=== Cookies ===\n'
+  cookiecheck "$url" 2>&1 | head -10
+}
+
+# Example: sec-status
+sec-status() {
+  for tool in nmap whois socat httpie exiftool sqlmap nikto; do
+    if command -v "$tool" >/dev/null 2>&1; then
+      printf '  INSTALLED  %s\n' "$tool"
+    else
+      printf '  MISSING    %s\n' "$tool"
+    fi
+  done
+}
+
+# Example: sec-tools
+sec-tools() {
+  if ! command -v pacman >/dev/null 2>&1 && ! command -v yay >/dev/null 2>&1; then
+    printf 'sec-tools: could not detect pacman or yay\n' >&2
+    return 127
+  fi
+
+  local pkgs=(nmap whois socat httpie perl-image-exiftool sqlmap nikto)
+
+  if command -v yay >/dev/null 2>&1; then
+    yay -Sy --noconfirm
+    yay -S --noconfirm --needed "${pkgs[@]}"
+  else
+    sudo pacman -Sy --noconfirm
+    sudo pacman -S --noconfirm --needed "${pkgs[@]}"
+  fi
+}
+
+# Example: suspicious file.txt
+suspicious() {
+  [ "$#" -ge 1 ] || { printf 'usage: suspicious FILE...\n' >&2; return 2; }
+  for f in "$@"; do
+    [ -f "$f" ] || { printf 'suspicious: not a file: %s\n' "$f" >&2; continue; }
+    printf '=== Scanning: %s ===\n' "$f"
+    printf '  URLs:\n'
+    rg -o 'https?://[^"'"'"'<> ]+' "$f" 2>/dev/null | sort -u | head -10
+    printf '  IPs:\n'
+    rg -o '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' "$f" 2>/dev/null | sort -u | head -10
+    printf '  Emails:\n'
+    rg -o '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' "$f" 2>/dev/null | sort -u | head -10
+    printf '  Potential Secrets:\n'
+    rg -o '[A-Za-z0-9+/]{40,}={0,2}' "$f" 2>/dev/null | head -10
+  done
+}
+
+# ──[ Binary Analysis ]─────────────────────────────────────────────
+
+# Example: analyze /bin/ls
+analyze() {
+  [ "$#" -ge 1 ] || { printf 'usage: analyze FILE\n' >&2; return 2; }
+  local f="$1"
+  [ -f "$f" ] || { printf 'analyze: not a file: %s\n' "$f" >&2; return 2; }
+  printf '=== File Type ===\n'
+  file "$f"
+  printf '\n=== Size ===\n'
+  stat --format='%s bytes (%h blocks)' "$f" 2>/dev/null || ls -lh "$f"
+  printf '\n=== Hex Header (64 bytes) ===\n'
+  xxd -l 64 "$f" 2>/dev/null | head -4
+  printf '\n=== Strings ===\n'
+  strings "$f" 2>/dev/null | head -20
+  local magic=$(xxd -l 4 -p "$f" 2>/dev/null)
+  if [ "$magic" = "7f454c46" ]; then
+    printf '\n=== ELF Info ===\n'
+    readelf -h "$f" 2>/dev/null | head -15
+    ldd "$f" 2>/dev/null | head -10 || printf '  (not dynamically linked)\n'
+  fi
+}
+
+# Example: stringsx /bin/ls 6
+stringsx() {
+  [ "$#" -ge 1 ] || { printf 'usage: stringsx FILE [MIN]\n' >&2; return 2; }
+  local min="${2:-6}"
+  command strings -n "$min" "$1" 2>/dev/null | sort -u
+}
+
+# Example: hexview /bin/ls 256
+hexview() {
+  [ "$#" -ge 1 ] || { printf 'usage: hexview FILE [LEN]\n' >&2; return 2; }
+  local len="${2:-512}"
+  xxd -l "$len" "$1" 2>/dev/null || printf 'hexview: could not read %s\n' "$1" >&2
+}
+
+# Example: entropy /bin/ls
+entropy() {
+  [ "$#" -ge 1 ] || { printf 'usage: entropy FILE\n' >&2; return 2; }
+  od -An -tu1 "$1" | awk '{for(i=1;i<=NF;i++){c=$i; freq[c]++; total++}} END {for(v in freq){p=freq[v]/total; if(p>0) e-=p*log(p)/log(256)} printf "Shannon entropy: %.4f (max 8.0)\n", e}'
+}
+
+# Example: cmpbin file1.bin file2.bin
+cmpbin() {
+  [ "$#" -eq 2 ] || { printf 'usage: cmpbin FILE1 FILE2\n' >&2; return 2; }
+  if command -v cmp >/dev/null 2>&1; then
+    cmp -l "$1" "$2" | head -20
+  else
+    diff <(xxd "$1") <(xxd "$2") | head -20
+  fi
+}
+
+# Example: peek /bin/ls 0 64
+peek() {
+  [ "$#" -ge 1 ] || { printf 'usage: peek FILE [OFFSET] [LEN]\n' >&2; return 2; }
+  local offset="${2:-0}" len="${3:-64}"
+  dd if="$1" bs=1 skip="$offset" count="$len" 2>/dev/null | xxd | head -10
+}
+
+# Example: exif photo.jpg
+exif() {
+  [ "$#" -ge 1 ] || { printf 'usage: exif FILE...\n' >&2; return 2; }
+  if command -v exiftool >/dev/null 2>&1; then
+    exiftool "$@"
+  else
+    for f in "$@"; do
+      file "$f"
+      stat --format='Size: %s bytes | Modified: %y' "$f" 2>/dev/null
+    done
+  fi
+}
+
+# ──[ Crypto & Passwords ]──────────────────────────────────────────
+
+# Example: genpass 32
+genpass() {
+  local len="${1:-24}"
+  if command -v openssl >/dev/null 2>&1; then
+    openssl rand -base64 "$((len * 3 / 4 + 1))" | head -c "$len" | tr -d '\n'
+    echo
+  else
+    tr -dc 'A-Za-z0-9!@#$%^&*()_+-=' < /dev/urandom | head -c "$len"
+    echo
+  fi
+}
+
+# Example: genpass-simple 32
+genpass-simple() {
+  local len="${1:-24}"
+  tr -dc 'A-Za-z0-9' < /dev/urandom | head -c "$len"
+  echo
+}
+
+# Example: genuuid
+genuuid() {
+  if [ -f /proc/sys/kernel/random/uuid ]; then
+    cat /proc/sys/kernel/random/uuid
+  elif command -v uuidgen >/dev/null 2>&1; then
+    uuidgen
+  else
+    python3 -c 'import uuid; print(uuid.uuid4())' 2>/dev/null || printf 'genuuid needs uuidgen or python3\n' >&2
+  fi
+}
+
+# Example: totp JBSWY3DPEHPK3PXP
+totp() {
+  [ "$#" -ge 1 ] || { printf 'usage: totp BASE32_SECRET\n' >&2; return 2; }
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -c "
+import hmac, struct, time, base64
+secret = base64.b32decode('$1'.upper().replace(' ',''))
+counter = struct.pack('>Q', int(time.time()/30))
+hash = hmac.new(secret, counter, 'sha1').digest()
+offset = hash[-1] & 0x0f
+code = (struct.unpack('>I', hash[offset:offset+4])[0] & 0x7fffffff) % 1000000
+print(f'{code:06d}')" 2>/dev/null || printf 'totp: TOTP generation failed. Ensure python3 is installed.\n' >&2
+  else
+    printf 'totp needs python3. Install: sudo pacman -S python\n' >&2
+    return 127
+  fi
+}
+
+# Example: hash file.txt
+hash() {
+  [ "$#" -ge 1 ] || { printf 'usage: hash FILE...\n' >&2; return 2; }
+  for f in "$@"; do
+    [ -f "$f" ] || continue
+    printf 'File: %s\n' "$f"
+    printf '  MD5:    '; md5sum "$f" 2>/dev/null | awk '{print $1}' || printf 'n/a\n'
+    printf '  SHA1:   '; sha1sum "$f" 2>/dev/null | awk '{print $1}' || printf 'n/a\n'
+    printf '  SHA256: '; sha256sum "$f" 2>/dev/null | awk '{print $1}' || printf 'n/a\n'
+    printf '  SHA512: '; sha512sum "$f" 2>/dev/null | awk '{print $1}' || printf 'n/a\n'
+  done
+}
+
+# Example: hashall /path/to/dir
+hashall() {
+  local dir="${1:-.}"
+  find "$dir" -type f -exec sha256sum {} \; > checksums.txt
+  printf 'Checksums written to checksums.txt (%d files)\n' "$(wc -l < checksums.txt)"
+}
+
+# Example: crypt secret.txt
+crypt() {
+  [ "$#" -ge 1 ] || { printf 'usage: crypt FILE\n' >&2; return 2; }
+  openssl aes-256-cbc -pbkdf2 -iter 100000 -in "$1" -out "${1}.enc"
+}
+
+# Example: decrypt secret.txt.enc
+decrypt() {
+  [ "$#" -ge 1 ] || { printf 'usage: decrypt FILE.enc\n' >&2; return 2; }
+  local out="${1%.enc}"
+  openssl aes-256-cbc -pbkdf2 -iter 100000 -d -in "$1" -out "$out"
+}
+
+# Example: seal project/
+seal() {
+  [ "$#" -ge 1 ] || { printf 'usage: seal DIR\n' >&2; return 2; }
+  local dir="$1"
+  tar -czf "${dir}.tar.gz" "$dir" && openssl aes-256-cbc -pbkdf2 -iter 100000 -in "${dir}.tar.gz" -out "${dir}.tar.gz.enc" && rm -f "${dir}.tar.gz"
+}
+
+# Example: unseal project.tar.gz.enc
+unseal() {
+  [ "$#" -ge 1 ] || { printf 'usage: unseal FILE.tar.gz.enc\n' >&2; return 2; }
+  local base="${1%.enc}"
+  openssl aes-256-cbc -pbkdf2 -iter 100000 -d -in "$1" -out "$base" && tar -xzf "$base" && rm -f "$base"
+}
+
+# Example: gpg-enc secret.txt user@example.com
+gpg-enc() {
+  [ "$#" -ge 2 ] || { printf 'usage: gpg-enc FILE RECIPIENT\n' >&2; return 2; }
+  gpg --encrypt --recipient "$2" --output "${1}.gpg" "$1"
+}
+
+# Example: gpg-dec secret.txt.gpg
+gpg-dec() {
+  [ "$#" -ge 1 ] || { printf 'usage: gpg-dec FILE.gpg\n' >&2; return 2; }
+  local out="${1%.gpg}"
+  gpg --decrypt --output "$out" "$1"
+}
+
+# ──[ Log Auditing ]────────────────────────────────────────────────
+
+# Example: logcheck /var/log/syslog
+logcheck() {
+  [ "$#" -ge 1 ] || { printf 'usage: logcheck FILE\n' >&2; return 2; }
+  rg -n --color=always \
+    -e 'Failed password' \
+    -e 'sudo\s*:' \
+    -e 'error' \
+    -e 'timeout' \
+    -e 'unauthorized' \
+    -e 'Invalid user' \
+    -e 'authentication failure' \
+    -e 'Connection closed by' \
+    -e 'BREAK-IN' \
+    -e 'segfault' \
+    "$@" | head -100
+}
+
+# Example: secwatch /var/log/syslog
+secwatch() {
+  [ "$#" -ge 1 ] || { printf 'usage: secwatch FILE\n' >&2; return 2; }
+  if command -v rg >/dev/null 2>&1; then
+    tail -f "$1" | rg --line-buffered --color=always \
+      -e 'Failed password|Invalid user|authentication failure' \
+      -e 'sudo\s*:|BREAK-IN' \
+      -e 'segfault|panic|error' \
+      -e 'unauthorized|Connection closed by'
+  else
+    printf 'secwatch needs rg (ripgrep)\n' >&2
+    return 127
+  fi
+}
+
+# Example: sudocheck 20
+sudocheck() {
+  local n="${1:-10}"
+  if command -v journalctl >/dev/null 2>&1; then
+    journalctl -q _COMM=sudo --since "7 days ago" 2>/dev/null | tail -n "$n"
+  elif [ -f /var/log/auth.log ]; then
+    rg 'sudo' /var/log/auth.log 2>/dev/null | tail -n "$n"
+  elif [ -f /var/log/secure ]; then
+    rg 'sudo' /var/log/secure 2>/dev/null | tail -n "$n"
+  else
+    printf 'sudocheck: no sudo log found\n' >&2
+    return 127
+  fi
+}
+
+# Example: lastlogins 20
+lastlogins() {
+  local n="${1:-10}"
+  if command -v last >/dev/null 2>&1; then
+    last -n "$n" 2>/dev/null | rg -v '^$|wtmp begins'
+  else
+    printf 'lastlogins needs last command (util-linux)\n' >&2
+    return 127
+  fi
+}
+
+# ──[ Productivity ]────────────────────────────────────────────────
+
+# Example: mkcd new_project
+mkcd() {
+  [ "$#" -ge 1 ] || { printf 'usage: mkcd DIR\n' >&2; return 2; }
+  mkdir -p "$1" && builtin cd "$1"
+}
+
+# Example: hist 20
+hist() {
+  local n="${1:-20}"
+  history | awk '{print $2}' | sort | uniq -c | sort -rn | head -n "$n"
+}
+
+# Example: histn 'git' 10
+histn() {
+  [ "$#" -ge 1 ] || { printf 'usage: histn PATTERN [N]\n' >&2; return 2; }
+  local pat="$1" n="${2:-10}"
+  history | rg -i "$pat" | awk '{print $2}' | sort | uniq -c | sort -rn | head -n "$n"
+}
+
+# Example: extract archive.zip
+extract() {
+  [ "$#" -eq 1 ] || { printf 'usage: extract FILE\n' >&2; return 2; }
+  tarx "$1"
+}
+
+# Example: here
+here() {
+  local dir
+  dir=$(mktemp -d) || { printf 'here: could not create temp dir\n' >&2; return 1; }
+  cd "$dir" || return 1
+  printf 'Working in %s\n' "$dir"
+}
+
+# Example: cheat find
+cheat() {
+  if [ "$#" -ge 1 ]; then
+    curl -s "https://cheat.sh/$1" 2>/dev/null || printf 'cheat: could not fetch from cheat.sh\n' >&2
+  elif command -v fzf >/dev/null 2>&1; then
+    curl -s https://cheat.sh/ | fzf --reverse --preview 'curl -s https://cheat.sh/{}' | xargs -r curl -s
+  else
+    printf 'usage: cheat KEYWORD\n' >&2
+    return 2
+  fi
+}
+
+# Example: epoch 1700000000
+epoch() {
+  if [ "$#" -ge 1 ]; then
+    if [[ "$1" =~ ^[0-9]+$ ]]; then
+      date -d "@$1" 2>/dev/null || printf 'epoch: invalid timestamp\n' >&2
+    else
+      date -d "$1" +%s 2>/dev/null || printf 'epoch: could not parse date\n' >&2
+    fi
+  else
+    date +%s
+  fi
+}
+
+# Example: count '*.rs'
+count() {
+  [ "$#" -ge 1 ] || { printf 'usage: count GLOB\n' >&2; return 2; }
+  eval "set -- $1"
+  printf '%d\n' $#
+}
+
+# Example: size /path
+size() {
+  du -sh "${1:-.}"
+}
+
+# Example: findtext PATTERN
+findtext() {
+  [ "$#" -ge 1 ] || { printf 'usage: findtext PATTERN\n' >&2; return 2; }
+  if command -v fzf >/dev/null 2>&1; then
+    rg --hidden --glob '!.git' --line-number --color=always "$1" | fzf --ansi --delimiter ':' --preview 'bat --color=always --line-range=:200 {1}'
+  else
+    rg --hidden --glob '!.git' -n "$1"
+  fi
+}
+
+# Example: colors
+colors() {
+  local i
+  for ((i = 0; i < 256; i++)); do
+    print -Pn "%F{$i}$i %f"
+    (( (i + 1) % 8 == 0 )) && print
+  done
+}
+
+# Example: path
+path() {
+  echo "$PATH" | tr ':' '\n'
+}
+
+# Example: fm
+fm() {
+  if command -v ranger >/dev/null 2>&1; then
+    ranger
+  elif command -v nnn >/dev/null 2>&1; then
+    nnn
+  else
+    ls
+  fi
+}
+
+# Example: paint
+paint() {
+  for i in {0..255}; do
+    printf '\e[48;5;%dm %03d ' "$i" "$i"
+    (( (i + 1) % 8 == 0 )) && printf '\e[0m\n'
+  done
+  printf '\e[0m'
+}
