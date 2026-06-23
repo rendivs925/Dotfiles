@@ -1,5 +1,5 @@
 return {
   "folke/neoconf.nvim",
-  event = "VeryLazy",
+  event = "BufReadPost",
   opts = {},
 }
