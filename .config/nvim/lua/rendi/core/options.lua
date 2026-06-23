@@ -65,6 +65,9 @@ opt.splitkeep = "screen"
 opt.jumpoptions = "stack"
 opt.undolevels = 10000
 opt.completeopt = { "menu", "menuone", "noselect" }
+opt.redrawtime = 1500
+opt.ttimeoutlen = 50
+opt.diffopt:append("algorithm:histogram,indent-heuristic")
 
 -- disable unused providers
 vim.g.loaded_perl_provider = 0
