@@ -9,6 +9,7 @@ return {
     "LukasPietzschmann/telescope-tabs",
     "nvim-telescope/telescope-media-files.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-file-browser.nvim",
 
     {
       "Marskey/telescope-sg",
