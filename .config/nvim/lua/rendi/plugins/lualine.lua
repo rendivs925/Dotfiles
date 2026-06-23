@@ -2,14 +2,18 @@ local c = {
   bg = "#011628",
   bg_dark = "#011423",
   bg_highlight = "#143652",
+  bg_search = "#0A64AC",
+  bg_visual = "#275378",
   fg = "#CBE0F0",
   fg_dark = "#B4D0E9",
   fg_gutter = "#627E97",
   border = "#547998",
+  purple = "#7E5CE0",
+  purple_alt = "#9A7BED",
 }
 
 local function mode_colors(mode)
-  local accent = mode == "insert" and c.bg_search or mode == "visual" and c.bg_visual or c.bg_highlight
+  local accent = mode == "insert" and c.purple or mode == "visual" and c.purple_alt or c.bg_highlight
   return {
     a = { fg = c.fg, bg = accent, gui = "bold" },
     b = { fg = c.fg_dark, bg = c.bg_highlight },
