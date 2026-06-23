@@ -80,6 +80,7 @@ vim.api.nvim_create_user_command("LspInfo", function()
 end, { desc = "Show LSP diagnostics" })
 
 local severity = vim.diagnostic.severity
+local c = require("rendi.core.palette")
 
 vim.diagnostic.config({
   virtual_text = { prefix = "●", spacing = 4 },
@@ -101,3 +102,5 @@ vim.diagnostic.config({
     prefix = "",
   },
 })
+
+vim.api.nvim_set_hl(0, "DiagnosticFloatBorder", { fg = c.border })
