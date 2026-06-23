@@ -9,10 +9,11 @@ fi
 source ~/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh
 
 # ──[ Completion & fzf-tab ]────────────────────────────────────────────────────
-autoload -U compinit; compinit
+zsh-defer 'autoload -Uz compinit; compinit; zstyle ":completion:*" rehash true'
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
+zstyle ':completion:*' rehash true
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' fzf-command fzf
 zstyle ':fzf-tab:*' fzf-flags \
@@ -53,43 +54,43 @@ export W3MIMGDISPLAY=/usr/lib/w3m/w3mimgdisplay
 export COLORTERM=truecolor
 export TERM=xterm-256color
 export SHELL="$(which zsh)"
-export OPENSSL_DIR="/usr" # export LEPTOS_TAILWIND_VERSION=v4.1.11
+export OPENSSL_DIR="/usr"
 export DOCKER_BUILDKIT=1
 export BROWSER="/usr/bin/qutebrowser"
 export LEPTOS_TAILWIND_VERSION="v4.0.0"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
-export PATH="$JAVA_HOME/bin:$PATH"
 export SUDO_EDITOR="nvim"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export MAKEFLAGS="-j$(nproc)"
-export PATH="$HOME/.cargo/bin:/opt/nvim-linux64/bin:/home/rendi/.local/bin:$PATH"
-export PATH="$HOME/.espressif/tools/xtensa-esp-elf/bin:$PATH"
-export PATH="$HOME/.espressif/xtensa-esp32-elf/bin:$PATH"
 export PYTHONPATH="/home/rendi/Downloads/pwndbg-2024.08.29/.venv/lib/python3.13/site-packages"
-# Android SDK
 export ANDROID_HOME=/opt/android-sdk
 export ANDROID_SDK_ROOT=/opt/android-sdk
-
-# Android NDK
 export ANDROID_NDK_HOME=/opt/android-ndk
-
-# export CARGO_BUILD_JOBS=4
-# export RUSTFLAGS="-Ccodegen-units=1"
-
-# Add tools to PATH
-export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH="/home/rendi/perl5/bin${PATH:+:${PATH}}"
 export PERL5LIB="/home/rendi/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
 export PERL_LOCAL_LIB_ROOT="/home/rendi/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
 export PERL_MB_OPT="--install_base \"/home/rendi/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=/home/rendi/perl5"
-export PATH="/home/rendi/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/home/rendi/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-export PATH="$PATH:/usr/local/go/bin"
+
+typeset -U path
+path=(
+  /home/rendi/.opencode/bin
+  $HOME/.local/bin
+  $HOME/.config/herd-lite/bin
+  /home/rendi/perl5/bin
+  $HOME/.espressif/xtensa-esp32-elf/bin
+  $HOME/.espressif/tools/xtensa-esp-elf/bin
+  $JAVA_HOME/bin
+  $HOME/.cargo/bin
+  /opt/nvim-linux64/bin
+  /usr/local/go/bin
+  $ANDROID_HOME/cmdline-tools/latest/bin
+  $ANDROID_HOME/platform-tools
+  $ANDROID_HOME/emulator
+  $path
+)
 
 # ──[ NVM Lazy Init ]───────────────────────────────────────────────────────────
 zsh-defer '[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"'
@@ -130,7 +131,7 @@ zsh-defer source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highli
 HISTFILE=$HOME/.zhistory
 HISTSIZE=100000
 SAVEHIST=50000
-setopt share_history
+# setopt share_history  # deferred to first prompt for faster startup; use inc_append_history instead
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -173,21 +174,18 @@ bindkey -M vicmd 'p' paste
 bindkey -M vicmd 'y' copy
 
 # ──[ Theme ]────────────────────────────────────────────────────────────────────
-ZSH_THEME="powerlevel10k/powerlevel10k"
-source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+zsh-defer '
+  ZSH_THEME="powerlevel10k/powerlevel10k"
+  source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+  [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+'
 
 # ──[ Command Editor ]──────────────────────────────────────────────────────────
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^E' edit-command-line
 
-export PATH=$HOME/.local/bin:$PATH
-
-# opencode
-export PATH=/home/rendi/.opencode/bin:$PATH
-
 # ──[ Aliases & Functions ]───────────────────────────────────────────────
 alias ls="eza --icons=always"
 alias o="opencode"
-source ~/.aliases
+zsh-defer source ~/.aliases

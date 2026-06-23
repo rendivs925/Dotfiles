@@ -10,6 +10,9 @@ blur = false
 
 decorations = "none"
 
+[scrolling]
+history = 10000
+
 [font]
 # normal.family = "Hack Nerd Font"
 normal.family = "JetBrains Mono"
