@@ -75,9 +75,6 @@ return {
       defaults = {
         path_display = { "smart" },
         file_ignore_patterns = { "node_modules" },
-        preview = {
-          treesitter = false,
-        },
         mappings = {
           i = {
             ["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
