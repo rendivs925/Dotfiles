@@ -174,11 +174,9 @@ bindkey -M vicmd 'p' paste
 bindkey -M vicmd 'y' copy
 
 # ──[ Theme ]────────────────────────────────────────────────────────────────────
-zsh-defer -c '
-  ZSH_THEME="powerlevel10k/powerlevel10k"
-  source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
-  [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-'
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # ──[ Command Editor ]──────────────────────────────────────────────────────────
 autoload -Uz edit-command-line
