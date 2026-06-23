@@ -75,6 +75,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.lsp.inlay_hint.enable(true)
 
+vim.api.nvim_create_user_command("LspInfo", function()
+  vim.cmd("checkhealth vim.lsp")
+end, { desc = "Show LSP diagnostics" })
+
 local severity = vim.diagnostic.severity
 
 vim.diagnostic.config({
