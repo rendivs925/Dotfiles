@@ -21,8 +21,7 @@ require("lazy").setup({
   { import = "rendi.plugins.lsp" },
 }, {
   checker = {
-    enabled = true,
-    notify = false,
+    enabled = false,
   },
   change_detection = {
     notify = false,

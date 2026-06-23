@@ -90,7 +90,7 @@ vim.diagnostic.config({
       [severity.INFO] = " ",
     },
   },
-  update_in_insert = true,
+  update_in_insert = false,
   underline = true,
   severity_sort = true,
   float = {

@@ -1,5 +1,18 @@
 return {
   "mfussenegger/nvim-dap",
+  keys = {
+    { "<leader>db", desc = "Toggle breakpoint" },
+    { "<leader>dB", desc = "Set conditional breakpoint" },
+    { "<leader>dc", desc = "Continue/start debugging" },
+    { "<leader>dn", desc = "Step over" },
+    { "<leader>di", desc = "Step into" },
+    { "<leader>do", desc = "Step out" },
+    { "<leader>dr", desc = "Open REPL" },
+    { "<leader>dl", desc = "Run last debug session" },
+    { "<leader>dt", desc = "Terminate debug session" },
+    { "<leader>du", desc = "Toggle DAP UI" },
+    { "<leader>de", desc = "Evaluate expression" },
+  },
   dependencies = {
     "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",

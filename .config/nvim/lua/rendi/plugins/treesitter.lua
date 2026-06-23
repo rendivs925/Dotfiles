@@ -5,7 +5,6 @@ local parsers = {
   "typescript",
   "tsx",
   "rust",
-  "asm",
   "yaml",
   "html",
   "css",
@@ -23,7 +22,6 @@ local parsers = {
   "query",
   "vimdoc",
   "c",
-  "smali",
 }
 
 return {

@@ -120,6 +120,5 @@ vim.g.rustaceanvim = {
 return {
   "mrcjkb/rustaceanvim",
   version = "^6",
-  lazy = false,
   ft = { "rust" },
 }

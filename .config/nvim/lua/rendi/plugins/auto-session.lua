@@ -1,5 +1,9 @@
 return {
   "rmagatti/auto-session",
+  keys = {
+    { "<leader>wr", desc = "Restore session for cwd" },
+    { "<leader>ws", desc = "Save session for auto session root dir" },
+  },
   config = function()
     local auto_session = require("auto-session")
 

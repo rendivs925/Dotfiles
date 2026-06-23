@@ -1,12 +1,14 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = "nvim-tree/nvim-web-devicons",
+  keys = {
+    { "<leader>ee", desc = "Toggle file explorer" },
+    { "<leader>ef", desc = "Toggle file explorer on current file" },
+    { "<leader>ec", desc = "Collapse file explorer" },
+    { "<leader>er", desc = "Refresh file explorer" },
+  },
   config = function()
     local nvimtree = require("nvim-tree")
-
-    -- recommended settings from nvim-tree documentation
-    vim.g.loaded_netrw = 1
-    vim.g.loaded_netrwPlugin = 1
 
     nvimtree.setup({
       view = {

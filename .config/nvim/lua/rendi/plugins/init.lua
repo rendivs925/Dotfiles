@@ -5,6 +5,7 @@ return {
   },
   {
     "christoomey/vim-tmux-navigator",
+    event = "VeryLazy",
   },
   {
     "L3MON4D3/LuaSnip",

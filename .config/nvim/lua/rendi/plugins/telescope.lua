@@ -30,7 +30,7 @@ return {
           history = 1000,
           enable_persistent_history = true,
           length_limit = 1048576,
-          continuous_sync = true,
+          continuous_sync = false,
           preview = true,
           default_register = { '"', "+", "*" },
           enable_system_clipboard = true,

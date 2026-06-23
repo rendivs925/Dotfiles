@@ -1,6 +1,7 @@
-vim.cmd("let g:netrw_liststyle = 3")
-
 local opt = vim.opt
+
+opt.updatetime = 300
+opt.undofile = true
 
 opt.wildignore:append({
   "**/node_modules/**",
@@ -31,8 +32,8 @@ opt.pumwidth = 20
 
 opt.wrap = false
 
--- Set the maximum column for syntax highlighting to 200
--- opt.synmaxcol = 200
+-- Limit syntax highlighting to first 2000 lines in large files
+opt.synmaxcol = 200
 
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive

@@ -20,8 +20,8 @@ return {
       format_on_save = function()
         return {
           lsp_fallback = true,
-          async = false,
-          timeout_ms = 2000,
+          async = true,
+          timeout_ms = 500,
         }
       end,
     })
