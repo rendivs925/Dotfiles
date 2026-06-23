@@ -174,6 +174,8 @@ bindkey -M vicmd 'p' paste
 bindkey -M vicmd 'y' copy
 
 # ──[ Theme ]────────────────────────────────────────────────────────────────────
+export POWERLEVEL9K_DISABLE_GITSTATUS=true
+export POWERLEVEL9K_INSTANT_PROMPT=quiet
 ZSH_THEME="powerlevel10k/powerlevel10k"
 source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
