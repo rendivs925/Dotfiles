@@ -42,7 +42,7 @@ bindsym Mod4+Shift+l exec --no-startup-id xdotool mousemove_relative -- 200 0
 bindsym Mod4+Shift+k exec --no-startup-id xdotool mousemove_relative -- 0 -100
 bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 
-exec_always --no-startup-id i3-auto-layout
+exec_always --no-startup-id sh -c 'killall i3-auto-layout 2>/dev/null; i3-auto-layout'
 exec --no-startup-id ~/.config/i3/scripts/early-init.sh
 
 # External monitor (fallback: prefer HDMI-0, then DP-1)
