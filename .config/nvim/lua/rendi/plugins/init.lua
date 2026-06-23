@@ -11,7 +11,7 @@ return {
     "L3MON4D3/LuaSnip",
     event = "InsertEnter",
     dependencies = {
-      { "mlaursen/vim-react-snippets", opts = {} },
+      { "mlaursen/vim-react-snippets", ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" }, opts = {} },
     },
   },
 }
