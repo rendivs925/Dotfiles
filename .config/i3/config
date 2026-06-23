@@ -45,17 +45,19 @@ bindsym Mod4+Shift+j exec --no-startup-id xdotool mousemove_relative -- 0 100
 exec_always --no-startup-id i3-auto-layout
 exec --no-startup-id ~/.config/i3/scripts/early-init.sh
 
-workspace 1 output DP-1
-workspace 2 output DP-1
-workspace 3 output DP-1
-workspace 4 output DP-1
-workspace 5 output DP-1
+# External monitor (fallback: prefer HDMI-0, then DP-1)
+workspace 1 output HDMI-0 DP-1
+workspace 2 output HDMI-0 DP-1
+workspace 3 output HDMI-0 DP-1
+workspace 4 output HDMI-0 DP-1
+workspace 5 output HDMI-0 DP-1
 
-workspace 6 output eDP-1
-workspace 7 output eDP-1
-workspace 8 output eDP-1
-workspace 9 output eDP-1
-workspace 10 output eDP-1
+# Internal laptop display (fallback: prefer eDP-1-0, then eDP-1)
+workspace 6 output eDP-1-0 eDP-1
+workspace 7 output eDP-1-0 eDP-1
+workspace 8 output eDP-1-0 eDP-1
+workspace 9 output eDP-1-0 eDP-1
+workspace 10 output eDP-1-0 eDP-1
 
 # left click 
 bindsym Mod4+Return exec --no-startup-id ~/.config/i3/scripts/left_click_and_stop.sh
@@ -223,4 +225,4 @@ bindsym $mod+Shift+p exec --no-startup-id polybar-msg cmd toggle
 
 # Polybar configuration
 exec --no-startup-id ~/.config/polybar/launch.sh
-exec_always xrandr --output eDP --set "TearFree" on
+exec_always xrandr --output eDP-1-0 --set "TearFree" on
