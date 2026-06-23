@@ -13,9 +13,5 @@ return {
     keymap.set("n", "<leader>ss", substitute.line, { desc = "Substitute line" })
     keymap.set("n", "<leader>sS", substitute.eol, { desc = "Substitute to end of line" })
     keymap.set("x", "s", substitute.visual, { desc = "Substitute in visual mode" })
-
-    -- Keep alternative legacy mappings as well
-    keymap.set("n", "<leader>rs", substitute.operator, { desc = "Substitute with motion" })
-    keymap.set("x", "<leader>rs", substitute.visual, { desc = "Substitute in visual mode" })
   end,
 }
