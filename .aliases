@@ -1638,7 +1638,7 @@ epoch() {
 # Example: count '*.rs'
 count() {
   [ "$#" -ge 1 ] || { printf 'usage: count GLOB\n' >&2; return 2; }
-  eval "set -- $1"
+  set -- "$1"*
   printf '%d\n' $#
 }
 

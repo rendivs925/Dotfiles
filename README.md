@@ -92,11 +92,10 @@ soz && sec-tools
 
 - `$mod` = Alt
 - `$mod+Return` — Alacritty terminal
-- `$mod+Shift+d` — Notes (Alacritty+neovim, floating)
-- `$mod+d` — rofi app launcher (aura-dark theme)  
+- `$mod+d` — rofi app launcher  
 - `$mod+y` — rofi clipboard manager (clipmenu)
 - `$mod+e` — yazi file manager in Alacritty (floating)
-- `$mod+b` — qutebrowser
+- `$mod+b` — Google Chrome
 - `$mod+z` — zathura PDF reader
 - `$mod+h/j/k/l` — Focus window
 - `$mod+Shift+h/j/k/l` — Move window
@@ -551,33 +550,47 @@ cbpaste | jq .                          # Paste and pipe
   - `<leader>ft` — Telescope tabs  
 - **LSP:**  
   - `gd` — Go to definition  
-  - `gr` — References  
-  - `gi` — Implementation  
-  - `<leader>cx` — Code actions  
+  - `gR` — References (Telescope)  
+  - `gi` — Implementations  
+  - `gt` — Type definition  
+  - `K` — Hover documentation  
+  - `<leader>ca` — Code actions (with preview)  
   - `<leader>rn` — Rename  
-  - `<leader>D` — Type definition  
+  - `<leader>ld` — Line diagnostics  
+  - `<leader>lD` — Buffer diagnostics (Telescope)  
   - `[d` / `]d` — Previous/next diagnostic  
-- **Debugging (nvim-dap):**  
-  - `<leader>db` — Toggle breakpoint  
-  - `<leader>dc` — Continue  
-  - `<leader>do` — Step over  
-  - `<leader>di` — Step into  
+  - `<leader>th` — Toggle inlay hints  
+  - `<C-k>` — Signature help (insert mode)  
+  - `<leader>ci` / `<leader>co` — Call hierarchy  
+- **Telescope (22 commands):**  
+  - `<leader>ff` / `<leader>fF` — Find files / incl hidden  
+  - `<leader>fr` — Recent files  
+  - `<leader>fs` — Live grep / `<leader>fS` — Grep word  
+  - `<leader>fb` — Buffers / `<leader>ft` — Tabs  
+  - `<leader>fi` / `<leader>fI` — Document/workspace symbols  
+  - `<leader>fc` / `<leader>fC` — References/implementations  
+  - `<leader>fg` / `<leader>fG` — Git status/commits  
+  - `<leader>fd` — TODOs / `<leader>fD` — Diagnostics  
+  - `<leader>fh` — Help tags / `<leader>fk` — Keymaps  
+  - `<leader>fB` — File browser  
+  - `<leader>fy` — Clipboard history  
 - **Editing:**  
-  - `Ctrl+s` — Select all  
-  - `+/-` — Increment/decrement number  
-  - `[w` — Wrap line, `]w` — No wrap  
-  - `<leader>sw` — Switch window  
-  - `<leader>sv` — Split vertical  
-  - `<leader>sh` — Split horizontal  
-  - `<leader>se` — Equalize splits  
-  - `<leader>sx` — Close split  
+  - `x` — Delete char (black hole)  
+  - `<leader>dd` — Delete line (black hole)  
+  - `<leader>d` + motion — Delete motion (black hole)  
+  - `<leader>cc` — Change line (black hole)  
+  - `<leader>c` + motion — Change motion (black hole)  
+  - `<leader>D` — Delete to EOL / `<leader>C` — Change to EOL  
+  - `<leader>rs` / `<leader>rl` — Substitute with motion / line  
+  - `<leader>sm` — Toggle maximizer  
+  - `<leader>sw` / `<leader>sv` / `<leader>sh` — Splits  
   - `<leader>to/tx/tn/tp/tf` — Tab operations  
   - `<leader>zm` — Zen mode  
 - **Git:**  
-  - `<leader>gg` — Lazygit toggle  
-  - `<leader>gd` — Git diff hunk  
-  - `<leader>gp` — Git preview hunk  
-- **Other plugins:** auto-session, indent-blankline, leap, surround, substitute, trouble, which-key, conform (auto-format), autopairs, comment, silicon (code screenshot), markdown-preview
+  - `<leader>lg` — Lazygit toggle  
+  - `<leader>fg` — Git status (Telescope)  
+  - `<leader>fG` — Git commits (Telescope)  
+- **Other plugins:** auto-session, aerial (outline, `<leader>cs`), leap, surround, substitute, trouble, which-key, conform (auto-format), autopairs, comment, silicon (code screenshot), markdown-preview
 
 Check `~/.config/nvim/lua/rendi/` for per-plugin configuration.
 
