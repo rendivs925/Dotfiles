@@ -10,12 +10,17 @@ return {
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
         typescriptreact = { "prettier" },
-        rust = { "rustfmt", "leptosfmt" },
+        rust = { "rustfmt" },
         html = { "prettier" },
         json = { "prettier" },
         yaml = { "prettier" },
         markdown = { "prettier" },
         lua = { "stylua" },
+      },
+      formatters = {
+        prettier = {
+          stop_after_first = true,
+        },
       },
       format_on_save = function()
         return {

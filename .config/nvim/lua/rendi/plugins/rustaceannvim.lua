@@ -40,7 +40,6 @@ vim.g.rustaceanvim = {
         },
 
         cargo = {
-          target = "xtensa-esp32-none-elf",
           allFeatures = false,
           loadOutDirsFromCheck = true,
           runBuildScripts = true,
@@ -53,10 +52,6 @@ vim.g.rustaceanvim = {
 
         check = {
           command = "check",
-          extraArgs = {
-            "--target",
-            "xtensa-esp32-none-elf",
-          },
         },
 
         diagnostics = {

@@ -1,3 +1,5 @@
+[[ -o interactive ]] || return
+
 # ──[ Instant Prompt ]──────────────────────────────────────────────────────────
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -56,7 +58,7 @@ export DOCKER_BUILDKIT=1
 export BROWSER="/usr/bin/qutebrowser"
 export LEPTOS_TAILWIND_VERSION="v4.0.0"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk/-openjdk"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
 export SUDO_EDITOR="nvim"
 export EDITOR="nvim"
