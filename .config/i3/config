@@ -214,4 +214,3 @@ bindsym $mod+Shift+p exec --no-startup-id polybar-msg cmd toggle
 
 # Polybar configuration
 exec --no-startup-id ~/.config/polybar/launch.sh
-exec_always xrandr --output eDP-1-0 --set "TearFree" on

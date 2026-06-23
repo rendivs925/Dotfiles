@@ -2,7 +2,14 @@ return {
   "stevearc/conform.nvim",
   event = { "BufReadPre", "BufNewFile" },
   keys = {
-    { "<leader>mp", function() require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 2000 }) end, desc = "Format file or range", mode = { "n", "v" } },
+    {
+      "<leader>mp",
+      function()
+        require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 2000 })
+      end,
+      desc = "Format file or range",
+      mode = { "n", "v" },
+    },
   },
   config = function()
     local conform = require("conform")
@@ -25,14 +32,7 @@ return {
           stop_after_first = true,
         },
       },
-      format_on_save = function()
-        return {
-          lsp_fallback = true,
-          async = true,
-          timeout_ms = 500,
-        }
-      end,
+      async = true,
     })
-
   end,
 }

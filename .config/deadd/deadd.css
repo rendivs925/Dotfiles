@@ -1,159 +1,218 @@
-/* Coolnight Theme - Match Terminal - 1.5x Scale */
+/* ═══════════════════════════════════════════════
+   DEADD NOTIFICATION CENTER — Premium Dark
+   Glassmorphism · Typography · Micro-interactions
+   ═══════════════════════════════════════════════ */
 
-.blurredBG, #main_window, .blurredBG.low, .blurredBG.normal {
-    background: rgba(1, 20, 35, 0.7);
+/* ── Base / Global ─────────────────────────── */
+* {
+    font-family: "SF Pro Display", "Inter", "System-ui", sans-serif;
 }
 
+.blurredBG, #main_window, .blurredBG.low, .blurredBG.normal {
+    background: rgba(8, 18, 32, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Notification Center Header (time / date) ─ */
 .noti-center.time {
     font-size: 72px;
-    font-weight: 300;
-    color: #CBE0F0;
+    font-weight: 200;
+    color: rgba(203, 224, 240, 0.9);
+    letter-spacing: -2px;
+    margin-bottom: 2px;
 }
 
 .noti-center.date {
-    font-size: 24px;
-    color: #214969;
-    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 450;
+    color: rgba(33, 73, 105, 0.85);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
 }
 
-/* Notifications */
+/* ── Notification Popup ────────────────────── */
 .notification.content {
     margin-left: 30px;
     margin-right: 30px;
-    margin-top: 22px;
-    margin-bottom: 22px;
-}
-
-.title {
-    font-weight: 600;
-    font-size: 27px;
-    color: #CBE0F0;
-}
-
-.appname {
-    font-size: 20px;
-    color: #0FC5ED;
-    font-weight: 500;
-}
-
-.body {
-    font-size: 21px;
-    color: #CBE0F0;
-    margin-top: 12px;
-}
-
-.time {
-    font-size: 16px;
-    color: #214969;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .blurredBG.notification {
-    background: rgba(1, 32, 57, 0.7);
-    border-radius: 18px;
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+    background: rgba(12, 28, 48, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: all 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .blurredBG.notification.critical {
-    background: rgba(229, 46, 46, 0.2);
-    border: 1px solid rgba(229, 46, 46, 0.5);
+    background: rgba(180, 30, 30, 0.22);
+    border: 1px solid rgba(255, 70, 70, 0.35);
+    box-shadow:
+        0 8px 32px rgba(180, 30, 30, 0.15),
+        inset 0 1px 0 rgba(255, 70, 70, 0.12);
 }
 
+/* ── Notification Typography ───────────────── */
+.title {
+    font-weight: 590;
+    font-size: 26px;
+    color: rgba(230, 240, 250, 0.95);
+    letter-spacing: -0.2px;
+    margin-bottom: 2px;
+}
+
+.appname {
+    font-size: 18px;
+    font-weight: 480;
+    color: #0FC5ED;
+    letter-spacing: 0.2px;
+    margin-bottom: 1px;
+    transition: color 150ms ease;
+}
+
+.body {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(203, 224, 240, 0.82);
+    line-height: 1.4;
+    margin-top: 10px;
+}
+
+.time {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(33, 73, 105, 0.7);
+    letter-spacing: 0.2px;
+}
+
+/* ── Notifications in Notification Center ──── */
 .notificationInCenter {
-    background: rgba(1, 40, 69, 0.5);
+    background: rgba(14, 32, 52, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 18px;
-    margin: 12px;
-    padding: 22px;
+    margin: 10px;
+    padding: 20px 22px;
+    transition: all 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.notificationInCenter:hover {
+    background: rgba(14, 32, 52, 0.72);
+    border-color: rgba(15, 197, 237, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 .notificationInCenter.critical {
-    background: rgba(229, 46, 46, 0.15);
-    border: 1px solid rgba(229, 46, 46, 0.3);
+    background: rgba(180, 30, 30, 0.12);
+    border: 1px solid rgba(255, 70, 70, 0.2);
 }
 
-/* Labels */
+.notificationInCenter.critical:hover {
+    background: rgba(180, 30, 30, 0.2);
+    border-color: rgba(255, 70, 70, 0.35);
+}
+
+/* ── Labels ──────────────────────────────────── */
 label {
-    color: #CBE0F0;
+    color: rgba(203, 224, 240, 0.85);
 }
 
 label.notification {
-    color: #CBE0F0;
+    color: rgba(203, 224, 240, 0.85);
 }
 
 label.critical {
-    color: #E52E2E;
+    color: #FF6B6B;
 }
 
 .notificationInCenter label.critical {
-    color: #E52E2E;
+    color: #FF6B6B;
 }
 
-/* Progress Bar */
+/* ── Progress Bar ──────────────────────────── */
 progressbar {
-    border-radius: 6px;
-    background: #214969;
+    border-radius: 8px;
+    background: rgba(33, 73, 105, 0.35);
+    min-height: 6px;
 }
 
 progressbar progress {
     background: linear-gradient(90deg, #0FC5ED, #a277ff);
-    border-radius: 6px;
+    border-radius: 8px;
+    border: none;
 }
 
-/* Buttons */
+/* ── Buttons (Generic) ────────────────────── */
 button {
-    background: rgba(33, 73, 105, 0.4);
-    color: #CBE0F0;
+    background: rgba(33, 73, 105, 0.35);
+    color: rgba(203, 224, 240, 0.85);
     border-radius: 12px;
-    border-width: 0px;
-    padding: 12px 24px;
-    font-size: 20px;
+    border: none;
+    padding: 10px 22px;
+    font-size: 19px;
+    font-weight: 480;
+    transition: all 150ms cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 button:hover {
-    background: rgba(15, 197, 237, 0.3);
-    border-radius: 12px;
-    border-width: 0px;
+    background: rgba(15, 197, 237, 0.25);
     color: #fff;
+    box-shadow: 0 2px 8px rgba(15, 197, 237, 0.12);
 }
 
+/* ── Action Buttons (on notifications) ────── */
 button.actionbutton {
-    background: rgba(15, 197, 237, 0.2);
+    background: rgba(15, 197, 237, 0.15);
     color: #0FC5ED;
-    border-radius: 9px;
-    padding: 9px 18px;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 17px;
+    font-weight: 490;
 }
 
 button.actionbutton:hover {
-    background: rgba(15, 197, 237, 0.4);
+    background: rgba(15, 197, 237, 0.3);
     color: #fff;
 }
 
+/* ── Close Button ──────────────────────────── */
 button.button-close {
     background: transparent;
-    color: #214969;
+    color: rgba(33, 73, 105, 0.5);
     border-radius: 50%;
-    padding: 6px;
+    padding: 4px 8px;
+    font-size: 16px;
+    min-width: 28px;
+    min-height: 28px;
 }
 
 button.button-close:hover {
-    background: rgba(229, 46, 46, 0.3);
-    color: #E52E2E;
+    background: rgba(229, 46, 46, 0.2);
+    color: #FF6B6B;
 }
 
-/* Custom Buttons */
+/* ── Custom Buttons (User Buttons) ────────── */
 .userbutton {
-    background: rgba(33, 73, 105, 0.6);
-    border-radius: 18px;
-    padding: 18px;
+    background: rgba(33, 73, 105, 0.4);
+    border-radius: 16px;
+    padding: 16px;
+    transition: all 150ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .userbuttonlabel {
-    color: #CBE0F0;
-    font-size: 18px;
-    font-weight: 500;
+    color: rgba(203, 224, 240, 0.8);
+    font-size: 17px;
+    font-weight: 480;
 }
 
 .userbutton:hover {
-    background: rgba(15, 197, 237, 0.3);
+    background: rgba(15, 197, 237, 0.18);
+    box-shadow: 0 2px 12px rgba(15, 197, 237, 0.08);
 }
 
 .userbuttonlabel:hover {
@@ -161,59 +220,79 @@ button.button-close:hover {
 }
 
 button.buttonState1 {
-    background: rgba(15, 197, 237, 0.4);
+    background: rgba(15, 197, 237, 0.35);
+    box-shadow: 0 2px 8px rgba(15, 197, 237, 0.15);
 }
 
 .userbuttonlabel.buttonState1 {
     color: #fff;
+    font-weight: 500;
 }
 
 button.buttonState1:hover {
-    background: rgba(15, 197, 237, 0.6);
+    background: rgba(15, 197, 237, 0.5);
 }
 
 button.buttonState2 {
-    background: rgba(162, 119, 255, 0.3);
+    background: rgba(162, 119, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(162, 119, 255, 0.1);
 }
 
 .userbuttonlabel.buttonState2 {
-    color: #a277ff;
+    color: #c4a7ff;
+    font-weight: 500;
 }
 
 button.buttonState2:hover {
-    background: rgba(162, 119, 255, 0.5);
+    background: rgba(162, 119, 255, 0.4);
 }
 
-/* Images */
+/* ── Images ──────────────────────────────────── */
 image.deadd-noti-center.notification.image {
-    margin-left: 22px;
-    border-radius: 12px;
+    margin-left: 20px;
+    border-radius: 14px;
 }
 
 image.deadd-noti-center.notification.icon {
     border-radius: 12px;
 }
 
-/* Delete All Button */
+/* ── Delete All ──────────────────────────────── */
 label.delete-all {
-    color: #E52E2E;
-    font-size: 18px;
+    color: rgba(255, 107, 107, 0.7);
+    font-size: 17px;
+    font-weight: 450;
+    transition: all 150ms ease;
 }
 
 label.delete-all:hover {
-    color: #ff6b6b;
+    color: #FF6B6B;
 }
 
-/* Scrollbar */
+/* ── Scrollbar ───────────────────────────────── */
 scrollbar {
     background: transparent;
+    border: none;
 }
 
 scrollbar slider {
-    background: rgba(15, 197, 237, 0.3);
+    background: rgba(15, 197, 237, 0.2);
     border-radius: 6px;
+    min-width: 4px;
+    min-height: 40px;
+    border: none;
 }
 
 scrollbar slider:hover {
-    background: rgba(15, 197, 237, 0.5);
+    background: rgba(15, 197, 237, 0.4);
+}
+
+/* ── Entry / Input ───────────────────────── */
+entry {
+    background: rgba(33, 73, 105, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    color: rgba(203, 224, 240, 0.85);
+    padding: 8px 14px;
+    font-size: 17px;
 }

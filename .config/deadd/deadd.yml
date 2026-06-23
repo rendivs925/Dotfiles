@@ -1,53 +1,86 @@
-# Deadd Notification Center Configuration - Premium - 1.5x Scale
+# ═══════════════════════════════════════════════
+# DEADD NOTIFICATION CENTER — Premium Config
+# Glassmorphism · Clean layout · Smart defaults
+# ═══════════════════════════════════════════════
 
 follow-mouse: true
 monitor: 0
 
-width: 750
+width: 420
 
 margin-top: 0
-margin-right: 30
+margin-right: 24
 margin-bottom: 0
 margin-left: 0
 
 notification:
   use-markup: true
   parse-html-entities: true
-  icon-size: 72
+  icon-size: 64
   app-icon:
     guess-icon-from-name: true
-    icon-size: 48
+    icon-size: 40
   image:
-    size: 120
-    margin-top: 15
-    margin-bottom: 15
-    margin-left: 15
+    size: 100
+    margin-top: 12
+    margin-bottom: 12
+    margin-left: 12
     margin-right: 0
-  margin-top: 22
-  margin-right: 22
-  margin-bottom: 22
-  margin-left: 22
+  margin-top: 20
+  margin-right: 20
+  margin-bottom: 20
+  margin-left: 20
+  dbus:
+    send-noti-closed: false
+  modifications:
+    - match:
+        app-name: "Spotify"
+      modify:
+        image-size: 72
+        timeout: 1
+        send-noti-closed: true
+        class-name: "Spotify"
+        action-icons: true
+        actions:
+          - previous
+          - media-skip-backward
+          - play
+          - media-playback-start
+          - next
+          - media-skip-forward
+        action-commands:
+          play: playerctl play-pause
+          previous: playerctl previous
+          next: playerctl next
 
 notification-center:
   follow-mouse: true
   monitor: 0
-  width: 750
+  width: 420
   margin-top: 0
-  margin-right: 30
-  margin-bottom: 0
+  margin-right: 24
   hide-on-mouse-leave: true
   new-first: true
   ignore-transient: false
   buttons:
     buttons-per-row: 4
-    buttons-height: 75
-    buttons-margin: 8
+    buttons-height: 64
+    buttons-margin: 6
+    actions:
+      - label: 󰅖 Lock
+        command: "loginctl lock-session"
+      - label: 󰖔 WiFi
+        command: "nmcli radio wifi off"
+      - label: 󰕧 VPN
+        command: "systemctl start protonvpn"
+      - label: 󰍃 Exit
+        command: "i3-msg exit"
 
 popup:
-  default-timeout: 8000
-  margin-top: 75
-  margin-right: 75
-  margin-between: 22
+  default-timeout: 6000
+  margin-top: 60
+  margin-right: 60
+  margin-between: 16
   max-lines-in-body: 4
   follow-mouse: true
   monitor: 0
