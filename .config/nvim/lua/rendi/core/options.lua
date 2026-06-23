@@ -49,6 +49,19 @@ opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 
+-- performance
+opt.showmode = false
+opt.shortmess:append({ c = true, I = true })
+opt.hidden = true
+opt.confirm = true
+opt.autoread = true
+opt.inccommand = "nosplit"
+
+-- disable unused providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+
 -- clipboard
 opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 

@@ -63,21 +63,11 @@ keymap.set("n", "<leader>mm", ":Mason<CR>", { desc = "Mason" })
 keymap.set("n", "+", "<C-a>", { desc = "Increment" })
 keymap.set("n", "-", "<C-x>", { desc = "Decrement" })
 
--- Set marks without conflicting with nvim-tree
-keymap.set("n", "<leader>ma", "ma", { desc = "Set mark a" })
-keymap.set("n", "<leader>mA", "mA", { desc = "Set mark A" })
-keymap.set("n", "<leader>mb", "mb", { desc = "Set mark b" })
-keymap.set("n", "<leader>mB", "mB", { desc = "Set mark B" })
-keymap.set("n", "<leader>mc", "mc", { desc = "Set mark c" })
-keymap.set("n", "<leader>mC", "mC", { desc = "Set mark C" })
-
--- Marks
-keymap.set("n", "<leader>ja", "'a", { desc = "Jump a" })
-keymap.set("n", "<leader>jA", "'A", { desc = "Jump A" })
-keymap.set("n", "<leader>jb", "'b", { desc = "Jump b" })
-keymap.set("n", "<leader>jB", "'B", { desc = "Jump B" })
-keymap.set("n", "<leader>jc", "'c", { desc = "Jump c" })
-keymap.set("n", "<leader>jC", "'C", { desc = "Jump C" })
+-- Set marks / jump marks (generated)
+for _, m in ipairs({ "a", "A", "b", "B", "c", "C" }) do
+  keymap.set("n", "<leader>m" .. m, "m" .. m, { desc = "Set mark " .. m })
+  keymap.set("n", "<leader>j" .. m, "'" .. m, { desc = "Jump " .. m })
+end
 keymap.set("n", "<leader>km", ":delmarks ", { desc = "Del mark" })
 keymap.set("n", "<leader>lm", ":marks<CR>", { desc = "List marks" })
 

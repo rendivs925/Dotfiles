@@ -181,7 +181,7 @@ return {
       builtin.buffers()
     end, { desc = "Buffers" })
 
-    keymap("n", "<space>fb", function()
+    keymap("n", "<leader>fB", function()
       require("telescope").extensions.file_browser.file_browser()
     end, { desc = "File browser" })
 
