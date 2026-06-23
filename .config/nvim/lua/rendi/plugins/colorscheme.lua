@@ -9,11 +9,6 @@ return {
       floats = "transparent",
     },
     on_colors = function(colors)
-      colors.bg_dark = colors.none
-      colors.bg_float = colors.none
-      colors.bg_popup = colors.none
-      colors.bg_sidebar = colors.none
-      colors.bg_statusline = colors.none
       colors.bg_highlight = "#143652"
       colors.bg_search = "#0A64AC"
       colors.bg_visual = "#275378"
