@@ -1,12 +1,15 @@
 return {
   "nvim-telescope/telescope.nvim",
   lazy = true,
+  cmd = "Telescope",
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-tree/nvim-web-devicons",
     "LukasPietzschmann/telescope-tabs",
     "nvim-telescope/telescope-media-files.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-file-browser.nvim",
 
     {
       "Marskey/telescope-sg",
@@ -17,8 +20,6 @@ return {
       "folke/todo-comments.nvim",
       opts = {},
     },
-
-    "nvim-telescope/telescope-file-browser.nvim",
 
     {
       "AckslD/nvim-neoclip.lua",
@@ -73,13 +74,60 @@ return {
     telescope.setup({
       defaults = {
         path_display = { "smart" },
-        file_ignore_patterns = { "node_modules" },
+        file_ignore_patterns = { "node_modules", ".git" },
+        prompt_prefix = "   ",
+        selection_caret = "  ",
+        layout_strategy = "horizontal",
+        layout_config = {
+          prompt_position = "top",
+          width = 0.85,
+          height = 0.80,
+          preview_cutoff = 120,
+          horizontal = {
+            preview_width = 0.55,
+          },
+        },
+        sorting_strategy = "ascending",
+        scroll_strategy = "cycle",
+        winblend = 0,
+        border = true,
 
         mappings = {
           i = {
             ["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
             ["<C-s>"] = trouble_telescope.open,
+            ["<C-u>"] = actions.preview_scrolling_up,
+            ["<C-d>"] = actions.preview_scrolling_down,
+            ["<Esc>"] = actions.close,
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<C-c>"] = actions.close,
           },
+          n = {
+            ["q"] = actions.close,
+          },
+        },
+      },
+
+      pickers = {
+        find_files = {
+          hidden = true,
+          follow = true,
+        },
+        live_grep = {
+          additional_args = { "--hidden", "--no-ignore-vcs" },
+        },
+        buffers = {
+          ignore_current_buffer = true,
+          sort_lastused = true,
+          mappings = {
+            i = {
+              ["<C-d>"] = actions.delete_buffer,
+            },
+          },
+        },
+        oldfiles = {
+          only_cwd = true,
         },
       },
 
@@ -87,9 +135,11 @@ return {
         media_files = {
           find_cmd = "rg",
         },
-
         ast_grep = {
           command = { "sg", "--json=stream" },
+        },
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown({}),
         },
       },
     })
@@ -100,32 +150,50 @@ return {
     telescope.load_extension("file_browser")
     telescope.load_extension("neoclip")
     telescope.load_extension("ast_grep")
+    telescope.load_extension("ui-select")
     pcall(telescope.load_extension, "todo-comments")
 
     local keymap = vim.keymap.set
 
-    keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-
-    keymap("n", "<space>fb", function()
-      require("telescope").extensions.file_browser.file_browser()
+    -- Files
+    keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+    keymap("n", "<leader>fF", "<cmd>Telescope find_files hidden=true<cr>", { desc = "Find files (incl hidden)" })
+    keymap("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
+    keymap("n", "<leader>fB", function()
+      require("telescope").extensions.file_browser.file_browser({ path = vim.fn.expand("%:p:h") })
     end, { desc = "File browser" })
 
-    keymap("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
-    keymap("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Grep string" })
-    keymap("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Grep word under cursor" })
+    -- Grep / search
+    keymap("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Grep project" })
+    keymap("n", "<leader>fS", "<cmd>Telescope grep_string<cr>", { desc = "Grep word under cursor" })
+    keymap("n", "<leader>fa", "<cmd>Telescope ast_grep<cr>", { desc = "AST grep" })
 
-    keymap("n", "<leader>fa", "<cmd>Telescope ast_grep<cr>", { desc = "AST Grep search" })
+    -- Code / symbols
+    keymap("n", "<leader>fi", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
+    keymap("n", "<leader>fI", "<cmd>Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols" })
+    keymap("n", "<leader>fc", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
+    keymap("n", "<leader>fC", "<cmd>Telescope lsp_implementations<cr>", { desc = "Implementations" })
 
+    -- Buffers / tabs
+    keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
     keymap("n", "<leader>ft", "<cmd>Telescope telescope-tabs list_tabs<cr>", { desc = "Tabs" })
-    keymap("n", "<leader>fd", "<cmd>TodoTelescope<cr>", { desc = "Todos" })
 
+    -- Git
+    keymap("n", "<leader>fg", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
+    keymap("n", "<leader>fG", "<cmd>Telescope git_commits<cr>", { desc = "Git commits" })
+    keymap("n", "<leader>fgB", "<cmd>Telescope git_branches<cr>", { desc = "Git branches" })
+
+    -- Diagnostics
+    keymap("n", "<leader>fd", "<cmd>TodoTelescope<cr>", { desc = "Todos" })
+    keymap("n", "<leader>fD", "<cmd>Telescope diagnostics<cr>", { desc = "Workspace diagnostics" })
+
+    -- History / help
     keymap("n", "<leader>fy", function()
       require("telescope").extensions.neoclip.plus({ extra = '",star' })
     end, { desc = "Clipboard history" })
-
-    keymap("n", "<leader>fi", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
-    keymap("n", "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols" })
+    keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
+    keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
+    keymap("n", "<leader>f.", "<cmd>Telescope commands<cr>", { desc = "Commands" })
+    keymap("n", "<leader>f;", "<cmd>Telescope command_history<cr>", { desc = "Command history" })
   end,
-
-  cmd = { "Telescope" },
 }
