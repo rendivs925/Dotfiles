@@ -6,10 +6,6 @@ return {
     require("mini.indentscope").setup({
       symbol = "│",
       options = { try_as_border = true },
-      draw = {
-        animation = function() return false end,
-        delay = 0,
-      },
     })
   end,
 }
