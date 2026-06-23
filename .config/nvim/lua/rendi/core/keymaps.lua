@@ -26,26 +26,26 @@ keymap.set("n", "<leader>zg", "g*", { desc = "Search partial ↓" })
 keymap.set("n", "<leader>zG", "g#", { desc = "Search partial ↑" })
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear highlight" })
 
--- Comments
-keymap.set("n", "<leader>dhhc", [[:%s/<!--.*-->//gc<CR>]], { desc = "Remove HTML comments" })
-keymap.set("n", "<leader>dccc", [[:%s/\/\*.*\*\///gc<CR>]], { desc = "Remove CSS comments" })
-keymap.set("n", "<leader>ddc", [[:%s/--.*//gc<CR>]], { desc = "Remove -- comments" })
-keymap.set("n", "<leader>dac", [[:%s/;.*//gc<CR>]], { desc = "Remove ; comments" })
-keymap.set("n", "<leader>drc", [[:%s/\/\/.*//gc<CR>]], { desc = "Remove // comments" })
-keymap.set("n", "<leader>dhc", [[:%s/#.*//gc<CR>]], { desc = "Remove # comments" })
-keymap.set("n", "<leader>dcl", [[:%s/\n\{3,}/\r\r/gc<CR>]], { desc = "Collapse blank lines" })
-keymap.set("n", "<leader>sc", [[:/\v(#|--|\/\/|;|<!--.*-->|\/\*.*\*\/).*<CR>]], { desc = "Search comments" })
+-- Cleanup
+keymap.set("n", "<leader>qh", [[:%s/<!--.*-->//gc<CR>]], { desc = "Clean HTML comments" })
+keymap.set("n", "<leader>qc", [[:%s/\/\*.*\*\///gc<CR>]], { desc = "Clean CSS comments" })
+keymap.set("n", "<leader>q-", [[:%s/--.*//gc<CR>]], { desc = "Clean -- comments" })
+keymap.set("n", "<leader>q;", [[:%s/;.*//gc<CR>]], { desc = "Clean ; comments" })
+keymap.set("n", "<leader>q/", [[:%s/\/\/.*//gc<CR>]], { desc = "Clean // comments" })
+keymap.set("n", "<leader>q#", [[:%s/#.*//gc<CR>]], { desc = "Clean # comments" })
+keymap.set("n", "<leader>qb", [[:%s/\n\{3,}/\r\r/gc<CR>]], { desc = "Clean blank lines" })
+keymap.set("n", "<leader>q?", [[:/\v(#|--|\/\/|;|<!--.*-->|\/\*.*\*\/).*<CR>]], { desc = "Search comments" })
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 
 -- Black hole ops
 keymap.set("n", "x", '"_x', { desc = "Del no copy" })
-keymap.set("n", "<leader>d", '"_d', { desc = "Del no copy" })
+keymap.set("n", "<leader>dd", '"_d', { desc = "Del no copy" })
 keymap.set("n", "<leader>D", '"_D', { desc = "Del to EOL no copy" })
 keymap.set("v", "<leader>d", '"_d', { desc = "Visual del no copy" })
 keymap.set("v", "<leader>D", '"_D', { desc = "Visual del to EOL" })
-keymap.set("n", "<leader>c", '"_c', { desc = "Change no copy" })
+keymap.set("n", "<leader>cc", '"_c', { desc = "Change no copy" })
 keymap.set("n", "<leader>C", '"_C', { desc = "Change to EOL" })
 keymap.set("v", "<leader>c", '"_c', { desc = "Visual change no copy" })
 keymap.set("v", "<leader>C", '"_C', { desc = "Visual change to EOL" })
