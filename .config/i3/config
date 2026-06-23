@@ -62,18 +62,18 @@ exec_always --no-startup-id i3-auto-layout
 # workspace 10 output eDP
 
 # # Workspaces 1–5 → external
-# workspace 1 output HDMI-1-0
-# workspace 2 output HDMI-1-0
-# workspace 3 output HDMI-1-0
-# workspace 4 output HDMI-1-0
-# workspace 5 output HDMI-1-0
-#
+workspace 1 output HDMI-0
+workspace 2 output HDMI-0
+workspace 3 output HDMI-0
+workspace 4 output HDMI-0
+workspace 5 output HDMI-0
+
 # # Workspaces 6–10 → internal
-# workspace 6 output eDP
-# workspace 7 output eDP
-# workspace 8 output eDP
-# workspace 9 output eDP
-# workspace 10 output eDP
+workspace 6 output eDP-1-0
+workspace 7 output eDP-1-0
+workspace 8 output eDP-1-0
+workspace 9 output eDP-1-0
+workspace 10 output eDP-1-0
 
 # workspace 1 output DP-1
 # workspace 2 output DP-1
@@ -104,7 +104,7 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Set default wallpaper on startup
-exec_always --no-startup-id feh --bg-scale ~/Downloads/vashishtha-jogi-bClr95glx6k-unsplash.jpg 
+exec_always --no-startup-id feh --bg-scale ~/Downloads/Images/yosemite-wallpaper-3840x2160-apple-181.jpg
 
 # Wallpapers bindings
 bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/vashishtha-jogi-bClr95glx6k-unsplash.jpg 
@@ -285,3 +285,4 @@ bindsym $mod+Shift+p exec --no-startup-id polybar-msg cmd toggle
 
 # Polybar configuration
 exec --no-startup-id ~/.config/polybar/launch.sh
+exec_always xrandr --output eDP --set "TearFree" on

@@ -1,63 +1,66 @@
+local parsers = {
+  "json",
+  "javascript",
+  "java",
+  "typescript",
+  "tsx",
+  "rust",
+  "asm",
+  "yaml",
+  "html",
+  "css",
+  "prisma",
+  "hurl",
+  "python",
+  "markdown",
+  "markdown_inline",
+  "graphql",
+  "php",
+  "bash",
+  "lua",
+  "vim",
+  "gitignore",
+  "query",
+  "vimdoc",
+  "c",
+  "smali",
+}
+
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPre", "BufNewFile" },
-  -- build = ":TSUpdate",
+  branch = "main",
+  lazy = false,
+  build = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
   },
   config = function()
-    local treesitter = require("nvim-treesitter.configs")
+    local ts = require("nvim-treesitter")
+
+    ts.setup({
+      install_dir = vim.fn.stdpath("data") .. "/site",
+    })
+
+    -- Replacement for old ensure_installed.
+    ts.install(parsers)
+
+    -- Replacement for old highlight = { enable = true }.
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function(args)
+        local ok = pcall(vim.treesitter.start, args.buf)
+
+        if ok then
+          -- Replacement for old indent = { enable = true }.
+          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end,
+    })
 
     require("nvim-ts-autotag").setup({
       opts = {
         enable_close = true,
         enable_rename = true,
         enable_close_on_slash = false,
-      },
-    })
-
-    treesitter.setup({
-      sync_install = false,
-      auto_install = false,
-      highlight = { enable = true },
-      indent = { enable = true },
-      ensure_installed = {
-        "json",
-        -- "dockerfile",
-        "javascript",
-        "java",
-        "typescript",
-        "tsx",
-        "rust",
-        "asm",
-        "yaml",
-        "html",
-        "css",
-        "prisma",
-        "hurl",
-        "python",
-        -- "rust_with_rstml",
-        "markdown",
-        "markdown_inline",
-        "graphql",
-        "php",
-        "bash",
-        "lua",
-        "vim",
-        "gitignore",
-        "query",
-        "vimdoc",
-        "c",
-        "smali",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
       },
     })
   end,

@@ -1,28 +1,15 @@
 vim.g.mapleader = " "
 local keymap = vim.keymap
 
--- LSP standard
+-- LSP lifecycle
 keymap.set("n", "<leader>lx", ":LspStop<CR>", { desc = "Stop LSP" })
 keymap.set("n", "<leader>ls", ":LspStart<CR>", { desc = "Start LSP" })
 keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "Restart LSP" })
 
--- LSP garbage-day
-keymap.set("n", "<leader>sl", ":lua require('garbage-day.utils').stop_lsp()<CR>", { desc = "Stop LSP (GD)" })
-keymap.set("n", "<leader>sr", ":lua require('garbage-day.utils').start_lsp()<CR>", { desc = "Start LSP (GD)" })
-
--- LSP navigation
-keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition" })
-
--- Go to line:column
+-- Extract Rust errors to quickfix
 keymap.set("n", "<leader>lc", function()
-  local input = vim.fn.input("Go to line:column: ")
-  local line, col = input:match("^(%d+):(%d+)$")
-  if line and col then
-    vim.api.nvim_win_set_cursor(0, { tonumber(line), tonumber(col) - 1 })
-  else
-    vim.notify("Invalid format. Use line:column", vim.log.levels.ERROR)
-  end
-end, { desc = "Jump to line:column" })
+  require("rendi.core.extract_locations").extract_to_qflist()
+end, { desc = "Extract Rust errors to quickfix" })
 
 -- Insert mode
 keymap.set("i", "<C-c>", "<Esc>", { desc = "Esc insert" })

@@ -1,6 +1,5 @@
 return {
   "nvim-telescope/telescope.nvim",
-  branch = "0.1.x",
   lazy = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -75,6 +74,7 @@ return {
       defaults = {
         path_display = { "smart" },
         file_ignore_patterns = { "node_modules" },
+
         mappings = {
           i = {
             ["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
@@ -122,6 +122,9 @@ return {
     keymap("n", "<leader>fy", function()
       require("telescope").extensions.neoclip.plus({ extra = '",star' })
     end, { desc = "Clipboard history" })
+
+    keymap("n", "<leader>fi", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
+    keymap("n", "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols" })
   end,
 
   cmd = { "Telescope" },

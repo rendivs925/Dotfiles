@@ -186,4 +186,6 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=/home/rendi/.opencode/bin:$PATH
 
 # ──[ Aliases & Functions ]───────────────────────────────────────────────
+alias ls="eza --icons=always"
+alias o="opencode"
 source ~/.aliases

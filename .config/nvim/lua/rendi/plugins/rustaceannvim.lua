@@ -1,5 +1,9 @@
 vim.g.rustaceanvim = {
   server = {
+    cmd = {
+      vim.fn.expand("~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer"),
+    },
+
     on_attach = function(_, bufnr)
       local opts = { silent = true, buffer = bufnr }
 
@@ -10,6 +14,10 @@ vim.g.rustaceanvim = {
       vim.keymap.set("n", "K", function()
         vim.cmd.RustLsp({ "hover", "actions" })
       end, opts)
+
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
       vim.keymap.set("n", "<leader>rr", function()
         vim.cmd.RustLsp("restart")
@@ -26,54 +34,85 @@ vim.g.rustaceanvim = {
 
     default_settings = {
       ["rust-analyzer"] = {
-        procMacro = { enable = true },
-        checkOnSave = { enable = false },
-        check = { command = "check" },
-
-        lens = { enable = false },
-        inlayHints = { enable = false },
-        diagnostics = { enable = true },
-
-        cargo = {
-          allFeatures = false,
-          loadOutDirsFromCheck = false,
-          runBuildScriptsLocally = false,
+        procMacro = {
+          enable = true,
+          ignored = {},
         },
 
-        compilationActions = { enable = false },
+        cargo = {
+          target = "xtensa-esp32-none-elf",
+          allFeatures = false,
+          loadOutDirsFromCheck = true,
+          runBuildScripts = true,
+          buildScripts = {
+            enable = true,
+          },
+        },
+
+        checkOnSave = false,
+
+        check = {
+          command = "check",
+          extraArgs = {
+            "--target",
+            "xtensa-esp32-none-elf",
+          },
+        },
+
+        diagnostics = {
+          enable = true,
+          experimental = {
+            enable = false,
+          },
+        },
+
+        lens = {
+          enable = false,
+        },
+
+        inlayHints = {
+          enable = false,
+        },
+
+        completion = {
+          autoimport = {
+            enable = true,
+          },
+          fullFunctionSignatures = {
+            enable = true,
+          },
+        },
+
+        imports = {
+          granularity = {
+            group = "module",
+          },
+          prefix = "self",
+        },
 
         files = {
           excludeDirs = {
+            ".git",
+            "target",
             "node_modules",
             "dist",
             "pkg",
-            ".git",
-            "target",
-            "target-rust-analyzer",
-            "debug",
           },
           watcherExclude = {
+            "**/.git/**",
+            "**/target/**",
             "**/node_modules/**",
             "**/dist/**",
             "**/pkg/**",
-            "**/.git/**",
-            "**/target/**",
-            "**/target-rust-analyzer/**",
-            "**/debug/**",
           },
         },
-
-        ["rusty Crane"] = {
-          liftComments = false,
-        },
-
-        memory = {
-          addressSpace = "100MiB",
-          declarativeItems = "100MiB",
-          proceduralMacros = "100MiB",
-          typeHints = "100MiB",
-        },
       },
+    },
+  },
+
+  tools = {
+    hover_actions = {
+      auto_focus = true,
     },
   },
 }
@@ -82,4 +121,5 @@ return {
   "mrcjkb/rustaceanvim",
   version = "^6",
   lazy = false,
+  ft = { "rust" },
 }
