@@ -6,6 +6,7 @@ return {
     options = {
       mode = "tabs",
       indicator = { style = "none" },
+      separator_style = "thin",
     },
   },
 }
