@@ -9,7 +9,7 @@ fi
 source ~/.config/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh
 
 # ──[ Completion & fzf-tab ]────────────────────────────────────────────────────
-zsh-defer 'autoload -Uz compinit; compinit; zstyle ":completion:*" rehash true'
+zsh-defer -c 'autoload -Uz compinit; compinit'
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
@@ -93,7 +93,7 @@ path=(
 )
 
 # ──[ NVM Lazy Init ]───────────────────────────────────────────────────────────
-zsh-defer '[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"'
+zsh-defer -c '[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"'
 zsh-defer source /usr/share/nvm/init-nvm.sh
 
 # ──[ FZF Bindings & Widgets ]──────────────────────────────────────────────────
@@ -174,9 +174,11 @@ bindkey -M vicmd 'p' paste
 bindkey -M vicmd 'y' copy
 
 # ──[ Theme ]────────────────────────────────────────────────────────────────────
-ZSH_THEME="powerlevel10k/powerlevel10k"
-source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+zsh-defer -c '
+  ZSH_THEME="powerlevel10k/powerlevel10k"
+  source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+  [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+'
 
 # ──[ Command Editor ]──────────────────────────────────────────────────────────
 autoload -Uz edit-command-line
