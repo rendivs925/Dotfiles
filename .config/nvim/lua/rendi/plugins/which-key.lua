@@ -19,7 +19,7 @@ return {
       { "<leader>m", group = "Set mark" },
       { "<leader>j", group = "Jump mark" },
       { "<leader>l", group = "Lazy/Plugin" },
-      { "<leader>r", group = "Substitute" },
+      { "<leader>s", group = "Substitute" },
       { "<leader>c", group = "Change/Code" },
       { "<leader>d", group = "Delete" },
       { "<leader>p", group = "Paste" },
