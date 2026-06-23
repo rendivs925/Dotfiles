@@ -215,5 +215,3 @@ bindsym $mod+Shift+p exec --no-startup-id polybar-msg cmd toggle
 # Polybar configuration
 exec --no-startup-id ~/.config/polybar/launch.sh
 exec_always xrandr --output eDP-1-0 --set "TearFree" on
-
-exec --no-startup-id sh -c 'rate=$(xrandr | awk '\''/^HDMI-0 connected/{f=1} f && /3840x2160/{for(i=2;i<=NF;i++){gsub(/[^0-9.]/,"",$i); if($i>max) max=$i}} END{print max}'\''); rate=${rate:-144}; xrandr --output eDP-1-0 --primary --auto --pos 0x0 --rotate normal --output HDMI-0 --mode 3840x2160 --rate "$rate" --right-of eDP-1-0 --rotate normal; for ws in 1 2 3 4 5; do i3-msg "workspace $ws; move workspace to output HDMI-0" >/dev/null 2>&1; done; i3-msg "workspace 1" >/dev/null 2>&1; feh --bg-scale "$HOME/Downloads/Images/yosemite-wallpaper-3840x2160-apple-181.jpg"'
