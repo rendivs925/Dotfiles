@@ -21,22 +21,7 @@ return {
       },
     })
 
-    mason_lspconfig.setup({
-      ensure_installed = {
-        "ts_ls",
-        "html",
-        -- "rust_analyzer",
-        "cssls",
-        -- "asm_lsp",
-        -- "jdtls",
-        "tailwindcss",
-        "lua_ls",
-        "graphql",
-        "emmet_ls",
-        -- "prismals",
-        -- "pyright",
-      },
-    })
+    mason_lspconfig.setup({})
 
     mason_tool_installer.setup({
       ensure_installed = {
