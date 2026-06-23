@@ -8,6 +8,7 @@ return {
       options = { try_as_border = true },
     })
 
-    vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#627E97", nocombine = true })
+    local c = require("rendi.core.palette")
+    vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = c.fg_gutter, nocombine = true })
   end,
 }
