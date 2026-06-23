@@ -73,8 +73,8 @@ exec_always --no-startup-id ~/.config/deadd/deadd-launch.sh
 # Screenshot command
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
-# Set default wallpaper on startup
-exec --no-startup-id feh --bg-scale ~/Downloads/Images/yosemite-wallpaper-3840x2160-apple-181.jpg
+# Set default wallpaper on startup (re-apply on i3 restart for monitor changes)
+exec_always --no-startup-id feh --bg-scale ~/Downloads/Images/yosemite-wallpaper-3840x2160-apple-181.jpg
 
 # Wallpapers bindings
 bindsym ctrl+1 exec --no-startup-id feh --bg-scale ~/Downloads/vashishtha-jogi-bClr95glx6k-unsplash.jpg 
