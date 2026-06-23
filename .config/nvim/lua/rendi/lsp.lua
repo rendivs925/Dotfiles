@@ -101,4 +101,6 @@ vim.diagnostic.config({
   },
 })
 
-vim.api.nvim_create_user_command("LspInfo", "Lsp", {})
+vim.api.nvim_create_user_command("LspInfo", function()
+  vim.cmd.Lsp()
+end, {})
