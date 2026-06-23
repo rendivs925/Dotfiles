@@ -4,9 +4,8 @@ local keymap = vim.keymap
 -- LSP lifecycle
 keymap.set("n", "<leader>lx", ":LspStop<CR>", { desc = "Stop LSP" })
 keymap.set("n", "<leader>ls", ":LspStart<CR>", { desc = "Start LSP" })
-keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "Restart LSP" })
 
--- Extract Rust errors to quickfix
+-- Go to line:column
 keymap.set("n", "<leader>lc", function()
   require("rendi.core.extract_locations").extract_to_qflist()
 end, { desc = "Extract Rust errors to quickfix" })
@@ -34,7 +33,7 @@ keymap.set("n", "<leader>q;", [[:%s/;.*//gc<CR>]], { desc = "Remove ; comments" 
 keymap.set("n", "<leader>q/", [[:%s/\/\/.*//gc<CR>]], { desc = "Remove // comments" })
 keymap.set("n", "<leader>q#", [[:%s/#.*//gc<CR>]], { desc = "Remove # comments" })
 keymap.set("n", "<leader>qb", [[:%s/\n\{3,}/\r\r/gc<CR>]], { desc = "Collapse blank lines" })
-keymap.set("n", "<leader>sc", [[:/\v(#|--|\/\/|;|<!--.*-->|\/\*.*\*\/).*<CR>]], { desc = "Search comments" })
+keymap.set("n", "<leader>qs", [[:/\v(#|--|\/\/|;|<!--.*-->|\/\*.*\*\/).*<CR>]], { desc = "Search comments" })
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
@@ -56,7 +55,7 @@ keymap.set("n", "<leader>P", '""0"P', { desc = "Paste before 0" })
 keymap.set("v", "<leader>p", '""0"p', { desc = "Visual paste 0" })
 
 -- Plugin UIs
-keymap.set("n", "<leader>kd", "<Cmd>lua LazyDocker.toggle()<CR>", { desc = "Toggle LazyDocker" })
+keymap.set("n", "<leader>ld", "<Cmd>lua require('lazydocker').toggle()<CR>", { desc = "Toggle LazyDocker" })
 keymap.set("n", "<leader>lz", ":Lazy<CR>", { desc = "Lazy.nvim" })
 keymap.set("n", "<leader>mm", ":Mason<CR>", { desc = "Mason" })
 
@@ -89,12 +88,13 @@ keymap.set("n", "<leader>zm", ":ZenMode<CR>", { desc = "Zen Mode" })
 keymap.set("n", "[w", ":set wrap<CR>", { desc = "Wrap" })
 keymap.set("n", "]w", ":set nowrap<CR>", { desc = "No wrap" })
 
--- Splits
-keymap.set("n", "<leader>sw", "<C-w>w", { desc = "Switch window" })
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split vertical" })
-keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split horizontal" })
-keymap.set("n", "<leader>se", "<C-w>=", { desc = "Equal split" })
-keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close split" })
+-- Window ops (w* prefix to avoid clashing with substitute operator)
+keymap.set("n", "<leader>ww", "<C-w>w", { desc = "Switch window" })
+keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split vertical" })
+keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Split horizontal" })
+keymap.set("n", "<leader>we", "<C-w>=", { desc = "Equal split" })
+keymap.set("n", "<leader>wx", "<cmd>close<CR>", { desc = "Close split" })
+keymap.set("n", "<leader>wz", "<cmd>MaximizerToggle<CR>", { desc = "Maximize/minimize split" })
 
 -- Tabs
 keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "New tab" })
