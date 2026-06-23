@@ -20,7 +20,7 @@ return {
           enable = true,
         },
         highlight_git = false,
-        highlight_opened_files = false,
+        highlight_opened_files = "none",
         root_folder_modifier = ":t",
         icons = {
           glyphs = {
