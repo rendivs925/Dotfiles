@@ -56,6 +56,15 @@ opt.hidden = true
 opt.confirm = true
 opt.autoread = true
 opt.inccommand = "nosplit"
+opt.list = true
+opt.listchars = { tab = "» ", trail = "·", extends = "›", precedes = "‹" }
+opt.fillchars = { eob = " ", diff = "╱", foldopen = "▾", foldclose = "▸" }
+opt.whichwrap:append({ "<", ">", "[", "]", "h", "l" })
+opt.virtualedit = "block"
+opt.splitkeep = "screen"
+opt.jumpoptions = "stack"
+opt.undolevels = 10000
+opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- disable unused providers
 vim.g.loaded_perl_provider = 0

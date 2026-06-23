@@ -6,8 +6,26 @@ return {
     vim.o.timeoutlen = 500
   end,
   opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
+    spec = {
+      { "<leader>f", group = "Telescope" },
+      { "<leader>g", group = "Search" },
+      { "<leader>G", group = "Search" },
+      { "<leader>zg", group = "Search" },
+      { "<leader>zG", group = "Search" },
+      { "<leader>q", group = "Comment cleanup" },
+      { "<leader>w", group = "Window" },
+      { "<leader>t", group = "Tab" },
+      { "<leader>x", group = "Trouble" },
+      { "<leader>m", group = "Set mark" },
+      { "<leader>j", group = "Jump mark" },
+      { "<leader>l", group = "Lazy/Plugin" },
+      { "<leader>r", group = "Substitute" },
+      { "<leader>c", group = "Change/Code" },
+      { "<leader>d", group = "Delete" },
+      { "<leader>p", group = "Paste" },
+      { "<leader>z", group = "Zen/Wrap" },
+      { "<leader>h", group = "Hurl" },
+      { "<leader>e", group = "NvimTree" },
+    },
   },
 }

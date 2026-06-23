@@ -57,6 +57,12 @@ keymap.set("v", "<leader>p", '""0"p', { desc = "Visual paste 0" })
 -- Plugin UIs
 keymap.set("n", "<leader>ld", "<Cmd>lua require('lazydocker').toggle()<CR>", { desc = "Toggle LazyDocker" })
 keymap.set("n", "<leader>lz", ":Lazy<CR>", { desc = "Lazy.nvim" })
+keymap.set("n", "<leader>L", ":Lazy<CR>", { desc = "Lazy.nvim" })
+
+-- Startup profiling
+keymap.set("n", "<leader>lp", function()
+  vim.cmd("Lazy profile")
+end, { desc = "Lazy profile" })
 keymap.set("n", "<leader>mm", ":Mason<CR>", { desc = "Mason" })
 
 -- Number
@@ -84,8 +90,6 @@ keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split vertical" })
 keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Split horizontal" })
 keymap.set("n", "<leader>we", "<C-w>=", { desc = "Equal split" })
 keymap.set("n", "<leader>wx", "<cmd>close<CR>", { desc = "Close split" })
-keymap.set("n", "<leader>wz", "<cmd>MaximizerToggle<CR>", { desc = "Maximize/minimize split" })
-
 -- Tabs
 keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "New tab" })
 keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close tab" })

@@ -1,1 +1,1 @@
-return { "akinsho/git-conflict.nvim", version = "*", event = "VeryLazy", config = true }
+return { "akinsho/git-conflict.nvim", version = "*", event = "VeryLazy", opts = {} }
