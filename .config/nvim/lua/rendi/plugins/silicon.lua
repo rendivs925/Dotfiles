@@ -14,7 +14,7 @@ return {
         return args.line1
       end,
       font = "Hack Nerd Font",
-      theme = vim.fn.expand("~/.config/bat/themes/tokyonight_night.tmTheme"),
+      theme = "/home/rendi/.config/bat/themes/tokyonight_night.tmTheme",
       background = c.bg,
       shadow_blur_radius = 4,
       shadow_offset_x = 2,
