@@ -8,32 +8,21 @@ local c = {
   border = "#547998",
 }
 
+local function mode_colors(mode)
+  local accent = mode == "insert" and c.bg_search or mode == "visual" and c.bg_visual or c.bg_highlight
+  return {
+    a = { fg = c.fg, bg = accent, gui = "bold" },
+    b = { fg = c.fg_dark, bg = c.bg_highlight },
+    c = { fg = c.fg, bg = "none" },
+  }
+end
+
 local theme = {
-  normal = {
-    a = { fg = c.bg_dark, bg = c.fg, gui = "bold" },
-    b = { fg = c.fg_dark, bg = c.bg_highlight },
-    c = { fg = c.fg, bg = "none" },
-  },
-  insert = {
-    a = { fg = c.bg_dark, bg = c.fg, gui = "bold" },
-    b = { fg = c.fg_dark, bg = c.bg_highlight },
-    c = { fg = c.fg, bg = "none" },
-  },
-  visual = {
-    a = { fg = c.bg_dark, bg = c.fg, gui = "bold" },
-    b = { fg = c.fg_dark, bg = c.bg_highlight },
-    c = { fg = c.fg, bg = "none" },
-  },
-  replace = {
-    a = { fg = c.bg_dark, bg = c.fg, gui = "bold" },
-    b = { fg = c.fg_dark, bg = c.bg_highlight },
-    c = { fg = c.fg, bg = "none" },
-  },
-  command = {
-    a = { fg = c.bg_dark, bg = c.fg, gui = "bold" },
-    b = { fg = c.fg_dark, bg = c.bg_highlight },
-    c = { fg = c.fg, bg = "none" },
-  },
+  normal   = mode_colors("normal"),
+  insert   = mode_colors("insert"),
+  visual   = mode_colors("visual"),
+  replace  = mode_colors("replace"),
+  command  = mode_colors("command"),
   inactive = {
     a = { fg = c.fg_gutter, bg = "none", gui = "bold" },
     b = { fg = c.fg_gutter, bg = "none" },
