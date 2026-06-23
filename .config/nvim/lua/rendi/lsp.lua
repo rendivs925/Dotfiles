@@ -102,5 +102,19 @@ vim.diagnostic.config({
 })
 
 vim.api.nvim_create_user_command("LspInfo", function()
-  vim.cmd.Lsp()
+  local clients = vim.lsp.get_clients()
+  if #clients == 0 then
+    vim.notify("No LSP clients attached", vim.log.levels.INFO)
+    return
+  end
+  local lines = { "Attached LSP clients:", "" }
+  for _, client in ipairs(clients) do
+    local root = client.config.root_dir or "-"
+    local fts = client.config.filetypes and table.concat(client.config.filetypes, ", ") or "-"
+    table.insert(lines, string.format("  %s (%d)", client.name, client.id))
+    table.insert(lines, string.format("    root: %s", root))
+    table.insert(lines, string.format("    filetypes: %s", fts))
+    table.insert(lines, "")
+  end
+  vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO)
 end, {})
