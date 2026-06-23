@@ -1,6 +1,4 @@
 local c = require("rendi.core.palette")
-c.purple = "#9d7cd8"
-c.purple_alt = "#bb9af7"
 
 local function mode_colors(mode)
   local accent = mode == "insert" and c.purple or mode == "visual" and c.purple_alt or c.bg_highlight
