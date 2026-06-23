@@ -20,6 +20,7 @@ return {
       { "<leader>j", group = "Jump mark" },
       { "<leader>l", group = "Lazy/Plugin" },
       { "<leader>s", group = "Substitute", mode = "n" },
+      { "<leader>S", group = "Substitute to EOL" },
       { "<leader>s", group = "Silicon", mode = "v" },
       { "<leader>c", group = "Change/Code" },
       { "<leader>d", group = "Delete" },
