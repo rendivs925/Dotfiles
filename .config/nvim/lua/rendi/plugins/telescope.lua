@@ -75,9 +75,19 @@ return {
       defaults = {
         path_display = { "smart" },
         file_ignore_patterns = { "node_modules", ".git" },
-        prompt_prefix = "   ",
-        selection_caret = "  ",
-        layout_strategy = "horizontal",
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--trim",
+        },
+        prompt_prefix = "> ",
+        selection_caret = ">",
+        layout_strategy = "flex",
         layout_config = {
           prompt_position = "top",
           width = 0.85,
@@ -86,25 +96,34 @@ return {
           horizontal = {
             preview_width = 0.55,
           },
+          vertical = {
+            preview_width = 0.55,
+          },
         },
         sorting_strategy = "ascending",
         scroll_strategy = "cycle",
         winblend = 0,
         border = true,
+        preview = {
+          filesize_limit = 0.1,
+        },
 
         mappings = {
           i = {
             ["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
-            ["<C-s>"] = trouble_telescope.open,
+            ["<C-s>"] = actions.cycle_previewers_next,
+            ["<C-a>"] = actions.cycle_previewers_prev,
             ["<C-u>"] = actions.preview_scrolling_up,
             ["<C-d>"] = actions.preview_scrolling_down,
             ["<Esc>"] = actions.close,
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
             ["<C-c>"] = actions.close,
+            ["<C-/>"] = "which_key",
           },
           n = {
             ["q"] = actions.close,
+            ["?"] = "which_key",
           },
         },
       },
@@ -113,16 +132,17 @@ return {
         find_files = {
           hidden = true,
           follow = true,
+          find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
         },
         live_grep = {
-          additional_args = { "--hidden", "--no-ignore-vcs" },
+          additional_args = { "--hidden", "--no-ignore-vcs", "--glob", "!**/.git/*" },
         },
         buffers = {
           ignore_current_buffer = true,
           sort_lastused = true,
           mappings = {
             i = {
-              ["<C-d>"] = actions.delete_buffer,
+              ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
             },
           },
         },
@@ -167,10 +187,11 @@ return {
     keymap("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Grep project" })
     keymap("n", "<leader>fS", "<cmd>Telescope grep_string<cr>", { desc = "Grep word under cursor" })
     keymap("n", "<leader>fa", "<cmd>Telescope ast_grep<cr>", { desc = "AST grep" })
+    keymap("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Fuzzy find in buffer" })
 
     -- Code / symbols
     keymap("n", "<leader>fi", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
-    keymap("n", "<leader>fI", "<cmd>Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols" })
+    keymap("n", "<leader>fW", "<cmd>Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols" })
     keymap("n", "<leader>fc", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
     keymap("n", "<leader>fC", "<cmd>Telescope lsp_implementations<cr>", { desc = "Implementations" })
 
@@ -195,5 +216,9 @@ return {
     keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps" })
     keymap("n", "<leader>f.", "<cmd>Telescope commands<cr>", { desc = "Commands" })
     keymap("n", "<leader>f;", "<cmd>Telescope command_history<cr>", { desc = "Command history" })
+    keymap("n", "<leader>fR", "<cmd>Telescope resume<cr>", { desc = "Resume last picker" })
+    keymap("n", "<leader>fq", "<cmd>Telescope quickfix<cr>", { desc = "Quickfix list" })
+    keymap("n", "<leader>fl", "<cmd>Telescope loclist<cr>", { desc = "Location list" })
+    keymap("n", "<leader>fj", "<cmd>Telescope jumplist<cr>", { desc = "Jump list" })
   end,
 }
