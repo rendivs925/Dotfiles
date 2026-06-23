@@ -8,8 +8,8 @@ local c = {
   fg_dark = "#B4D0E9",
   fg_gutter = "#627E97",
   border = "#547998",
-  purple = "#7E5CE0",
-  purple_alt = "#9A7BED",
+  purple = "#9d7cd8",
+  purple_alt = "#bb9af7",
 }
 
 local function mode_colors(mode)
