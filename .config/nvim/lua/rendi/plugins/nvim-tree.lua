@@ -19,8 +19,8 @@ return {
         indent_markers = {
           enable = true,
         },
-        highlight_git = true,
-        highlight_opened_files = "none",
+        highlight_git = false,
+        highlight_opened_files = false,
         root_folder_modifier = ":t",
         icons = {
           glyphs = {
