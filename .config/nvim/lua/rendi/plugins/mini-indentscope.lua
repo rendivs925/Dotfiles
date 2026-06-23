@@ -7,7 +7,7 @@ return {
       symbol = "│",
       options = { try_as_border = true },
       draw = {
-        animation = false,
+        animation = function() return false end,
         delay = 0,
       },
     })
