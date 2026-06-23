@@ -14,7 +14,7 @@ return {
         return args.line1
       end,
       font = "Hack Nerd Font",
-      theme = "Coldark-Dark",
+      theme = "tokyonight_night",
       background = c.bg,
       shadow_blur_radius = 4,
       shadow_offset_x = 2,
