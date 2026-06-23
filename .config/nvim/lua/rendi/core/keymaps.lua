@@ -56,7 +56,7 @@ keymap.set("n", "<leader>P", '""0"P', { desc = "Paste before 0" })
 keymap.set("v", "<leader>p", '""0"p', { desc = "Visual paste 0" })
 
 -- Plugin UIs
-keymap.set("n", "<leader>ld", "<Cmd>lua LazyDocker.toggle()<CR>", { desc = "Toggle LazyDocker" })
+keymap.set("n", "<leader>kd", "<Cmd>lua LazyDocker.toggle()<CR>", { desc = "Toggle LazyDocker" })
 keymap.set("n", "<leader>lz", ":Lazy<CR>", { desc = "Lazy.nvim" })
 keymap.set("n", "<leader>mm", ":Mason<CR>", { desc = "Mason" })
 

@@ -100,3 +100,5 @@ vim.diagnostic.config({
     prefix = "",
   },
 })
+
+vim.api.nvim_create_user_command("LspInfo", "Lsp", {})
