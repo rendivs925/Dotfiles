@@ -4,8 +4,12 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     require("mini.indentscope").setup({
-      symbol = "┊",
+      symbol = "│",
       options = { try_as_border = true },
+      draw = {
+        animation = false,
+        delay = 0,
+      },
     })
   end,
 }
