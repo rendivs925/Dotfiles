@@ -59,7 +59,7 @@ opt.inccommand = "nosplit"
 opt.list = true
 opt.listchars = { tab = "» ", trail = "·", extends = "›", precedes = "‹" }
 opt.fillchars = { eob = " ", diff = "╱", foldopen = "▾", foldclose = "▸" }
-opt.whichwrap:append({ "<", ">", "[", "]", "h", "l" })
+opt.whichwrap:append("<,>,[,],h,l")
 opt.virtualedit = "block"
 opt.splitkeep = "screen"
 opt.jumpoptions = "stack"
