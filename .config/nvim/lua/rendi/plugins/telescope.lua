@@ -74,40 +74,10 @@ return {
     telescope.setup({
       defaults = {
         path_display = { "smart" },
-        file_ignore_patterns = { "node_modules", ".git" },
-        vimgrep_arguments = {
-          "rg",
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-          "--trim",
-        },
-        prompt_prefix = "> ",
-        selection_caret = ">",
-        layout_strategy = "flex",
-        layout_config = {
-          prompt_position = "top",
-          width = 0.85,
-          height = 0.80,
-          preview_cutoff = 120,
-          horizontal = {
-            preview_width = 0.55,
-          },
-          vertical = {
-            preview_width = 0.55,
-          },
-        },
-        sorting_strategy = "ascending",
-        scroll_strategy = "cycle",
-        winblend = 0,
-        border = true,
+        file_ignore_patterns = { "node_modules" },
         preview = {
-          filesize_limit = 0.1,
+          treesitter = false,
         },
-
         mappings = {
           i = {
             ["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
