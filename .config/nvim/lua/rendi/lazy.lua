@@ -17,6 +17,9 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+-- Ensure doc directory exists (lazy.nvim runs helptags here on update)
+vim.fn.mkdir(lazypath .. "/doc", "p")
+
 require("lazy").setup({
   { import = "rendi.plugins" },
   { import = "rendi.plugins.lsp" },

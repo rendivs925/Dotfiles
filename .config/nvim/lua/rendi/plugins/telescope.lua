@@ -2,6 +2,40 @@ return {
   "nvim-telescope/telescope.nvim",
   lazy = true,
   cmd = "Telescope",
+  keys = {
+    { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
+    { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Buffers" },
+    { "<leader>fB", function() require("telescope").extensions.file_browser.file_browser() end, desc = "File browser" },
+    { "<leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "Recent files" },
+    { "<leader>fs", function() require("telescope.builtin").live_grep() end, desc = "Grep string" },
+    { "<leader>fc", function() require("telescope.builtin").grep_string() end, desc = "Grep word under cursor" },
+    { "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
+    { "<leader>fm", function() require("telescope.builtin").man_pages() end, desc = "Man pages" },
+    { "<leader>fk", function() require("telescope.builtin").keymaps() end, desc = "Keymaps" },
+    { "<leader>fco", function() require("telescope.builtin").commands() end, desc = "Commands" },
+    { "<leader>ft", function() require("telescope").extensions["telescope-tabs"].list_tabs() end, desc = "Tabs" },
+    { "<leader>fd", function() require("telescope.builtin").diagnostics() end, desc = "Diagnostics" },
+    { "<leader>fds", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Document symbols" },
+    { "<leader>fws", function() require("telescope.builtin").lsp_workspace_symbols() end, desc = "Workspace symbols" },
+    { "<leader>fdr", function() require("telescope.builtin").lsp_references() end, desc = "References" },
+    { "<leader>fdi", function() require("telescope.builtin").lsp_implementations() end, desc = "Implementations" },
+    { "<leader>fdd", function() vim.lsp.buf.definition() end, desc = "Go to definition" },
+    { "<leader>fdt", function() require("telescope.builtin").lsp_type_definitions() end, desc = "Type definitions" },
+    { "<leader>fgc", function() require("telescope.builtin").git_commits() end, desc = "Git commits" },
+    { "<leader>fgb", function() require("telescope.builtin").git_bcommits() end, desc = "Git buffer commits" },
+    { "<leader>fgs", function() require("telescope.builtin").git_status() end, desc = "Git status" },
+    { "<leader>fgB", function() require("telescope.builtin").git_branches() end, desc = "Git branches" },
+    { "<leader>fgst", function() require("telescope.builtin").git_stash() end, desc = "Git stash" },
+    { "<leader>fR", function() require("telescope.builtin").resume() end, desc = "Resume picker" },
+    { "<leader>fj", function() require("telescope.builtin").jumplist() end, desc = "Jumplist" },
+    { "<leader>f/", function() require("telescope.builtin").search_history() end, desc = "Search history" },
+    { "<leader>f?", function() require("telescope.builtin").command_history() end, desc = "Command history" },
+    { "<leader>fq", function() require("telescope.builtin").quickfix() end, desc = "Quickfix list" },
+    { "<leader>fl", function() require("telescope.builtin").loclist() end, desc = "Location list" },
+    { "<leader>fa", "<cmd>Telescope ast_grep<CR>", desc = "AST Grep" },
+    { "<leader>fy", function() require("telescope").extensions.neoclip.plus({ extra = '",star' }) end, desc = "Clipboard history" },
+    { "<leader>ftd", "<cmd>TodoTelescope<CR>", desc = "Todo comments" },
+  },
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -61,7 +95,6 @@ return {
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
-    local builtin = require("telescope.builtin")
     local transform_mod = require("telescope.actions.mt").transform_mod
     local trouble = require("trouble")
     local trouble_telescope = require("trouble.sources.telescope")
@@ -170,132 +203,5 @@ return {
     telescope.load_extension("ast_grep")
     telescope.load_extension("ui-select")
     pcall(telescope.load_extension, "todo-comments")
-
-    local keymap = vim.keymap.set
-
-    keymap("n", "<leader>ff", function()
-      builtin.find_files()
-    end, { desc = "Find files" })
-
-    keymap("n", "<leader>fb", function()
-      builtin.buffers()
-    end, { desc = "Buffers" })
-
-    keymap("n", "<leader>fB", function()
-      require("telescope").extensions.file_browser.file_browser()
-    end, { desc = "File browser" })
-
-    keymap("n", "<leader>fr", function()
-      builtin.oldfiles()
-    end, { desc = "Recent files" })
-
-    keymap("n", "<leader>fs", function()
-      builtin.live_grep()
-    end, { desc = "Grep string" })
-
-    keymap("n", "<leader>fc", function()
-      builtin.grep_string()
-    end, { desc = "Grep word under cursor" })
-
-    keymap("n", "<leader>fh", function()
-      builtin.help_tags()
-    end, { desc = "Help tags" })
-
-    keymap("n", "<leader>fm", function()
-      builtin.man_pages()
-    end, { desc = "Man pages" })
-
-    keymap("n", "<leader>fk", function()
-      builtin.keymaps()
-    end, { desc = "Keymaps" })
-
-    keymap("n", "<leader>fco", function()
-      builtin.commands()
-    end, { desc = "Commands" })
-
-    keymap("n", "<leader>ft", function()
-      require("telescope").extensions["telescope-tabs"].list_tabs()
-    end, { desc = "Tabs" })
-
-    keymap("n", "<leader>fd", function()
-      builtin.diagnostics()
-    end, { desc = "Diagnostics" })
-
-    keymap("n", "<leader>fds", function()
-      builtin.lsp_document_symbols()
-    end, { desc = "Document symbols" })
-
-    keymap("n", "<leader>fws", function()
-      builtin.lsp_workspace_symbols()
-    end, { desc = "Workspace symbols" })
-
-    keymap("n", "<leader>fdr", function()
-      builtin.lsp_references()
-    end, { desc = "References" })
-
-    keymap("n", "<leader>fdi", function()
-      builtin.lsp_implementations()
-    end, { desc = "Implementations" })
-
-    keymap("n", "<leader>fdd", function()
-      vim.lsp.buf.definition()
-    end, { desc = "Go to definition" })
-
-    keymap("n", "<leader>fdt", function()
-      builtin.lsp_type_definitions()
-    end, { desc = "Type definitions" })
-
-    keymap("n", "<leader>fgc", function()
-      builtin.git_commits()
-    end, { desc = "Git commits" })
-
-    keymap("n", "<leader>fgb", function()
-      builtin.git_bcommits()
-    end, { desc = "Git buffer commits" })
-
-    keymap("n", "<leader>fgs", function()
-      builtin.git_status()
-    end, { desc = "Git status" })
-
-    keymap("n", "<leader>fgB", function()
-      builtin.git_branches()
-    end, { desc = "Git branches" })
-
-    keymap("n", "<leader>fgst", function()
-      builtin.git_stash()
-    end, { desc = "Git stash" })
-
-    keymap("n", "<leader>fR", function()
-      builtin.resume()
-    end, { desc = "Resume picker" })
-
-    keymap("n", "<leader>fj", function()
-      builtin.jumplist()
-    end, { desc = "Jumplist" })
-
-    keymap("n", "<leader>f/", function()
-      builtin.search_history()
-    end, { desc = "Search history" })
-
-    keymap("n", "<leader>f?", function()
-      builtin.command_history()
-    end, { desc = "Command history" })
-
-    keymap("n", "<leader>fq", function()
-      builtin.quickfix()
-    end, { desc = "Quickfix list" })
-
-    keymap("n", "<leader>fl", function()
-      builtin.loclist()
-    end, { desc = "Location list" })
-
-    keymap("n", "<leader>fa", "<cmd>Telescope ast_grep<CR>", { desc = "AST Grep" })
-
-    -- History / help
-    keymap("n", "<leader>fy", function()
-      require("telescope").extensions.neoclip.plus({ extra = '",star' })
-    end, { desc = "Clipboard history" })
-
-    keymap("n", "<leader>ftd", "<cmd>TodoTelescope<CR>", { desc = "Todo comments" })
   end,
 }
