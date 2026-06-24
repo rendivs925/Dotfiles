@@ -10,4 +10,8 @@ return {
   border = "#547998",
   purple = "#9d7cd8",
   purple_alt = "#bb9af7",
+  git_add = "#3e8d5c",
+  git_change = "#9d7cd8",
+  git_delete = "#cd5454",
+  git_untracked = "#4a9c6d",
 }
