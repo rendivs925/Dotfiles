@@ -12,6 +12,6 @@ return {
   purple_alt = "#bb9af7",
   git_add = "#3d8c9c",
   git_change = "#9d7cd8",
-  git_delete = "#cd5454",
+  git_delete = "#b34f4f",
   git_untracked = "#4da8b8",
 }
