@@ -91,6 +91,8 @@ return {
             "--smart-case",
             "--trim",
             "--hidden",
+            "--max-columns", "200",
+            "--max-count", "20",
           },
           find_command = {
             "fd",
@@ -99,6 +101,7 @@ return {
             "--follow",
             "--exclude", ".git",
             "--exclude", "node_modules",
+            "--max-results", "5000",
           },
           file_previewer = require("telescope.previewers").vim_buffer_cat.new,
           grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
