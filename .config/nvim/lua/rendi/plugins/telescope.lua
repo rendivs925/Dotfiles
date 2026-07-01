@@ -90,6 +90,7 @@ return {
             "--column",
             "--smart-case",
             "--trim",
+            "--hidden",
           },
           find_command = {
             "fd",
@@ -99,8 +100,6 @@ return {
             "--exclude", ".git",
             "--exclude", "node_modules",
           },
-          file_sorter = require("telescope.sorters").get_fzy_sorter,
-          generic_sorter = require("telescope.sorters").get_fzy_sorter,
           file_previewer = require("telescope.previewers").vim_buffer_cat.new,
           grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
           filesize_limit = 1,
@@ -135,14 +134,16 @@ return {
             hidden = true,
             follow = true,
           },
-          live_grep = {
-            additional_args = function()
-              return { "--hidden" }
-            end,
-          },
+
         },
 
         extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
           media_files = {
             find_cmd = "rg",
           },
@@ -155,7 +156,6 @@ return {
         },
       })
 
-      -- fzf is loaded eagerly since it's used by all pickers
       telescope.load_extension("fzf")
     end,
   },
