@@ -32,8 +32,6 @@ opt.pumwidth = 20
 
 opt.wrap = false
 
--- Limit syntax highlighting to first 2000 lines in large files
-opt.synmaxcol = 3000
 
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
