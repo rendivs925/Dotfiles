@@ -1,8 +1,6 @@
 vim.g.rustaceanvim = {
   server = {
-    cmd = {
-      vim.fn.expand("~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer"),
-    },
+    cmd = { "rust-analyzer" },
 
     on_attach = function(_, bufnr)
       local opts = { silent = true, buffer = bufnr }
@@ -36,7 +34,6 @@ vim.g.rustaceanvim = {
       ["rust-analyzer"] = {
         procMacro = {
           enable = true,
-          ignored = {},
         },
 
         cargo = {
@@ -86,13 +83,6 @@ vim.g.rustaceanvim = {
         },
 
         files = {
-          excludeDirs = {
-            ".git",
-            "target",
-            "node_modules",
-            "dist",
-            "pkg",
-          },
           watcherExclude = {
             "**/.git/**",
             "**/target/**",
